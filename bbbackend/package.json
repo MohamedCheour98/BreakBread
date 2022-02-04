@@ -1,0 +1,21 @@
+{
+  "name": "bbbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend_with_db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon backend_with_db.js"
+  },
+  "author": "Dr. da Silva",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13",
+    "prettier": "2.4.1"
+  }
+}
