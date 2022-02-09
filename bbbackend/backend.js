@@ -16,10 +16,9 @@ app.get('/', (req, res) => {
 app.get('/users', async (req, res) => {
     const name = req.query['name'];
     const job = req.query['job'];
-
     try {
         const result = await userServices.getUsers(name, job);
-        res.send({users_list: result});
+        res.send({users_list: result});         
     } catch (error) {
         console.log(error);
         res.status(500).send('An error ocurred in the server.');
@@ -28,7 +27,6 @@ app.get('/users', async (req, res) => {
 
 app.get('/users/:id', async (req, res) => {
     const id = req.params['id'];
-
     const result = await userServices.findUserById(id);
     if (result === undefined || result === null)
         res.status(404).send('Resource not found.');
@@ -36,19 +34,16 @@ app.get('/users/:id', async (req, res) => {
         res.send({users_list: result});
     }
 });
-app.delete('/users/:id', (req, res) =>{
-  const id = req.params['id']; //or req.params.id
 
-  let result = findUserById(id);
-
-  if (result === undefined || result.length == 0)
-      res.status(404).send('Resource not found.');
-  else {
-      userServices.findByIdAndDelete(id);
-      removeUser(users['users_list'].indexOf(result)  );
-
-      res.status(204).end();
-  }
+app.delete('/users/:id', async (req, res) => {
+    const id = req.params['id'];
+    const result = await userServices.findUserById(id);
+    if (result === undefined || result === null)
+        res.status(404).send('Resource not found.');
+    else {
+        userServices.removeUserById(result);
+        res.status(204).send('user removed');
+    }
 });
 
 app.post('/users', async (req, res) => {

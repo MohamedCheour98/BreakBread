@@ -36,60 +36,61 @@ mongoose
 ).catch(error => console.log(error));*/
 
 async function getUsers(name, job){
-    let result;
-    if(name && job){
-       result = await findUserByJobAndName(name, job);
-    }
-    else if (name === undefined && job === undefined){
-        result = await userModel.find();
-    }
+  let result;
+  if (name === undefined && job === undefined){
+      result = await userModel.find();
+  }
+  else if (name && !job) {
+      result = await findUserByName(name);
+  }
+  else if (job && !name){
+      result = await findUserByJob(job);
+  }   
+  else if (job && name) {
+      result = await findUserByNameAndJob(name, job);
+  }
+  return result;  
+}
 
-    else if (name && !job) {
-        result = await findUserByName(name);
-    }
-    else if (job && !name){
-        result = await findUserByJob(job);
-    }
-    return result;
+async function removeUserById(id){
+  let result;
+  result = await userModel.findByIdAndDelete(id);
+  return result;  
 }
 
 async function findUserById(id){
-    try{
-        return await userModel.findById(id);
-    }catch(error) {
-        console.log(error);
-        return undefined;
-    }
+  try{
+      return await userModel.findById(id);
+  }catch(error) {
+      console.log(error);
+      return undefined;
+  }
 }
 
 async function addUser(user){
-    try{
-        const userToAdd = new userModel(user);
-        const savedUser = await userToAdd.save()
-        return savedUser;
-    }catch(error) {
-        console.log(error);
-        return false;
-    }
+  try{
+      const userToAdd = new userModel(user);
+      const savedUser = await userToAdd.save()
+      return savedUser;
+  }catch(error) {
+      console.log(error);
+      return false;
+  }   
 }
 
 async function findUserByName(name){
-    return await userModel.find({'name':name});
+  return await userModel.find({'name':name});
 }
 
 async function findUserByJob(job){
-    return await userModel.find({'job':job});
+  return await userModel.find({'job':job});
 }
-async function findUserByJobAndName(name , job){
-  console.log("fsdfnkjdfnuksdnfk");
-    //let user = await findUserByName(name);
-    //console.log(user);
-    //let result = {(users_list: user)};
-   //let users = {users_list: user};
-   //return await users.find({'job':job});
-   return await userModel.find({'name':name}).find({'job':job});
+
+async function findUserByNameAndJob(name, job){
+  return await userModel.find({'name':name, 'job':job});
 }
 
 exports.getUsers = getUsers;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
+exports.removeUserById = removeUserById;
