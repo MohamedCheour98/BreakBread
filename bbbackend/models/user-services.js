@@ -65,13 +65,13 @@ async function findUserByName(name) {
 async function findUserByNameAndPassword(username, password) {
   return await userModel.find({ username: username, password: password });
 }
-
+/*
 async function removeUserById(id) {
   let result;
   result = await userModel.findByIdAndDelete(id);
   return result;
 }
-
+*/
 async function findUserById(id) {
   try {
     return await userModel.findById(id);
