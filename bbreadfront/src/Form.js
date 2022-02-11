@@ -8,34 +8,40 @@ function Form(props) {
 
   function submitForm() {
     props.handleSubmit(person);
-    setPerson({ name: "", job: "" }); /*  id: ''  this was added*/
+    setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
   }
 
   function handleChange(event) {
     const { name, value } = event.target; /* added id*/
-    if (name === "job") setPerson({ name: person["name"], job: value });
-    else setPerson({ name: value, job: person["job"] });
-    s;
+    if (name === "password") setPerson({ username: person["username"], password: value });
+    else setPerson({ username: value, password: person["password"] });
   }
 
   return (
     <form>
-      <label htmlFor="name">Name</label>
+      <div className="app">
+        <div className="header">
+          <h1>BreakBread</h1>
+        </div>
+      </div>
+      <div className = "form">
+      <label htmlFor="name">Username</label>
       <input
         type="text"
-        name="name"
-        value={person.name}
+        name="username"
+        value={person.username}
         onChange={handleChange}
       />
-      <label htmlFor="job">Job</label>
+      <label htmlFor="password">Password</label>
       <input
         type="text"
-        name="job"
-        value={person.job}
+        name="password"
+        value={person.password}
         onChange={handleChange}
       />
+      </div>
 
-      <input type="button" value="Submit" onClick={submitForm} />
+      <input type="button" value="Login" onClick={submitForm} />
     </form>
   );
 }
