@@ -15,7 +15,6 @@ function Form(props) {
     const { name, value } = event.target; /* added id*/
     if (name === "job") setPerson({ name: person["name"], job: value });
     else setPerson({ name: value, job: person["job"] });
-    s;
   }
 
   return (
