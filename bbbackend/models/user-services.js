@@ -29,26 +29,41 @@ mongoose
   )
   .catch((error) => console.log(error));
 
-/*  mongoose.connect(
-    'mongodb://localhost:27017/users',
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
-).catch(error => console.log(error));*/
-
-async function getUsers(name, job) {
+async function getUsers(username, password, testing) {
   let result;
-  if (name === undefined && job === undefined) {
+  if (username === undefined && password == undefined && testing == 1) {
     result = await userModel.find();
-  } else if (name && !job) {
-    result = await findUserByName(name);
-  } else if (job && !name) {
-    result = await findUserByJob(job);
-  } else if (job && name) {
-    result = await findUserByNameAndJob(name, job);
+  } else if (username && password) {
+    result = await findUserByNameAndPassword(username, password);
   }
+
   return result;
+}
+
+async function addUser(user) {
+  try {
+    const userToAdd = new userModel(user);
+    setdefaults(userToAdd);
+    const savedUser = await userToAdd.save();
+    return savedUser;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+function setdefaults(userToAdd) {
+  userToAdd.lists = { listcount: 0 };
+  userToAdd.friends = { friendcount: 0 };
+
+  userToAdd.profilepicture =
+    "https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
+}
+async function findUserByName(name) {
+  return await userModel.find({ username: name });
+}
+
+async function findUserByNameAndPassword(username, password) {
+  return await userModel.find({ username: username, password: password });
 }
 
 async function removeUserById(id) {
@@ -66,30 +81,8 @@ async function findUserById(id) {
   }
 }
 
-async function addUser(user) {
-  try {
-    const userToAdd = new userModel(user);
-    const savedUser = await userToAdd.save();
-    return savedUser;
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
-}
-
-async function findUserByName(name) {
-  return await userModel.find({ name: name });
-}
-
-async function findUserByJob(job) {
-  return await userModel.find({ job: job });
-}
-
-async function findUserByNameAndJob(name, job) {
-  return await userModel.find({ name: name, job: job });
-}
-
 exports.getUsers = getUsers;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
 exports.removeUserById = removeUserById;
+exports.findUserByName = findUserByName;
