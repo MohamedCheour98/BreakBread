@@ -61,7 +61,7 @@ function removeOneCharacter (index) {
 }, [] );
     return (
       <div className="container">
-        <Table characterData={characters} removeOneCharacter={removeOneCharacter} />
+        
         <Form handleSubmit={updateList} />
       </div>
     );  

@@ -19,6 +19,12 @@ function Form(props) {
 
   return (
     <form>
+      <div className="app">
+        <div className="header">
+          <h1>BreakBread</h1>
+        </div>
+      </div>
+      <div className = "form">
       <label htmlFor="name">Username</label>
       <input
         type="text"
@@ -33,6 +39,7 @@ function Form(props) {
         value={person.password}
         onChange={handleChange}
       />
+      </div>
 
       <input type="button" value="Login" onClick={submitForm} />
     </form>

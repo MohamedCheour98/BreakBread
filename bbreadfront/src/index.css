@@ -49,7 +49,9 @@ main {
  */
 h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+  margin: auto;
+  width: 20%;
+  max-width: 50%;
 }
 
 /* Grouping content
@@ -407,7 +409,12 @@ h5 {
   font-weight: 600;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
   line-height: 1.2;
-  color: #404040;
+  color: #56CCF2;
+  margin: auto;
+  width: 20%;
+  max-width: 50%;
+  text-align: center;
+
 }
 
 h1:not(:first-child),
@@ -430,6 +437,10 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
+  margin: auto;
+  width: 20%;
+  max-width: 50%;
+  text-align: center;
 }
 
 h3 {
@@ -778,6 +789,8 @@ dd {
 /**
  * Buttons
  */
+
+ 
 .button, a.button, button, [type=submit], [type=reset], [type=button] {
   -webkit-appearance: none;
   display: block;
