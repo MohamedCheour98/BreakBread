@@ -51,7 +51,6 @@ app.delete("/users/:id", async (req, res) => {
 // this one adds users
 app.post("/users", async (req, res) => {
   const user = req.body;
-  console.log("lmao");
   const savedUser = await userServices.addUser(user);
   if (savedUser) res.status(201).send(savedUser);
   else res.status(500).end();
