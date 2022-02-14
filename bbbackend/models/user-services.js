@@ -65,13 +65,13 @@ async function findUserByName(name) {
 async function findUserByNameAndPassword(username, password) {
   return await userModel.find({ username: username, password: password });
 }
-/*
+
 async function removeUserById(id) {
   let result;
   result = await userModel.findByIdAndDelete(id);
   return result;
 }
-*/
+
 async function findUserById(id) {
   try {
     return await userModel.findById(id);
@@ -84,5 +84,5 @@ async function findUserById(id) {
 exports.getUsers = getUsers;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
-//exports.removeUserById = removeUserById;
+exports.removeUserById = removeUserById;
 exports.findUserByName = findUserByName;

@@ -4,6 +4,7 @@ import { BrowserRouter as Router,
   Route,
   Link } from 'react-router-dom'
 import MyApp from './MyApp'
+import SignUpFunc from './SignUpFunc'
 
   export default function Landing() {
     return (
@@ -29,6 +30,7 @@ import MyApp from './MyApp'
             </Route>
             <Route path="/signup">
               <SignUp />
+              <SignUpFunc />
             </Route>
             <Route path="/">
               <Home />

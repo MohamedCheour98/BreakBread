@@ -25,7 +25,7 @@ app.get("/users", async (req, res) => {
     res.status(500).send("An error ocurred in the server.");
   }
 });
-/*
+
 app.get("/users/:id", async (req, res) => {
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
@@ -34,8 +34,8 @@ app.get("/users/:id", async (req, res) => {
   else {
     res.send({ users_list: result });
   }
-}); */
-/*
+});
+
 app.delete("/users/:id", async (req, res) => {
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
@@ -47,11 +47,9 @@ app.delete("/users/:id", async (req, res) => {
   }
 });
 
-*/
 // this one adds users
 app.post("/users", async (req, res) => {
   const user = req.body;
-  console.log("lmao");
   const savedUser = await userServices.addUser(user);
   if (savedUser) res.status(201).send(savedUser);
   else res.status(500).end();
