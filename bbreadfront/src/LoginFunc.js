@@ -1,9 +1,9 @@
 
 import React, {useState, useEffect} from 'react'
-import Form from './Form'
+import LoginForm from './LoginForm'
 import axios from 'axios'
 
-function MyApp() {
+function LoginFunc() {
   const [characters, setCharacters] = useState([]);
 function removeOneCharacter (index) {
   const deleted = characters[index];
@@ -26,9 +26,9 @@ function removeOneCharacter (index) {
     }
   }
   function updateList(person) { 
-    makePostCall(person).then( result => {
-    if (result && result.status === 201)
-       setCharacters([...characters, result.data] );
+    makeGetCall(person).then( result => {
+    /*if (result && result.status === 201)
+       setCharacters([...characters, result.data] );*/
     });
  }
   async function fetchAll(){
@@ -42,9 +42,9 @@ function removeOneCharacter (index) {
        return false;         
     }
  }
- async function makePostCall(person){
+ async function makeGetCall(person){
   try {
-     const response = await axios.post('http://localhost:5000/users', person);
+     const response = await axios.get('http://localhost:5000/users', person);
      return response;
   }
   catch (error) {
@@ -61,9 +61,9 @@ function removeOneCharacter (index) {
     return (
       <div className="container">
         
-        <Form handleSubmit={updateList} />
+        <LoginForm handleSubmit={updateList} />
       </div>
     );  
 }
 
-export default MyApp;
+export default LoginFunc;

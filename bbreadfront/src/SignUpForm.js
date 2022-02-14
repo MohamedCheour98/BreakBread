@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Form(props) {
+function SignUpForm(props) {
   const [person, setPerson] = useState({
     name: "",
     job: ""
@@ -41,9 +41,9 @@ function Form(props) {
       />
       </div>
       
-      <input type="button" value="Login" onClick={submitForm} />
+      <input type="button" value="SignUp" onClick={submitForm} />
     </form>
   );
 }
 
-export default Form;
+export default SignUpForm;
