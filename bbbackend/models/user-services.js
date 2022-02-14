@@ -84,5 +84,5 @@ async function findUserById(id) {
 exports.getUsers = getUsers;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
-exports.removeUserById = removeUserById;
+//exports.removeUserById = removeUserById;
 exports.findUserByName = findUserByName;
