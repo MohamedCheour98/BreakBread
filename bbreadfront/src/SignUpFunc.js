@@ -1,29 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import Form from './Form'
+import SignUpForm from './SignUpForm'
 import axios from 'axios'
 
 function SignUpFunc() {
   const [characters, setCharacters] = useState([]);
-function removeOneCharacter (index) {
-  const deleted = characters[index];
-  const updated = characters.filter((character, i) => {
-      return i !== index
-    });
-    deleteBackend(deleted['_id']);
-    setCharacters(updated);
-  }
-  async function deleteBackend(_id) {
-    try {
-      const response = await axios.delete('http://localhost:5000/users/' + _id);
-      return response.data.users_list;
 
-    }
-    catch (error){
-      //We're not handling errors. Just logging into the console.
-      console.log(error); 
-      return false;
-    }
-  }
   function updateList(person) { 
     makePostCall(person).then( result => {
     if (result && result.status === 201)
@@ -60,7 +41,7 @@ function removeOneCharacter (index) {
     return (
       <div className="container">
         
-        <Form handleSubmit={updateList} />
+        <SignUpForm handleSubmit={updateList} />
       </div>
     );  
 }

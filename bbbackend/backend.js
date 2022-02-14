@@ -16,9 +16,8 @@ app.get("/", (req, res) => {
 app.get("/users", async (req, res) => {
   const username = req.query["username"];
   const password = req.query["password"];
-  const testing = 1; //this is only so it shows all users in testing
   try {
-    const result = await userServices.getUsers(username, password, 1);
+    const result = await userServices.getUsers(username, password);
     res.send({ users_list: result });
   } catch (error) {
     console.log(error);

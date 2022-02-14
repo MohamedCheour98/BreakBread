@@ -3,7 +3,7 @@ import { BrowserRouter as Router,
   Switch,
   Route,
   Link } from 'react-router-dom'
-import MyApp from './MyApp'
+import LoginFunc from './LoginFunc'
 import SignUpFunc from './SignUpFunc'
 
   export default function Landing() {
@@ -26,7 +26,7 @@ import SignUpFunc from './SignUpFunc'
           <Switch>
             <Route path="/login">
               <Login />
-              <MyApp />
+              <LoginFunc />
             </Route>
             <Route path="/signup">
               <SignUp />

@@ -29,9 +29,9 @@ mongoose
   )
   .catch((error) => console.log(error));
 
-async function getUsers(username, password, testing) {
+async function getUsers(username, password) {
   let result;
-  if (username === undefined && password == undefined && testing == 1) {
+  if (username === undefined && password == undefined) {
     result = await userModel.find();
   } else if (username && password) {
     result = await findUserByNameAndPassword(username, password);
