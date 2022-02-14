@@ -16,16 +16,15 @@ app.get("/", (req, res) => {
 app.get("/users", async (req, res) => {
   const username = req.query["username"];
   const password = req.query["password"];
-  const testing = 1; //this is only so it shows all users in testing
   try {
-    const result = await userServices.getUsers(username, password, 1);
+    const result = await userServices.getUsers(username, password);
     res.send({ users_list: result });
   } catch (error) {
     console.log(error);
     res.status(500).send("An error ocurred in the server.");
   }
 });
-/*
+
 app.get("/users/:id", async (req, res) => {
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
@@ -34,8 +33,8 @@ app.get("/users/:id", async (req, res) => {
   else {
     res.send({ users_list: result });
   }
-}); */
-/*
+});
+
 app.delete("/users/:id", async (req, res) => {
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
@@ -47,7 +46,6 @@ app.delete("/users/:id", async (req, res) => {
   }
 });
 
-*/
 // this one adds users
 app.post("/users", async (req, res) => {
   const user = req.body;

@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
       trim: true,
       validate(value) {
-        if (value.length < 6) throw new Error("Invalid Password.");
+        if (value.length < 2) throw new Error("Invalid Password.");
       },
     },
     profilepicture: {

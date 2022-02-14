@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 
+<<<<<<< HEAD:bbreadfront/src/Form.js
 
 
 
 
 function Form(props) {
+=======
+function LoginForm(props) {
+>>>>>>> 0fc2484546223fed2080966c565e69d79a1dbdd9:bbreadfront/src/LoginForm.js
   const [person, setPerson] = useState({
     name: "",
     job: ""
@@ -77,4 +81,4 @@ function Form(props) {
   );
 }
 
-export default Form;
+export default LoginForm;
