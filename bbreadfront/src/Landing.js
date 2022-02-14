@@ -5,6 +5,7 @@ import { BrowserRouter as Router,
   Link } from 'react-router-dom'
 import LoginFunc from './LoginFunc'
 import SignUpFunc from './SignUpFunc'
+import Button from 'react-bootstrap/Button';
 
   export default function Landing() {
     return (
