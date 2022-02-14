@@ -31,7 +31,7 @@ const rows = props.characterData.map((row, index) => {
       <tbody>
         {rows}
        </tbody>
-   );	
+  );
 }
 
 function Table(props) {
