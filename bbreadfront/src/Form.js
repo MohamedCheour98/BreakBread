@@ -54,10 +54,7 @@ function Form(props) {
         onChange={handleChange}
       />
       </div>
-<<<<<<< HEAD
-=======
-      
->>>>>>> 06436ffc764aa3b7ca34541d91be751609f9e9fa
+    
       <input type="button" value="Login" onClick={submitForm} />
 
       <button onClick={() => props.history.push("https://www.google.com")}>lmao</button><br />
