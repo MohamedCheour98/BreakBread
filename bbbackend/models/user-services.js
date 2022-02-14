@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const userModel = require("./user");
 const dotenv = require("dotenv");
+const {
+  compareByGeneratedPositionsDeflated,
+} = require("prettier/parser-postcss");
 
 dotenv.config();
 console.log(
@@ -43,11 +46,18 @@ async function getUsers(username, password, testing) {
 async function addUser(user) {
   try {
     const userToAdd = new userModel(user);
-    setdefaults(userToAdd);
-    const savedUser = await userToAdd.save();
-    return savedUser;
+    const inDatabase = await findUserByNameAndPassword(
+      userToAdd.username,
+      userToAdd.password
+    );
+
+    if (Object.keys(inDatabase).length === 0) {
+      console.log("here");
+      setdefaults(userToAdd);
+      const savedUser = await userToAdd.save();
+      return savedUser;
+    }
   } catch (error) {
-    console.log(error);
     return false;
   }
 }
@@ -65,13 +75,13 @@ async function findUserByName(name) {
 async function findUserByNameAndPassword(username, password) {
   return await userModel.find({ username: username, password: password });
 }
-/*
+
 async function removeUserById(id) {
   let result;
   result = await userModel.findByIdAndDelete(id);
   return result;
 }
-*/
+
 async function findUserById(id) {
   try {
     return await userModel.findById(id);
