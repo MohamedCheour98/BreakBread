@@ -5,6 +5,7 @@ import { BrowserRouter as Router,
   Link } from 'react-router-dom'
 import LoginFunc from './LoginFunc'
 import SignUpFunc from './SignUpFunc'
+import ProfileFunc from './ProfileFunc'
 import Button from 'react-bootstrap/Button';
 
   export default function Landing() {
@@ -22,6 +23,9 @@ import Button from 'react-bootstrap/Button';
               <li>
                 <Link to="/signup">SignUp</Link>
               </li>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
             </ul>
           </nav>
           <Switch>
@@ -33,9 +37,12 @@ import Button from 'react-bootstrap/Button';
               <SignUp />
               <SignUpFunc />
             </Route>
+            <Route path="/profile">
+              <Profile />
+              <ProfileFunc />
+            </Route>
             <Route path="/">
               <Home />
-              
             </Route>
           </Switch>
         </div>
@@ -54,4 +61,8 @@ import Button from 'react-bootstrap/Button';
   
   function SignUp() {
     return <h2>SignUp</h2>;
+  }
+
+  function Profile(){
+    return <h2>Profile</h2>
   }
