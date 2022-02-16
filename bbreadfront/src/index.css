@@ -20,6 +20,9 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+
+ /*imports*/
+
 html {
   line-height: 1.15;
   /* 1 */
@@ -394,6 +397,8 @@ table {
 
 ul li ul {
   margin-bottom: 0;
+  font-weight: 600;
+  color: #56CCF2;
 }
 
 ol li ol {
@@ -417,7 +422,7 @@ h5 {
 
 }
 
-h1:not(:first-child),
+/*h1:not(:first-child),
 h2:not(:first-child),
 h3:not(:first-child),
 h4:not(:first-child),
@@ -429,7 +434,7 @@ h1:not(:first-child),
 h2:not(:first-child),
 h3:not(:first-child) {
   margin-top: 2rem;
-}
+}*/
 
 h1 {
   font-size: 1.75rem;

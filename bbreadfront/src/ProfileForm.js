@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Container } from "react-bootstrap";
 
 function ProfileForm(props) {
   const [person, setPerson] = useState({
@@ -18,30 +19,24 @@ function ProfileForm(props) {
   }
 
   return (
-    <form>
-      <div className="app">
-        <div className="header">
-          <h1>BreakBread</h1>
-        </div>
-      </div>
-      <div className = "form">
-      <label htmlFor="friends">Friends</label>
-      <input
-        type="text"
-        name="friends"
-        value={person.friends}
-        onChange={handleChange}
-      />
+    <container>
+      <div className = "list">
+        <label htmlFor="friends">Friends</label>
+        {/* <input
+          type="text"
+          name="friends"
+          value={person.friends}
+          onChange={handleChange}
+        /> */}
       <label htmlFor="inventory">Inventory</label>
-      <input
+      {/* <input
         type="text"
         name="inventory"
         value={person.inventory}
         onChange={handleChange}
-      />
+      /> */}
       </div>
-      
-    </form>
+    </container>
   );
 }
 
