@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
 app.get("/users", async (req, res) => {
   const username = req.query["username"];
   const password = req.query["password"];
+
   try {
     const result = await userServices.getUsers(username, password);
     res.send({ users_list: result });
@@ -24,7 +25,33 @@ app.get("/users", async (req, res) => {
     res.status(500).send("An error ocurred in the server.");
   }
 });
+app.post("/users", async (req, res) => {
+  console.log("fuckme1");
 
+  let user = req.body;
+  console.log("fuckme1");
+
+  const inDatabase = await userServices.findUserByNameAndPassword(
+    user.username,
+    user.password
+  );
+  let savedUser = {};
+  console.log("fuckme2");
+
+  if (Object.keys(inDatabase).length === 0) {
+    savedUser = await userServices.addUser(user);
+  }
+  console.log("fuckme");
+  console.log(savedUser);
+  if (savedUser || Object.keys(savedUser).length === 0)
+    res.status(201).send(savedUser);
+  else res.status(500).end();
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+/*
 app.get("/users/:id", async (req, res) => {
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
@@ -34,7 +61,7 @@ app.get("/users/:id", async (req, res) => {
     res.send({ users_list: result });
   }
 });
-
+*/
 app.delete("/users/:id", async (req, res) => {
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
@@ -47,13 +74,3 @@ app.delete("/users/:id", async (req, res) => {
 });
 
 // this one adds users
-app.post("/users", async (req, res) => {
-  const user = req.body;
-  const savedUser = await userServices.addUser(user);
-  if (savedUser) res.status(201).send(savedUser);
-  else res.status(500).end();
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
