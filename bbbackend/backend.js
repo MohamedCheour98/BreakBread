@@ -26,42 +26,21 @@ app.get("/users", async (req, res) => {
   }
 });
 app.post("/users", async (req, res) => {
-  console.log("fuckme1");
-
   let user = req.body;
-  console.log("fuckme1");
+  let inDatabase = await userServices.getUsers(user.username, user.password);
 
-  const inDatabase = await userServices.findUserByNameAndPassword(
-    user.username,
-    user.password
-  );
   let savedUser = {};
-  console.log("fuckme2");
-
-  if (Object.keys(inDatabase).length === 0) {
+  if (Object.keys(inDatabase).length == 0) {
     savedUser = await userServices.addUser(user);
   }
-  console.log("fuckme");
-  console.log(savedUser);
-  if (savedUser || Object.keys(savedUser).length === 0)
-    res.status(201).send(savedUser);
+  if (savedUser) res.status(201).send(savedUser);
   else res.status(500).end();
 });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-/*
-app.get("/users/:id", async (req, res) => {
-  const id = req.params["id"];
-  const result = await userServices.findUserById(id);
-  if (result === undefined || result === null)
-    res.status(404).send("Resource not found.");
-  else {
-    res.send({ users_list: result });
-  }
-});
-*/
+
 app.delete("/users/:id", async (req, res) => {
   const id = req.params["id"];
   const result = await userServices.findUserById(id);

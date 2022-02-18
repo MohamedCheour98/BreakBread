@@ -7,14 +7,9 @@ function SignUpForm(props) {
   });
   const [show, setShow] = React.useState(false);
   const [redirect, setRedirect] = React.useState(false);
-  function submitForm() {
-    console.log("reallu");
-    let signedIn = props.handleSubmit(person);
-    console.log("reallu");
+  async function submitForm() {
+    let signedIn = await props.handleSubmit(person);
 
-    console.log("fuck my life");
-    console.log("what the actuall fuck is going on");
-    console.log(signedIn);
     if (signedIn) {
       setShow(false);
       setRedirect(true);
@@ -58,11 +53,11 @@ function SignUpForm(props) {
       <input type="button" value="SignUp" onClick={submitForm} />
       {show ? (
         <div id="ip">
-          <h2 style={{ color: "red" }}>Invalid Login</h2>
+          <h2 style={{ color: "red" }}>User already signed up</h2>
         </div>
       ) : null}
 
-      {redirect ? <Redirect to="/home" /> : null}
+      {redirect ? <Redirect to="/profile" /> : null}
     </form>
   );
 }

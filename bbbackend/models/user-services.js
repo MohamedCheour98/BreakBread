@@ -34,10 +34,9 @@ mongoose
 
 async function getUsers(username, password) {
   let result;
-
   if (username === undefined && password == undefined) {
-    //result = {};
-    result = await userModel.find();
+    result = {};
+    // result = await userModel.find();
   } else if (username && password) {
     result = await findUserByNameAndPassword(username, password);
   }
@@ -48,17 +47,6 @@ async function getUsers(username, password) {
 async function addUser(user) {
   try {
     const userToAdd = new userModel(user);
-    /*   const inDatabase = await findUserByNameAndPassword(
-      userToAdd.username,
-      userToAdd.password
-    );
-     
-    if (Object.keys(inDatabase).length === 0) {
-      setdefaults(userToAdd);
-      const savedUser = await userToAdd.save();
-      return savedUser;
-    }
-    */
     setdefaults(userToAdd);
     const savedUser = await userToAdd.save();
     return savedUser;

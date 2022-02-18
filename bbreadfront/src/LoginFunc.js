@@ -23,18 +23,18 @@ function LoginFunc() {
       return false;
     }
   }
-  function updateList(person) {
-    let loggedIn = makeGetCall(person).then(result => {
-      if (
-        Object.keys(result.data.users_list).length != 0 &&
-        result.status === 200
-      ) {
-        return true;
-      }
-      return false;
-    });
+  async function updateList(person) {
+    let result = await makeGetCall(person);
 
-    return loggedIn;
+    let loggin = false;
+    if (
+      Object.keys(result.data.users_list).length != 0 &&
+      result.status === 200
+    ) {
+      return (loggin = true);
+    }
+
+    return loggin;
   }
   async function fetchAll() {
     try {
@@ -48,15 +48,12 @@ function LoginFunc() {
   }
   async function makeGetCall(person) {
     try {
-      console.log("here");
-      console.log(person);
       const response = await axios.get(
         "http://localhost:5000/users?username=" +
           person.username +
           "&password=" +
           person.password
       );
-      console.log("fuck");
       return response;
     } catch (error) {
       console.log(error);
