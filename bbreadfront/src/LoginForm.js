@@ -40,6 +40,7 @@ function LoginForm(props) {
 
   return (
     <form>
+<<<<<<< HEAD
       <div className="app">
         <div className="header">
           <h1>BreakBread</h1>
@@ -60,6 +61,23 @@ function LoginForm(props) {
           value={person.password}
           onChange={handleChange}
         />
+=======
+      <div className = "form">
+      <label htmlFor="name">Username</label>
+      <input
+        type="text"
+        name="username"
+        value={person.username}
+        onChange={handleChange}
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        type="text"
+        name="password"
+        value={person.password}
+        onChange={handleChange}
+      />
+>>>>>>> 4c5d82931262e20ecadee3d7a5b822222bbd2172
       </div>
 
       <input type="button" value="Login" onClick={submitForm} />
