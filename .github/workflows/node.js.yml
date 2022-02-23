@@ -8,7 +8,12 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    
 
+defaults:
+  run:
+    working-directory: ./bbbackend   
+    
 jobs:
   build:
 
