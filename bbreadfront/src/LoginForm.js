@@ -16,15 +16,12 @@ function LoginForm(props) {
 
   /*const message = this.state.displayErrorMessage ? null : <div> nice</div>; */
 
-  function submitForm() {
-    console.log("great");
-    let loggedIn = props.handleSubmit(person);
-    console.log("great");
+  async function submitForm() {
+    let loggedIn = await props.handleSubmit(person);
     if (loggedIn) {
       setShow(false);
       setRedirect(true);
 
-      console.log("heressss");
     } else {
       setShow(true);
     }
@@ -70,7 +67,7 @@ function LoginForm(props) {
         </div>
       ) : null}
 
-      {redirect ? <Redirect to="/signup" /> : null}
+      {redirect ? <Redirect to="/profile" /> : null}
     </form>
   );
 }
