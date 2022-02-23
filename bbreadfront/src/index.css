@@ -91,6 +91,9 @@ pre {
 a {
   background-color: transparent;
 }
+invalidpassword{
+  font-family: monospace, monospace;
+}
 
 /**
  * 1. Remove the bottom border in Chrome 57-
