@@ -26,27 +26,26 @@ app.get("/users", async (req, res) => {
   }
 });
 app.post("/users", async (req, res) => {
-  console.log("fuckme1");
-
   let user = req.body;
-  console.log("fuckme1");
 
   const inDatabase = await userServices.findUserByNameAndPassword(
     user.username,
     user.password
   );
   let savedUser = {};
-  console.log("fuckme2");
 
   if (Object.keys(inDatabase).length === 0) {
     savedUser = await userServices.addUser(user);
   }
-  console.log("fuckme");
-  console.log(savedUser);
   if (savedUser || Object.keys(savedUser).length === 0)
     res.status(201).send(savedUser);
   else res.status(500).end();
 });
+/*
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
+});
+*/
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

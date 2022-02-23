@@ -5,22 +5,13 @@ const SignUp = require("./SignUpForm");
 function SignUpFunc() {
   const [characters, setCharacters] = useState([]);
 
-  function updateList(person) {
-    let signedIn = makePostCall(person).then(result => {
-      console.log("fuckkk4");
-
+  async function updateList(person) {
+    let result  = await makePostCall(person);
       if (Object.keys(result.data).length != 0 && result.status === 201) {
-        console.log("why is this ap");
-        setCharacters([...characters, result.data]);
-        console.log("fuckkk4");
-
         return true;
       }
-      console.log("pe");
-      SignUp.setShow(true);
-      return false;
-    });
-    return signedIn;
+    return false
+  
   }
   async function fetchAll() {
     try {
@@ -34,10 +25,8 @@ function SignUpFunc() {
   }
   async function makePostCall(person) {
     try {
-      console.log("gethere");
       const response = await axios.post("http://localhost:5000/users", person);
-      console.log("dic");
-      console.log(response);
+  
       return response;
     } catch (error) {
       console.log(error);
