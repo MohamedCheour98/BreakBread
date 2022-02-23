@@ -414,11 +414,7 @@ h5 {
   font-weight: 600;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
   line-height: 1.2;
-  color: #56CCF2;
-  margin: auto;
-  width: 20%;
-  max-width: 50%;
-  text-align: center;
+
 
 }
 
@@ -438,14 +434,16 @@ h3:not(:first-child) {
 
 h1 {
   font-size: 1.75rem;
+  margin: auto;
+  text-align: center;
+  color: #56CCF2;
 }
 
 h2 {
   font-size: 1.5rem;
   margin: auto;
-  width: 20%;
-  max-width: 50%;
   text-align: center;
+  color: #56CCF2;
 }
 
 h3 {
@@ -1046,6 +1044,15 @@ caption {
 /*
  * Navigation
  */
+.li{
+  font-weight: 600;
+  display: block;
+  margin: auto;
+  width: 20%;
+  max-width: 50%;
+  text-align: center;  
+}
+
 /**
  * Layout
  */
