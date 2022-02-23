@@ -1047,13 +1047,39 @@ caption {
 /*
  * Navigation
  */
-.li{
-  font-weight: 600;
-  display: block;
-  margin: auto;
-  width: 20%;
-  max-width: 50%;
-  text-align: center;  
+ /*top navbar*/
+ .topnav{
+  background-color:#275b6d;
+  overflow: hidden;
+}
+
+/*style the links*/
+.topnav a{
+  float: left;
+  color:white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px 10px;
+}
+
+/*style the header*/
+.topnav h1{
+  color:#56CCF2;
+  text-align: center;
+  vertical-align: text-top;
+}
+
+/*hover color for links*/
+.topnav a:hover{
+  background-color:#56CCF2;
+  color: white;
+}
+
+/*color for selected link*/
+.topnav a:active{
+  background-color:black;
+  color:white;
 }
 
 /**

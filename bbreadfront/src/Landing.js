@@ -8,26 +8,18 @@ import SignUpFunc from './SignUpFunc'
 import ProfileFunc from './ProfileFunc'
 import Button from 'react-bootstrap/Button';
 
+
   export default function Landing() {
     return (
       <Router>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/signup">SignUp</Link>
-              </li>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
-            </ul>
-          </nav>
+        <div class = "topnav">
+            <a><Link to="/">Home</Link></a>
+            <a><Link to="/login">Login</Link></a>
+            <a><Link to="/signup">SignUp</Link></a>
+            <a><Link to="/profile">Profile</Link></a>
+            <h1>BreakBread</h1>
+          </div>
           <Switch>
             <Route path="/login">
               <Login />
