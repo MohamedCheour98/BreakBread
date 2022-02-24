@@ -29,11 +29,6 @@ function SignUpForm(props) {
 
   return (
     <form>
-      <div className="app">
-        <div className="header">
-          <h1>BreakBread</h1>
-        </div>
-      </div>
       <div className="form">
         <label htmlFor="name">Username</label>
         <input
