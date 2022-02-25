@@ -7,7 +7,7 @@ const SignUp = require("./SignUpForm");
 
 function SignUpFunc() {
   
-  const [characters, setCharacters] = useState([]);
+  //const [characters, setCharacters] = useState([]);
 
   async function updateList(person) {
     let result  = await makePostCall(person);
