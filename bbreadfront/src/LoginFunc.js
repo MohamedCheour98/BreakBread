@@ -28,8 +28,8 @@ function LoginFunc() {
     console.log("result");
     console.log(result.data.users_list);
       if (
-        Object.keys(result.data.users_list).length != 0 &&
-        result.status == 200
+        Object.keys(result.data.users_list).length !== 0 &&
+        result.status === 200
       ) {
         return true;
       }
