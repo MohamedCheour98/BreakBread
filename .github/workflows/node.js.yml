@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [master]
+    branches: [master, with-subfolder]
   pull_request:
-    branches: [master]
+    branches: [master, with-subfolder]
 
 defaults:
   run:
@@ -38,3 +38,4 @@ jobs:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
             heroku_app_name: "breakbread1"
             heroku_email: "moha.cheour@yahoo.fr"
+            appdir: "bbbackend"
