@@ -5,13 +5,13 @@ name: Node.js CI
 
 on:
   push:
-    branches: [master, with-subfolder]
+    branches: [main, with-subfolder]
   pull_request:
-    branches: [master, with-subfolder]
+    branches: [main, with-subfolder]
 
 defaults:
   run:
-    working-directory: ./bbbackend
+    working-directory: bbbackend
 
 jobs:
   build:
@@ -29,13 +29,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-          cache-dependency-path: bbbackend/package-lock.json
+          cache-dependency-path: "bbbackend/package-lock.json"
       - run: npm ci
-      #- run: npm run build --if-present
-      #- run: npm test
-        - uses: akhileshns/heroku-deploy@v3.12.12
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "breakbread1"
-            heroku_email: "moha.cheour@yahoo.fr"
-            appdir: "bbbackend"
+      - run: npm run build --if-present
+      # - run: npm test
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "breakbread1"
+          heroku_email: "moha.cheour@yahoo.fr"
+          appdir: "bbbackend"
