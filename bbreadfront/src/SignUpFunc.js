@@ -42,11 +42,12 @@ function SignUpFunc() {
   }
 
 
-  useEffect(() => {
+  /* useEffect(() => {
     fetchAll().then(result => {
-      if (result) setCharacters(result);
+      if (result) 
+        setCharacters(result);
     });
-  }, []);
+  }, []); */
 
 
   return (
@@ -55,7 +56,7 @@ function SignUpFunc() {
     </div>
   );
 
-  
+
 }
 
 export default SignUpFunc;
