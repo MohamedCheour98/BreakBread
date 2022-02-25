@@ -25,6 +25,7 @@ app.get("/users", async (req, res) => {
     res.status(500).send("An error ocurred in the server.");
   }
 });
+
 app.post("/users", async (req, res) => {
   let user = req.body;
 
