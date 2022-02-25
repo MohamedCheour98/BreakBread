@@ -42,15 +42,14 @@ app.post("/users", async (req, res) => {
     res.status(201).send(savedUser);
   else res.status(500).end();
 });
-/*
+
 app.listen(process.env.PORT || port, () => {
   console.log("REST API is listening.");
 });
-*/
 
-app.listen(port, () => {
+/* app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
-});
+}); */
 /*
 app.get("/users/:id", async (req, res) => {
   const id = req.params["id"];
