@@ -39,7 +39,7 @@ function SignUpForm(props) {
         />
         <label htmlFor="password">Password</label>
         <input
-          type="text"
+          type="password"
           name="password"
           value={person.password}
           onChange={handleChange}
