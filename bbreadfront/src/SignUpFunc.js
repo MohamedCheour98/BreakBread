@@ -18,7 +18,7 @@ function SignUpFunc() {
   }
 
 
-  async function fetchAll() {
+  /* async function fetchAll() {
     try {
       const response = await axios.get("http://localhost:5000/users");
       return response.data.users_list;
@@ -27,7 +27,7 @@ function SignUpFunc() {
       console.log(error);
       return false;
     }
-  }
+  } */
   
   
   async function makePostCall(person) {
