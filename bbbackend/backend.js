@@ -28,7 +28,7 @@ app.get("/users", async (req, res) => {
 
 app.post("/users", async (req, res) => {
   let user = req.body;
-  console.log("enterpost");
+
   const inDatabase = await userServices.findUserByNameAndPassword(
     user.username,
     user.password
@@ -39,7 +39,6 @@ app.post("/users", async (req, res) => {
     savedUser = await userServices.addUser(user);
   }
   if (savedUser || Object.keys(savedUser).length === 0) {
-    console.log(savedUser);
     res.status(201).send(savedUser);
   } else res.status(500).end();
 });

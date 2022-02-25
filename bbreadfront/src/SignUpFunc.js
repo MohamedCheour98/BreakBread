@@ -32,7 +32,7 @@ function SignUpFunc() {
   
   async function makePostCall(person) {
     try {
-      console.log(person);
+    
       // const response = await axios.post(" http://localhost:5000/users", person);
       const response = await axios.post(" https://breakbread2.herokuapp.com/users", person);  
       // change the htttp with the new heroku backend app bbb1 URL
