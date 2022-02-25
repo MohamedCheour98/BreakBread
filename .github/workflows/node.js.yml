@@ -12,7 +12,7 @@ on:
 
 defaults:
   run:
-    working-directory: bbbackend
+    working-directory: bbreadfront
 
 jobs:
   build:
@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-          cache-dependency-path: "bbbackend/package-lock.json"
+          cache-dependency-path: "bbreadfront/package-lock.json"
       - run: npm ci
       - run: npm run build --if-present
       # - run: npm test
@@ -39,4 +39,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "breakbread1"
           heroku_email: "moha.cheour@yahoo.fr"
-          appdir: "bbbackend"
+          appdir: "bbreadfront"
