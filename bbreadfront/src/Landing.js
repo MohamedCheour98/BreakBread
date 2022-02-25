@@ -43,8 +43,14 @@ import Button from 'react-bootstrap/Button';
   }
   
   function Home() {
-    return <h2>Home</h2>;
-    
+    return(
+      <div>
+        <h3>Shop, Share, Enjoy!</h3>
+        <p>Join the <p2>BreakBread</p2> community to revolutionize</p>
+        <p>your grocery shopping and sharing experience.</p>
+      </div>
+    )
+
   }
   
   function Login() {

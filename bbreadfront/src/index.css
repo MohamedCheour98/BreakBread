@@ -474,7 +474,9 @@ h5 {
     font-size: 2rem;
   }
   h3 {
-    font-size: 1.75rem;
+    font-size: 3rem;
+    color:#275b6d;
+    margin: 3rem;
   }
   h4 {
     font-size: 1.5rem;
@@ -482,6 +484,14 @@ h5 {
   h5 {
     font-size: 1.25rem;
   }
+}
+p{
+  margin-top: 0rem;
+  margin: 3rem;
+}
+
+p2{
+  color:#56CCF2;
 }
 
 a {
