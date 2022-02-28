@@ -20,15 +20,15 @@ import Button from 'react-bootstrap/Button';
             <h1>BreakBread</h1>
           </div>
           <Switch>
-            <Route path="/login">
+            <Route exact path="/login">
               <Login />
               <LoginFunc />
             </Route>
-            <Route path="/signup">
+            <Route exact path="/signup">
               <SignUp />
               <SignUpFunc />
             </Route>
-            <Route path="/profile">
+            <Route exact path="/profile">
               <Profile />
               <ProfileFunc />
             </Route>
@@ -47,7 +47,7 @@ import Button from 'react-bootstrap/Button';
         <h3>Shop, Share, Enjoy!</h3>
         <p>Join the <p2>BreakBread</p2> community to revolutionize
         your grocery shopping and sharing experience.</p>
-        <img src="BreakBread.png" alt = "BreakBread Logo"/>
+        <img id = "logo" src= "images/BreakBread@2x.png" width = "324" height = "267" alt = "BreakBread Logo"/>
       </div>
     )
   }
