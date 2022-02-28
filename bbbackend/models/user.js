@@ -42,6 +42,10 @@ const UserSchema = new mongoose.Schema(
       type: Object,
       required: false,
     },
+    groups: {
+      type: Object,
+      required: false,
+    },
   },
   { collection: "users_list" }
 );

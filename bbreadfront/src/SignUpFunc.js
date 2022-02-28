@@ -7,7 +7,7 @@ const SignUp = require("./SignUpForm");
 
 function SignUpFunc() {
   
-  //const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState([]);
 
   async function updateList(person) {
     let result  = await makePostCall(person);
@@ -17,8 +17,8 @@ function SignUpFunc() {
     return false
   }
 
-
-  /* async function fetchAll() {
+/*
+  async function fetchAll() {
     try {
       const response = await axios.get("http://localhost:5000/users");
       return response.data.users_list;
@@ -27,8 +27,8 @@ function SignUpFunc() {
       console.log(error);
       return false;
     }
-  } */
-  
+  }
+  */
   
   async function makePostCall(person) {
     try {
@@ -44,14 +44,14 @@ function SignUpFunc() {
     }
   }
 
-
-  /* useEffect(() => {
+/*
+  useEffect(() => {
     fetchAll().then(result => {
       if (result) 
         setCharacters(result);
     });
-  }, []); */
-
+  }, []);
+*/
 
   return (
     <div className="container">

@@ -66,6 +66,7 @@ async function addUser(user) {
   }
 }
 
+
 // called in the addUser function, gives the new user an empty list for friends, groups, inventory, history
 
 function setDefaults(userToAdd) {
