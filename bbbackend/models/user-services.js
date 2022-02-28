@@ -69,7 +69,7 @@ async function addUser(user) {
 function setdefaults(userToAdd) {
   userToAdd.lists = { listcount: 0 };
   userToAdd.friends = { friendcount: 0 };
-
+  userToAdd.groups = { testcount: 0 };
   userToAdd.profilepicture =
     "https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 }
