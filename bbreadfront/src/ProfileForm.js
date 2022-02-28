@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
+
 function ProfileForm(props) {
   const [person, setPerson] = useState({
     name: "",
@@ -20,21 +21,18 @@ function ProfileForm(props) {
 
   return (
     <container>
-      <div className = "list">
+      <div className = "friends">
         <label htmlFor="friends">Friends</label>
-        {/* <input
+          {/* <input
           type="text"
           name="friends"
           value={person.friends}
           onChange={handleChange}
-        /> */}
+          /> */}
+        </div>
+      <div className = "inventory">
       <label htmlFor="inventory">Inventory</label>
-      {/* <input
-        type="text"
-        name="inventory"
-        value={person.inventory}
-        onChange={handleChange}
-      /> */}
+    
       </div>
     </container>
   );
