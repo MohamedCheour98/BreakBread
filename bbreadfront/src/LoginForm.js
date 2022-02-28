@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router";
+import { BrowserRouter as Router, 
+  Switch,
+  Route,
+  Link } from 'react-router-dom'
+  import ProfileFunc from './ProfileFunc'
 function LoginForm(props) {
   const [person, setPerson] = useState({
     username: "",
@@ -15,9 +20,19 @@ function LoginForm(props) {
   const [redirect, setRedirect] = React.useState(false);
 
   /*const message = this.state.displayErrorMessage ? null : <div> nice</div>; */
-
+  //cant get to sending things into creating the profile page
+  /* commenting this here since i cant in side html
+  <Route exact path = "/home">{redirect ? <Redirect (
+      <Router>
+      <Route exact path = "/profile"> 
+                  <Profile/> <ProfileFunc/>
+      </Route>
+      </Router>
+    ):  null}</Route> */
+    //this was the redirect
   async function submitForm() {
     let loggedIn = await props.handleSubmit(person);
+    console.log(loggedIn);
     if (loggedIn) {
       setShow(false);
       setRedirect(true);
@@ -36,6 +51,7 @@ function LoginForm(props) {
   }
 
   return (
+    
     <form>
       <div className="form">
         <label htmlFor="name">Username</label>
@@ -55,16 +71,19 @@ function LoginForm(props) {
       </div>
 
       <input type="button" value="Login" onClick={submitForm} />
+    
+     
+       </form>
 
-      {show ? (
-        <div id="ip">
-          <h2 style={{ color: "red" }}>Invalid Login</h2>
-        </div>
-      ) : null}
 
-      {redirect ? <Redirect to="/profile" /> : null}
-    </form>
+       
+      
+
   );
+  function Profile(){
+    return <h2>Profile</h2>
+  }
 }
+
 
 export default LoginForm;

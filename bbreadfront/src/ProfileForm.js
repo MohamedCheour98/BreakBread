@@ -1,43 +1,42 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
-
+import Table from "./Table";
 function ProfileForm(props) {
   const [person, setPerson] = useState({
-    name: "",
-    job: ""
+    username: props.username,
+    password: props.password
+  });
+  const [user, setUser] = useState({
+     user: {}
   });
 
-  function submitForm() {
-    props.handleSubmit(person);
-    setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
-  }
+ 
 
   function handleChange(event) {
     const { name, value } = event.target; /* added id*/
     if (name === "password") setPerson({ username: person["username"], password: value });
     else setPerson({ username: value, password: person["password"] });
   }
-
+   
   return (
-    <container>
-      <div className = "list">
-        <label htmlFor="friends">Friends</label>
-        {/* <input
-          type="text"
-          name="friends"
-          value={person.friends}
-          onChange={handleChange}
-        /> */}
-      <label htmlFor="inventory">Inventory</label>
-      {/* <input
-        type="text"
-        name="inventory"
-        value={person.inventory}
-        onChange={handleChange}
-      /> */}
-      </div>
-    </container>
-  );
+
+    <div className="container">
+    
+    <input type="button" value="Login" onClick={getUsers(person)} />
+
+    
+  </div>
+   );
+   //Trying to get the user to come before the console.log but every time it prints it just prints the undefined
+   //Any ideas 
+   function getUsers(person){
+     props.getUserFromDB(person).then( user => {
+        setUser(user);
+     })
+     console.log(user);
+   }
+   
+   
 }
 
 export default ProfileForm;

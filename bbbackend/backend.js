@@ -28,7 +28,6 @@ app.get("/users", async (req, res) => {
 
 app.post("/users", async (req, res) => {
   let user = req.body;
-  console.log("enterpost");
   const inDatabase = await userServices.findUserByNameAndPassword(
     user.username,
     user.password
@@ -51,7 +50,7 @@ app.listen(process.env.PORT || port, () => {
 /* app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 }); */
-/*
+
 app.get("/users/:id", async (req, res) => {
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
@@ -61,7 +60,7 @@ app.get("/users/:id", async (req, res) => {
     res.send({ users_list: result });
   }
 });
-*/
+
 app.delete("/users/:id", async (req, res) => {
   const id = req.params["id"];
   const result = await userServices.findUserById(id);

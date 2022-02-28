@@ -8,7 +8,8 @@ import SignUpFunc from './SignUpFunc'
 import ProfileFunc from './ProfileFunc'
 import Button from 'react-bootstrap/Button';
 
-
+// this was testing for sending things to the profile page.
+// passed in a user in order to do testing with passing things to a table
   export default function Landing() {
     return (
       <Router>
@@ -21,21 +22,23 @@ import Button from 'react-bootstrap/Button';
             <h1>BreakBread</h1>
           </div>
           <Switch>
-            <Route path="/login">
+            <Route exact path="/login">
               <Login />
               <LoginFunc />
             </Route>
-            <Route path="/signup">
+            <Route exact path="/signup">
               <SignUp />
               <SignUpFunc />
             </Route>
-            <Route path="/profile">
-              <Profile />
-              <ProfileFunc />
-            </Route>
-            <Route path="/">
+            <Route exact path="/profile">
+              <Profile   name="1" password="123456"/>
+              <ProfileFunc  />
+            </Route>            
+            <Route exact path="/">
               <Home />
             </Route>
+            
+                 
           </Switch>
         </div>
       </Router>

@@ -53,7 +53,7 @@ function SignUpForm(props) {
         </div>
       ) : null}
 
-      {redirect ? <Redirect to="/home" /> : null}
+      {redirect ? <Redirect to="/profile" /> : null}
     </form>
   );
 }

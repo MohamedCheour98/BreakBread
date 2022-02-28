@@ -2,8 +2,8 @@
 import React, {useState, useEffect} from 'react'
 import ProfileForm from './ProfileForm'
 import axios from 'axios'
-
-function ProfileFunc() {
+import Table from "./Table";
+function ProfileFunc(props) {
   const [characters, setCharacters] = useState([]);
 function removeOneCharacter (index) {
   const deleted = characters[index];
@@ -25,11 +25,10 @@ function removeOneCharacter (index) {
       return false;
     }
   }
-  function updateList(person) { 
-    makeGetCall(person).then( result => {
-    /*if (result && result.status === 201)
-       setCharacters([...characters, result.data] );*/
-    });
+  function updateList(name) { 
+    console.log("we reachedhere");
+    console.log(name);
+    
  }
   async function fetchAll(){
     try {
@@ -42,26 +41,44 @@ function removeOneCharacter (index) {
        return false;         
     }
  }
- async function makeGetCall(person){
+
+ async function printScreen(person){
+   let result = await makeGetCall(person);
+    
+    if (
+      Object.keys(result.data.users_list).length !== 0 &&
+      result.status === 200
+    ) {
+    
+    }
+    return true;
+ }
+ async function getUserFromDB(person){
+   let user = await makeGetCall(person);
+   return user;
+ }
+ async function makeGetCall(person) {
   try {
-     const response = await axios.get('http://localhost:5000/users', person);
-     return response;
-  }
-  catch (error) {
-     console.log(error);
-     return false;
+    console.log(person);
+
+    const response = await axios.get(
+      "http://localhost:5000/users?username=" +
+        person.username +
+        "&password=" +
+        person.password
+    );
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    return false;
   }
 }
- useEffect(() => {
-  fetchAll().then( result => {
-     if (result)
-        setCharacters(result);
-   });
-}, [] );
+ 
+
     return (
       <div className="container">
-        
-        <ProfileForm handleSubmit={updateList} />
+            <ProfileForm getUserFromDB = {getUserFromDB} />
       </div>
     );  
 }
