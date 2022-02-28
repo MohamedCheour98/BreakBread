@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 
-// user schema for the database, a user has:
-// username and password for login credentials (must be at least 2 chars), a profilepicture,
-// groups of friends that they have created or have been invited to,
-// friends that they have added (other users)
-// invetory that holds all the items they currently have
-// history that holds their previous purchases and grocery runs
-
+/** user schema for the database, a user has:
+ * username and password (at least 2 chars long) for login credentials, 
+ * a profilepicture,
+ * groups of friends that they have created or have been invited to,
+ * friends that they have added (other users),
+ * inventory that holds all the items they currently have,
+ * history that holds their previous purchases and grocery runs
+*/
 const UserSchema = new mongoose.Schema(
   {
     username: {

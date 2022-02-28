@@ -4,11 +4,8 @@ import axios from "axios";
 
 const SignUp = require("./SignUpForm");
 
-
 function SignUpFunc() {
   
-  const [characters, setCharacters] = useState([]);
-
   async function updateList(person) {
     let result  = await makePostCall(person);
       if (Object.keys(result.data).length !== 0 && result.status === 201) {
@@ -16,42 +13,19 @@ function SignUpFunc() {
       }
     return false
   }
-
-/*
-  async function fetchAll() {
-    try {
-      const response = await axios.get("http://localhost:5000/users");
-      return response.data.users_list;
-    } catch (error) {
-      
-      console.log(error);
-      return false;
-    }
-  }
-  */
   
+
   async function makePostCall(person) {
     try {
-    
-      // const response = await axios.post(" http://localhost:5000/users", person);
       const response = await axios.post(" https://breakbread2.herokuapp.com/users", person);  
-      // change the htttp with the new heroku backend app bbb1 URL
       return response;
-    } catch (error) {
-      
+    
+    } catch (error) {  
       console.log(error);
       return false;
     }
   }
 
-/*
-  useEffect(() => {
-    fetchAll().then(result => {
-      if (result) 
-        setCharacters(result);
-    });
-  }, []);
-*/
 
   return (
     <div className="container">
