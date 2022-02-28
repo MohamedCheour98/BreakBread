@@ -73,7 +73,7 @@ function setDefaults(userToAdd) {
   userToAdd.groups = { groupList: [], groupCount: 0 };
   userToAdd.inventory = { itemList: [], itemCount: 0 };
   // history object has to be built out to include more functionality
-  userToAdd.history = { purchaseList: [] };
+  userToAdd.history = { purchaseList: [], purchaseCount: 0 };
   userToAdd.profilepicture =
     "https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 }
