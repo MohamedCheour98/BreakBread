@@ -17,7 +17,6 @@ import Button from 'react-bootstrap/Button';
             <a><Link to="/">Home</Link></a>
             <a><Link to="/login">Login</Link></a>
             <a><Link to="/signup">SignUp</Link></a>
-            <a><Link to="/profile">Profile</Link></a>
             <h1>BreakBread</h1>
           </div>
           <Switch>
@@ -44,13 +43,13 @@ import Button from 'react-bootstrap/Button';
   
   function Home() {
     return(
-      <div>
+      <div class = "home">
         <h3>Shop, Share, Enjoy!</h3>
-        <p>Join the <p2>BreakBread</p2> community to revolutionize</p>
-        <p>your grocery shopping and sharing experience.</p>
+        <p>Join the <p2>BreakBread</p2> community to revolutionize
+        your grocery shopping and sharing experience.</p>
+        <img src="BreakBread.png" alt = "BreakBread Logo"/>
       </div>
     )
-
   }
   
   function Login() {

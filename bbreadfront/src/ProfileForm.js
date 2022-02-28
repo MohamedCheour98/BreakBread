@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 function ProfileForm(props) {
   const [person, setPerson] = useState({
     name: "",
-    job: ""
+    password: ""
   });
 
   function submitForm() {

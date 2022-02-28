@@ -1093,6 +1093,35 @@ caption {
   color:white;
 }
 
+/*background image and responsive page in browser*/
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: url(images/veggies.jpg)
+		center center fixed no-repeat;
+	background-size: cover;	
+}
+
+.home {
+  width: 50%; /* makes browser responsive to changes in size*/
+  padding: 5%;
+  margin: 30px auto;
+  border-radius: 80%; /* rounded center div */
+  background: rgba(256, 256, 256, .75); /*this uses opacity of 80% for the background color*/
+  text-align: center;
+/*border: 4px dashed white;*/
+}
+.form {
+  width: 50%; /* makes browser responsive to changes in size*/
+  padding: 5%;
+  margin: 30px auto;
+  background: rgba(256, 256, 256, .75); /*this uses opacity of 80% for the background color*/
+  text-align: center;
+/*border: 4px dashed white;*/
+}
+
 /**
  * Layout
  */
