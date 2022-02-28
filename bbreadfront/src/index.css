@@ -1122,6 +1122,12 @@ html, body {
 /*border: 4px dashed white;*/
 }
 
+.friends{
+  background: rgba(256, 256, 256, .75);
+  width: 30%;
+  margin: auto;
+}
+
 /**
  * Layout
  */

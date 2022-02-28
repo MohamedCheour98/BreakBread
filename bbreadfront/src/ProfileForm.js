@@ -29,8 +29,6 @@ function ProfileForm(props) {
           value={person.friends}
           onChange={handleChange}
           /> */}
-        </div>
-      <div className = "inventory">
       <label htmlFor="inventory">Inventory</label>
     
       </div>
