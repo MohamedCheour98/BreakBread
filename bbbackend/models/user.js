@@ -27,23 +27,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    groups: {
-      type: Object,
-      required: false,
-    },
     friends: {
       type: Object,
       required: false,
     },
     inventory: {
-      type: Object,
-      required: false,
-    },
-    history: {
-      type: Object,
-      required: false,
-    },
-    groups: {
       type: Object,
       required: false,
     },

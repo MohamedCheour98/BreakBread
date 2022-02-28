@@ -2,90 +2,85 @@ const mongoose = require("mongoose");
 const userModel = require("./user");
 const dotenv = require("dotenv");
 
-
-const {compareByGeneratedPositionsDeflated,} = require("prettier/parser-postcss");
+const {
+  compareByGeneratedPositionsDeflated,
+} = require("prettier/parser-postcss");
 dotenv.config();
 
-mongoose.connect("mongodb+srv://" + process.env.MONGO_USER + ":" +
-    process.env.MONGO_PWD + "@cluster0.g187p.mongodb.net/" +
-      process.env.MONGO_DB + "?retryWrites=true&w=majority",
+mongoose
+  .connect(
+    "mongodb+srv://" +
+      process.env.MONGO_USER +
+      ":" +
+      process.env.MONGO_PWD +
+      "@cluster0.g187p.mongodb.net/" +
+      process.env.MONGO_DB +
+      "?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
   )
-  .catch((error) => console.log(error)
-);
-
+  .catch((error) => console.log(error));
 
 /**
  * Fetch all users from the database if credentials (username, password) are not valid.
- * Fetch user if credentials are valid. 
- * @param {*} username 
- * @param {*} password 
- * @returns 
+ * Fetch user if credentials are valid.
+ * @param {*} username
+ * @param {*} password
+ * @returns
  */
 async function getUsers(username, password) {
   let result;
 
   if (username === undefined && password == undefined) {
     result = await userModel.find();
-  } 
-  
-  else if (username && password) {
+  } else if (username && password) {
     result = await findUserByNameAndPassword(username, password);
   }
 
   return result;
 }
 
-
 /**
  * Add a new user to a database based on the username and password provided by the user.
  * Set default user attributes (profile picture, friends' list etc...) for every new user.
- * @param {*} user 
- * @returns new user 
+ * @param {*} user
+ * @returns new user
  */
 async function addUser(user) {
   try {
-    
     const userToAdd = new userModel(user);
     setDefaults(userToAdd);
     const savedUser = await userToAdd.save();
-    
+
     return savedUser;
-  
   } catch (error) {
     return false;
   }
 }
 
-
 /**
  * Give a new user an empty list for each of there attributes: friends, groups, inventory, history.
  * History object has to be built out to include more functionality.
- * @param {*} userToAdd 
+ * @param {*} userToAdd
  */
 function setDefaults(userToAdd) {
   userToAdd.friends = { friendList: [], friendCount: 0 };
-  userToAdd.groups = { groupList: [], groupCount: 0 };
   userToAdd.inventory = { itemList: [], itemCount: 0 };
-  userToAdd.history = { purchaseList: [], purchaseCount: 0 };
   userToAdd.profilepicture =
     "https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 }
 
-
 /**
  * Fetch user from the database given its username and password.
- * @param {*} username 
- * @param {*} password 
+ * @param {*} username
+ * @param {*} password
  * @returns user
  */
 async function findUserByNameAndPassword(username, password) {
   return await userModel.find({ username: username, password: password });
 }
-
 
 exports.getUsers = getUsers;
 exports.addUser = addUser;
