@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
-
+import { Redirect } from "react-router";
+import Table from "./Table"
 
 function ProfileForm(props) {
   const [person, setPerson] = useState({
@@ -29,7 +30,12 @@ function ProfileForm(props) {
           value={person.friends}
           onChange={handleChange}
           /> */}
-      <label htmlFor="inventory">Inventory</label>
+
+        <label htmlFor="inventory">Inventory</label>
+
+        <button on click = {<Redirect to="/" />}> new run </button>
+        <button on click = {<Redirect to="/" />}> add friend </button>
+      
     
       </div>
     </container>
