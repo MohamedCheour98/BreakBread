@@ -9,4 +9,4 @@ LINTER/CODE STYLER:
 -Then the style checker should be set up, to format a file, run SHIFT+ALT+F(windows) or SHIFT+OPTION+F(mac)
 -There is also an option to set up auto format on save in Settings on VS Code
 
-![Node.js](https://github.com/MohamedCheour98/BreakBread/actions/workflows/node.js.yml/badge.svg)
+![bbbackend.js](https://github.com/MohamedCheour98/BreakBread/actions/workflows/bbbackend.js.yml/badge.svg)
