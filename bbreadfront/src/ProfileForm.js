@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
-
+import { Container} from "react-bootstrap";
+import Table from "./Table"
 
 function ProfileForm(props) {
   
@@ -25,14 +25,9 @@ function ProfileForm(props) {
   return (
     <container>
       <div className = "friends">
-        <label htmlFor="friends">Friends</label>
-          {/* <input
-          type="text"
-          name="friends"
-          value={person.friends}
-          onChange={handleChange}
-          /> */}
-      <label htmlFor="inventory">Inventory</label>
+       
+      <Table user={props.user}/>
+
     
       </div>
     </container>
