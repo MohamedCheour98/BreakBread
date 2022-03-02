@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SignUpForm from "./SignUpForm";
 import axios from "axios";
-import { isNullOrUndefined } from "prettier/parser-postcss";
 
 const SignUp = require("./SignUpForm");
 
