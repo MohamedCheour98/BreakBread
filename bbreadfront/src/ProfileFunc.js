@@ -8,6 +8,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 
 function ProfileFunc() {
+
   let history = useHistory();
   let location = useLocation();
   console.log("user here");
@@ -25,14 +26,15 @@ function removeOneCharacter (index) {
     try {
       const response = await axios.delete('http://localhost:5000/users/' + _id);
       return response.data.users_list;
-
-    }
+      }
     catch (error){
       //We're not handling errors. Just logging into the console.
       console.log(error); 
       return false;
     }
   }
+
+
   function updateList(person) { 
     makeGetCall(person).then( result => {
     /*if (result && result.status === 201)
@@ -63,7 +65,7 @@ function removeOneCharacter (index) {
  useEffect(() => {
   fetchAll().then( result => {
      if (result)
-        setCharacters(result);
+        setPerson(result);
    });
 }, [] );
     return (

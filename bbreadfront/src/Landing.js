@@ -6,6 +6,7 @@ import { BrowserRouter as Router,
 import LoginFunc from './LoginFunc'
 import SignUpFunc from './SignUpFunc'
 import ProfileFunc from './ProfileFunc'
+import GroceryFunc from './GroceryRun'
 import Button from 'react-bootstrap/Button';
 
 
@@ -32,8 +33,12 @@ import Button from 'react-bootstrap/Button';
               <Profile />
               <ProfileFunc />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path = "/grocery">
+              <Grocery />
+              <GroceryFunc/>
             </Route>
           </Switch>
         </div>
@@ -62,4 +67,8 @@ import Button from 'react-bootstrap/Button';
 
   function Profile(){
     return <h2>Profile</h2>
+  }
+
+  function Grocery(){
+    return <h2>New Grocery Run</h2>
   }
