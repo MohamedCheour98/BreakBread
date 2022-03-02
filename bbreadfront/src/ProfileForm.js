@@ -22,7 +22,11 @@ function ProfileForm(props) {
   }
 
   return (
-      null
+    <div><input type="button" value="Login" onClick={props.addFriend} />
+    <input type="button" value="Login" onClick={props.deleteFriend} /></div>
+    
+
+
   );
 }
 

@@ -60,6 +60,12 @@ function removeOneCharacter (index) {
      return false;
   }
 }
+function addFriend(){
+  console.log("addfriend");
+}
+function deleteFriend(){
+  console.log("deletefriend");
+}
  useEffect(() => {
   fetchAll().then( result => {
      if (result)
@@ -70,7 +76,7 @@ function removeOneCharacter (index) {
       <div className="container">
         <FriendTable user={location.state.user}/>
         <InventoryTable user={location.state.user}/>
-        <ProfileForm />
+        <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} />
       </div>
     );  
 }
