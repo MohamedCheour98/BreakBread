@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
 function GroceryRun(props){
+    
+    const inventory = [
+      ];
+
     const [person, setPerson] = useState({
         item: "",
         price: "",
@@ -24,14 +28,14 @@ function GroceryRun(props){
         <input
           type="text"
           name="item"
-          value={person.username}
+          value={person.item}
           onChange={handleChange}
         />
         <label htmlFor="price">Price</label>
         <input
           type="text"
           name="price"
-          value={person.password}
+          value={person.price}
           onChange={handleChange}
         />
       </div>
