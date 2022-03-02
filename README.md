@@ -8,3 +8,5 @@ LINTER/CODE STYLER:
 -Three dependencies need to be downloaded: eslint@6.8.0, prettier@1.9.1, & prettier-eslint@10.1.0, to download these, run npm install and the name of the dependecy in the directory you want to be affected by the style checker
 -Then the style checker should be set up, to format a file, run SHIFT+ALT+F(windows) or SHIFT+OPTION+F(mac)
 -There is also an option to set up auto format on save in Settings on VS Code
+
+![Node.js](https://github.com/MohamedCheour98/BreakBread/actions/workflows/node.js.yml/badge.svg)
