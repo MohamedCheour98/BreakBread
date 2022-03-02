@@ -16,11 +16,10 @@ function LoginForm(props) {
   const [userData, setUserData] = useState({});
 
   /*const message = this.state.displayErrorMessage ? null : <div> nice</div>; */
-
+  // strange array prototype, making us use loggedIn[0], Joseph?
   async function submitForm() {
     let loggedIn = await props.handleSubmit(person);
-    console.log("whyyy");
-    console.log(loggedIn);
+    console.log(loggedIn)
     if (Object.keys(loggedIn[0]).length != 0) {
       setShow(false);
       setUserData(loggedIn[0])

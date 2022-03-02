@@ -2,6 +2,8 @@
 import React, {useState, useEffect} from 'react'
 import ProfileForm from './ProfileForm'
 import axios from 'axios'
+import FriendTable from './FriendTable'
+import InventoryTable from './InventoryTable'
 import { useHistory, useLocation } from 'react-router-dom';
 
 
@@ -10,10 +12,10 @@ function ProfileFunc() {
   let location = useLocation();
   console.log("user here");
   console.log(location.state.user);
-  const [characters, setCharacters] = useState([]);
+  const [users, setCharacters] = useState([]);
 function removeOneCharacter (index) {
-  const deleted = characters[index];
-  const updated = characters.filter((character, i) => {
+  const deleted = users[index];
+  const updated = users.filter((user, i) => {
       return i !== index
     });
     deleteBackend(deleted['_id']);
@@ -66,8 +68,9 @@ function removeOneCharacter (index) {
 }, [] );
     return (
       <div className="container">
-        
-        <ProfileForm user = {location.state.user}/>
+        <FriendTable user={location.state.user}/>
+        <InventoryTable user={location.state.user}/>
+        <ProfileForm />
       </div>
     );  
 }

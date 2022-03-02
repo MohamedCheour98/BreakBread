@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Container} from "react-bootstrap";
-import Table from "./Table"
 
 function ProfileForm(props) {
   
@@ -23,14 +22,7 @@ function ProfileForm(props) {
   }
 
   return (
-    <container>
-      <div className = "friends">
-       
-      <Table user={props.user}/>
-
-    
-      </div>
-    </container>
+      null
   );
 }
 

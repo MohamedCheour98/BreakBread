@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SignUpForm from "./SignUpForm";
 import axios from "axios";
+import { isNullOrUndefined } from "prettier/parser-postcss";
 
 const SignUp = require("./SignUpForm");
 
@@ -9,9 +10,11 @@ function SignUpFunc() {
   async function updateList(person) {
     let result  = await makePostCall(person);
       if (Object.keys(result.data).length !== 0 && result.status === 201) {
-        return true;
+        console.log('found func')
+        console.log(result.data)
+        return result.data;
       }
-    return false
+    return null
   }
   
 
