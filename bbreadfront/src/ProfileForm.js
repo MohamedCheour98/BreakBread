@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
-
+import { Container} from "react-bootstrap";
 
 function ProfileForm(props) {
   
@@ -23,19 +22,7 @@ function ProfileForm(props) {
   }
 
   return (
-    <container>
-      <div className = "friends">
-        <label htmlFor="friends">Friends</label>
-          {/* <input
-          type="text"
-          name="friends"
-          value={person.friends}
-          onChange={handleChange}
-          /> */}
-      <label htmlFor="inventory">Inventory</label>
-    
-      </div>
-    </container>
+      null
   );
 }
 
