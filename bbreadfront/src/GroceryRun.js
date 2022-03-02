@@ -8,17 +8,20 @@ function GroceryRun(props){
     const [person, setPerson] = useState({
         item: "",
         price: "",
+        user: "",
     })
 
     function handleChange(event) {
         const { name, value } = event.target; /* added inventory*/
         if (name === "price")
-          setPerson({ item: person["item"], price: value });
-        else setPerson({ item: value, price: person["price"] });
+          setPerson({ item: person["item"], price: value, user: person["user"]});
+        else if (name === "item")
+            setPerson({ item: value, price: person["price"], user: person["user"]});
+        else(setPerson({ item: person["item"], price: person["price"], user: value}))
       }
 
     async function submitForm() {
-        setPerson({ item: "", price: "" });
+        setPerson({ item: "", price: "", user: ""});
       }
 
     return(
@@ -36,6 +39,13 @@ function GroceryRun(props){
           type="text"
           name="price"
           value={person.price}
+          onChange={handleChange}
+        />
+        <label htmlFor="user">User</label>
+        <input
+          type="text"
+          name="user"
+          value={person.user}
           onChange={handleChange}
         />
       </div>
