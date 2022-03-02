@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import {Link} from "react-router-dom";
-import Table from "./Table"
 
 function ProfileForm(props) {
   const [person, setPerson] = useState({

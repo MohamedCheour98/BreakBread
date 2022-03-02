@@ -2,7 +2,6 @@
 import React, {useState, useEffect} from 'react'
 import ProfileForm from './ProfileForm'
 import axios from 'axios'
-import Table from './Table';
 
 function ProfileFunc() {
   const [person, setPerson] = useState([]);
