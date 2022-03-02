@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 function GroceryRun(props){
     
-    const inventory = [
-      ];
+    /*const inventory = [
+      ];*/
 
     const [person, setPerson] = useState({
         item: "",
