@@ -3,6 +3,9 @@ import { Container } from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 function ProfileForm(props) {
+  
+  console.log("we in here?");
+  console.log(props);
   const [person, setPerson] = useState({
     name: "",
     password: ""
@@ -18,16 +21,7 @@ function ProfileForm(props) {
 
   return (
     <container>
-      <div className = "friends">
-        <label htmlFor="friends">Friends</label>
-          {/* <input
-          type="text"
-          name="friends"
-          value={person.friends}
-          onChange={handleChange}
-          /> */}
-
-        <label htmlFor="inventory">Inventory</label>
+      <div className = "grocery">
       <Link to = "/grocery" className = "button"> New run </Link>
     
       </div>

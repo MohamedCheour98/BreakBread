@@ -13,13 +13,17 @@ function LoginForm(props) {
   });
   const [show, setShow] = React.useState(false);
   const [redirect, setRedirect] = React.useState(false);
+  const [userData, setUserData] = useState({});
 
   /*const message = this.state.displayErrorMessage ? null : <div> nice</div>; */
-
+  // strange array prototype, making us use loggedIn[0], Joseph?
   async function submitForm() {
     let loggedIn = await props.handleSubmit(person);
-    if (loggedIn) {
+    console.log(loggedIn)
+    if (Object.keys(loggedIn[0]).length != 0) {
       setShow(false);
+      setUserData(loggedIn[0])
+
       setRedirect(true);
 
     } else {
@@ -62,7 +66,10 @@ function LoginForm(props) {
         </div>
       ) : null}
 
-      {redirect ? <Redirect to="/profile" /> : null}
+{redirect  ? (<div>
+        <Redirect to={{pathname: "/profile", state: {user: userData}}}  />
+      </div> 
+      ): null} 
     </form>
   );
 }

@@ -2,9 +2,38 @@
 import React, {useState, useEffect} from 'react'
 import ProfileForm from './ProfileForm'
 import axios from 'axios'
+import FriendTable from './FriendTable'
+import InventoryTable from './InventoryTable'
+import { useHistory, useLocation } from 'react-router-dom';
+
 
 function ProfileFunc() {
-  const [person, setPerson] = useState([]);
+
+  let history = useHistory();
+  let location = useLocation();
+  console.log("user here");
+  console.log(location.state.user);
+  const [users, setCharacters] = useState([]);
+function removeOneCharacter (index) {
+  const deleted = users[index];
+  const updated = users.filter((user, i) => {
+      return i !== index
+    });
+    deleteBackend(deleted['_id']);
+    setCharacters(updated);
+  }
+  async function deleteBackend(_id) {
+    try {
+      const response = await axios.delete('http://localhost:5000/users/' + _id);
+      return response.data.users_list;
+      }
+    catch (error){
+      //We're not handling errors. Just logging into the console.
+      console.log(error); 
+      return false;
+    }
+  }
+
 
   function updateList(person) { 
     makeGetCall(person).then( result => {
@@ -41,8 +70,9 @@ function ProfileFunc() {
 }, [] );
     return (
       <div className="container">
-        
-        <ProfileForm handleSubmit={updateList} />
+        <FriendTable user={location.state.user}/>
+        <InventoryTable user={location.state.user}/>
+        <ProfileForm />
       </div>
     );  
 }

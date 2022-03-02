@@ -7,12 +7,13 @@ function SignUpForm(props) {
   });
   const [show, setShow] = React.useState(false);
   const [redirect, setRedirect] = React.useState(false);
+  const [userData, setUserData] = useState({});
   async function submitForm() {
     let signedIn = await props.handleSubmit(person);
-
-
-    if (signedIn) {
+    console.log(signedIn)
+    if (Object.keys(signedIn).length != 0) {
       setShow(false);
+      setUserData(signedIn)
       setRedirect(true);
     } else {
       setShow(true);
@@ -53,7 +54,9 @@ function SignUpForm(props) {
         </div>
       ) : null}
 
-      {redirect ? <Redirect to="/profile" /> : null}
+    {redirect ? (<div>
+        <Redirect to={{pathname: "/profile", state: {user: userData}}} /> 
+        </div> ): null}
     </form>
   );
 }
