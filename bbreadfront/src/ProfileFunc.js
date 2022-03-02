@@ -2,8 +2,14 @@
 import React, {useState, useEffect} from 'react'
 import ProfileForm from './ProfileForm'
 import axios from 'axios'
+import { useHistory, useLocation } from 'react-router-dom';
+
 
 function ProfileFunc() {
+  let history = useHistory();
+  let location = useLocation();
+  console.log("user here");
+  console.log(location.state.user);
   const [characters, setCharacters] = useState([]);
 function removeOneCharacter (index) {
   const deleted = characters[index];
@@ -61,7 +67,7 @@ function removeOneCharacter (index) {
     return (
       <div className="container">
         
-        <ProfileForm handleSubmit={updateList} />
+        <ProfileForm user = {location.state.user}/>
       </div>
     );  
 }

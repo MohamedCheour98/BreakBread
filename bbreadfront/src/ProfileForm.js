@@ -3,6 +3,9 @@ import { Container } from "react-bootstrap";
 
 
 function ProfileForm(props) {
+  
+  console.log("we in here?");
+  console.log(props);
   const [person, setPerson] = useState({
     name: "",
     password: ""

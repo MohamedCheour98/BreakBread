@@ -25,17 +25,7 @@ function LoginFunc() {
   }
   async function updateList(person) {
     let result = await makeGetCall(person);
-    console.log("result");
-    console.log(result.data.users_list);
-      if (
-        Object.keys(result.data.users_list).length !== 0 &&
-        result.status === 200
-      ) {
-        return true;
-      }
- 
-
-    return false;
+    return result.data.users_list;
   }
   async function fetchAll() {
     try {
