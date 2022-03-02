@@ -65,7 +65,7 @@ function removeOneCharacter (index) {
  useEffect(() => {
   fetchAll().then( result => {
      if (result)
-        setPerson(result);
+        setCharacters(result);
    });
 }, [] );
     return (
