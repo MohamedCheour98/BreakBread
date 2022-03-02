@@ -50,7 +50,7 @@ function GroceryRun(props){
         />
       </div>
 
-      <input type="button" value="add" onClick={submitForm} />
+      <input type="button" value="add item" onClick={submitForm} />
 
     </form>
 
