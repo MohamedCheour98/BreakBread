@@ -6,6 +6,7 @@ const {
   compareByGeneratedPositionsDeflated,
 } = require("prettier/parser-postcss");
 dotenv.config();
+mongoose.set("debug", true);
 
 mongoose
   .connect(
@@ -84,13 +85,24 @@ async function findUserByNameAndPassword(username, password) {
 
 async function update(userAddingFriend, friendToAdd) {
   let oldVersionUser = await findUserByName(userAddingFriend);
-  let oldVersionfriends = oldVersionUser[0].friends;
+  let oldVersionFriend = await findUserByName(friendToAdd);
+  if (oldVersionUser.length == 0 || oldVersionFriend.length == 0) return false;
+  let oldVersionFriends = oldVersionUser[0].friends;
+  let oldVersionFFriends = oldVersionFriend[0].friends;
 
-  oldVersionfriends.user2 = "bruh";
+  oldVersionFriends.friendList.push(friendToAdd);
+  oldVersionFFriends.friendList.push(userAddingFriend);
+
   let found = await userModel.updateOne(
-    { userAddingFriend },
-    { $set: { friends: { oldVersionfriends } } }
+    { username: userAddingFriend },
+    { $set: { friends: oldVersionFriends } }
   );
+  let found2 = await userModel.updateOne(
+    { username: friendToAdd },
+    { $set: { friends: oldVersionFFriends } }
+  );
+  if (found.modifiedCount == 0 || found2.modifiedCount == 0) return false;
+  return true;
 }
 async function findUserByName(name) {
   return await userModel.find({ username: name });
@@ -100,6 +112,7 @@ exports.getUsers = getUsers;
 exports.addUser = addUser;
 exports.findUserByNameAndPassword = findUserByNameAndPassword;
 exports.update = update;
+exports.findUserByName = findUserByName;
 
 /*FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
 

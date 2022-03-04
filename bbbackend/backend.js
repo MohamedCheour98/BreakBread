@@ -36,21 +36,29 @@ app.put("/users", async (req, res) => {
   const data = req.body;
   const userAddingFriend = data.user;
   const friendToAdd = data.friend;
-  let bruh = await userServices.update(userAddingFriend, friendToAdd);
-  res.status(201).end();
+
+  let success = await userServices.update(userAddingFriend, friendToAdd);
+  if (success) {
+    res.status(201).end();
+  } else {
+    res.status(300).end();
+  }
 });
 
 app.post("/users", async (req, res) => {
   let user = req.body;
 
-  const inDatabase = await userServices.findUserByNameAndPassword(
-    user.username,
-    user.password
-  );
+  const inDatabaseUserNameAndPassword =
+    await userServices.findUserByNameAndPassword(user.username, user.password);
+
+  const inDatabaseUsername = await userServices.findUserByName(user.username);
 
   let savedUser = {};
 
-  if (Object.keys(inDatabase).length === 0) {
+  if (
+    Object.keys(inDatabaseUserNameAndPassword).length === 0 &&
+    Object.keys(inDatabaseUsername).length === 0
+  ) {
     savedUser = await userServices.addUser(user);
     res.status(201).send(savedUser);
   } else {
