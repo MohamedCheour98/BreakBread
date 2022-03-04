@@ -41,7 +41,8 @@ function ProfileFunc() {
     /*if (result && result.status === 201)
        setCharacters([...characters, result.data] );*/
     });
- }
+  }
+
   async function fetchAll(){
     try {
        const response = await axios.get('http://localhost:5000/users');
@@ -52,30 +53,33 @@ function ProfileFunc() {
        console.log(error); 
        return false;         
     }
- }
- async function makeGetCall(person){
-  try {
-     const response = await axios.get('http://localhost:5000/users', person);
-     return response;
   }
-  catch (error) {
-     console.log(error);
-     return false;
+
+  async function makeGetCall(person){
+    try {
+      const response = await axios.get('http://localhost:5000/users', person);
+      return response;
+    }
+    catch (error) {
+      console.log(error);
+      return false;
+    }
   }
-}
- useEffect(() => {
-  fetchAll().then( result => {
-     if (result)
-        setCharacters(result);
-   });
-}, [] );
-    return (
-      <div className="container">
-        <FriendTable user={location.state.user}/>
-        <InventoryTable user={location.state.user}/>
-        <ProfileForm />
-      </div>
-    );  
+  
+  useEffect(() => {
+    fetchAll().then( result => {
+      if (result)
+          setCharacters(result);
+    });
+  }, [] );
+
+  return (
+    <div className="container">
+      <FriendTable user={location.state.user}/>
+      <InventoryTable user={location.state.user}/>
+      <ProfileForm />
+    </div>
+  );  
 }
 
 export default ProfileFunc;

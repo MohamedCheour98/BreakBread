@@ -6,6 +6,7 @@ function SignUpForm(props) {
     name: "",
     job: ""
   });
+  
   const [show, setShow] = React.useState(false);
   const [redirect, setRedirect] = React.useState(false);
   const [userData, setUserData] = useState({});

@@ -39,7 +39,6 @@ function LoginFunc() {
       return false;
     }
   }
-
   async function makeGetCall(person) {
     try {
       const response = await axios.get(
