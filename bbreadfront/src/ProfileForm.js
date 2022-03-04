@@ -19,17 +19,6 @@ function ProfileForm(props) {
       <div className = "grocery">
       <Link to = "/grocery" className = "button"> New run </Link>    
       </div>
-      
-      <div className="form">
-      <label htmlFor="name">Username</label>
-      <input
-        type="text"
-        name="username"
-        value={person.username}
-        onChange={handleChange}
-      />
-      </div>
-    
     </container>
 
     
