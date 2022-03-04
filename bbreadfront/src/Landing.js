@@ -54,7 +54,7 @@ import Button from 'react-bootstrap/Button';
         <h3>Shop, Share, Enjoy!</h3>
         <p>Join the <p2>BreakBread</p2> community to revolutionize
         your grocery shopping and sharing experience.</p>
-        <img id = "logo" src= "images/BreakBread@2x.png" width = "324" height = "267" alt = "BreakBread Logo"/>
+        <img id = "logo" src={require("./images/BreakBread@2x.png")} width = "162" height = "133.5" alt = "BreakBread Logo"/>
       </div>
     )
   }

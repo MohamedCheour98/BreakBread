@@ -11,14 +11,6 @@ function ProfileForm(props) {
     password: ""
   });
 
-
-  function submitForm() {
-    props.handleSubmit(person);
-    setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
-  }
-
-
-
   return (
     <container>
       <div className = "grocery">
