@@ -22,7 +22,6 @@ app.get("/users", async (req, res) => {
   try {
     const result = await userServices.getUsers(username, password);
     res.send({ users_list: result });
-  
   } catch (error) {
     console.log(error);
     res.status(500).send("An error ocurred in the server.");

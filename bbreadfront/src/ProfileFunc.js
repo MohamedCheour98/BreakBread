@@ -11,17 +11,18 @@ function ProfileFunc() {
 
   let history = useHistory();
   let location = useLocation();
-  console.log("user here");
-  console.log(location.state.user);
+  
   const [users, setCharacters] = useState([]);
-function removeOneCharacter (index) {
-  const deleted = users[index];
-  const updated = users.filter((user, i) => {
+  
+  function removeOneCharacter (index) {
+    const deleted = users[index];
+    const updated = users.filter((user, i) => {
       return i !== index
     });
     deleteBackend(deleted['_id']);
     setCharacters(updated);
   }
+  
   async function deleteBackend(_id) {
     try {
       const response = await axios.delete('http://localhost:5000/users/' + _id);

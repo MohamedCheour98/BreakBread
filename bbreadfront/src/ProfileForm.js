@@ -3,9 +3,6 @@ import { Container } from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 function ProfileForm(props) {
-  
-  console.log("we in here?");
-  console.log(props);
   const [person, setPerson] = useState({
     name: "",
     password: ""
@@ -16,8 +13,6 @@ function ProfileForm(props) {
     props.handleSubmit(person);
     setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
   }
-
-
 
   return (
     <container>
