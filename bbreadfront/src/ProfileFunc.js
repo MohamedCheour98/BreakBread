@@ -10,6 +10,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 function ProfileFunc() {
   let history = useHistory();
   let location = useLocation();
+  let currentUser = location.state.user.username;
 
   const [users, setCharacters] = useState([]);
 function removeOneCharacter (index) {
@@ -60,9 +61,10 @@ function removeOneCharacter (index) {
   }
 }
 async function addFriend(){
- console.log("fml");
+  //dont know know what to return from put just because there is only a status that is sent back
   try {
-    const response = await axios.put('http://localhost:5000/users', {user: "1" , friend: "123456"});
+    const response = await axios.put('http://localhost:5000/users', {user: currentUser , friend: "come"});
+    
     return response;
  }
  catch (error) {

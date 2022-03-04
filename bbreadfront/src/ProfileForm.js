@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Container} from "react-bootstrap";
 
 function ProfileForm(props) {
+  console.log("the user");
+  console.log(props.currentUser);
   
-  console.log("we in here?");
-  console.log(props);
+ 
   const [person, setPerson] = useState({
     name: "",
     password: ""
@@ -22,8 +23,8 @@ function ProfileForm(props) {
   }
 
   return (
-    <div><input type="button" value="Login" onClick={props.addFriend} />
-    <input type="button" value="Login" onClick={props.deleteFriend} /></div>
+    <div><input type="button" value="Add Friends" onClick={props.addFriend} />
+    <input type="button" value="Delete Friends" onClick={props.deleteFriend} /></div>
     
 
 
