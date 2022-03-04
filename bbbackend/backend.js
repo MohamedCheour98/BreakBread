@@ -9,11 +9,10 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
-
 /**
  * Fetch all users when "/users" is added to the url.
- * Separation of concerns: Calling the model component "user-services" 
- * and not accessing the databse directly from here. 
+ * Separation of concerns: Calling the model component "user-services"
+ * and not accessing the databse directly from here.
  */
 app.get("/users", async (req, res) => {
   const username = req.query["username"];
@@ -22,7 +21,6 @@ app.get("/users", async (req, res) => {
   try {
     const result = await userServices.getUsers(username, password);
     res.send({ users_list: result });
-  
   } catch (error) {
     console.log(error);
     res.status(500).send("An error ocurred in the server.");
@@ -33,6 +31,15 @@ app.get("/users", async (req, res) => {
  * Adding a new user to the database once they sign up.
  * To implement: check if user already exists.
  */
+
+app.put("/users", async (req, res) => {
+  const data = req.body;
+  const userAddingFriend = data.user;
+  const friendToAdd = data.friend;
+  let bruh = await userServices.update(userAddingFriend, friendToAdd);
+  res.status(201).end();
+});
+
 app.post("/users", async (req, res) => {
   let user = req.body;
 
@@ -46,11 +53,9 @@ app.post("/users", async (req, res) => {
   if (Object.keys(inDatabase).length === 0) {
     savedUser = await userServices.addUser(user);
     res.status(201).send(savedUser);
-  }
-
-  else {
+  } else {
     res.status(500).end();
-  } 
+  }
 });
 
 app.listen(process.env.PORT || port, () => {

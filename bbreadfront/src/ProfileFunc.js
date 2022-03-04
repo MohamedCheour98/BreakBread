@@ -10,8 +10,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 function ProfileFunc() {
   let history = useHistory();
   let location = useLocation();
-  console.log("user here");
-  console.log(location.state.user);
+
   const [users, setCharacters] = useState([]);
 function removeOneCharacter (index) {
   const deleted = users[index];
@@ -60,8 +59,16 @@ function removeOneCharacter (index) {
      return false;
   }
 }
-function addFriend(){
-  console.log("addfriend");
+async function addFriend(){
+ console.log("fml");
+  try {
+    const response = await axios.put('http://localhost:5000/users', {user: "1" , friend: "123456"});
+    return response;
+ }
+ catch (error) {
+    console.log(error);
+    return false;
+ }
 }
 function deleteFriend(){
   console.log("deletefriend");

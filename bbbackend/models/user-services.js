@@ -82,9 +82,24 @@ async function findUserByNameAndPassword(username, password) {
   return await userModel.find({ username: username, password: password });
 }
 
+async function update(userAddingFriend, friendToAdd) {
+  let oldVersionUser = await findUserByName(userAddingFriend);
+  let oldVersionfriends = oldVersionUser[0].friends;
+
+  oldVersionfriends.user2 = "bruh";
+  let found = await userModel.updateOne(
+    { userAddingFriend },
+    { $set: { friends: { oldVersionfriends } } }
+  );
+}
+async function findUserByName(name) {
+  return await userModel.find({ username: name });
+}
+
 exports.getUsers = getUsers;
 exports.addUser = addUser;
 exports.findUserByNameAndPassword = findUserByNameAndPassword;
+exports.update = update;
 
 /*FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
 
