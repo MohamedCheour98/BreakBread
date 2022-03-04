@@ -18,7 +18,9 @@ import Button from 'react-bootstrap/Button';
             <a><Link to="/">Home</Link></a>
             <a><Link to="/login">Login</Link></a>
             <a><Link to="/signup">SignUp</Link></a>
+            <a><Link to ="/">Logout</Link></a>
             <h1>BreakBread</h1>
+
           </div>
           <Switch>
             <Route exact path="/login">
