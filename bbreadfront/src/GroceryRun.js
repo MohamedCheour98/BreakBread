@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import {Link} from "react-router-dom"
+import axios from "axios";
 
+
+let inventory = [
+
+];
 function GroceryRun(props){
     
-    /*const inventory = [
-      ];*/
-
     const [person, setPerson] = useState({
         item: "",
         price: "",
@@ -19,12 +21,32 @@ function GroceryRun(props){
         else if (name === "item")
             setPerson({ item: value, price: person["price"], user: person["user"]});
         else(setPerson({ item: person["item"], price: person["price"], user: value}))
+
       }
 
     async function submitForm() {
-        setPerson({ item: "", price: "", user: ""});
+      let newPerson = person
+      inventory.push(newPerson)
+      setPerson({ item: "", price: "", user: ""});
       }
 
+      async function makePatchCall(person) {
+        try {
+          const response = await axios.patch(" https://breakbread2.herokuapp.com/users", person);  
+          return response;
+        
+        } catch (error) {  
+          console.log(error);
+          return false;
+        }
+      }
+    
+    async function submitInventory() {
+      for (let i = 0; i < inventory.length; i++) {
+        console.log(inventory[i])
+        await makePatchCall(inventory[i])
+      }
+    }
     return(
     <form>
       <div className="form">
@@ -53,6 +75,7 @@ function GroceryRun(props){
 
       <input type="button" value="add item" onClick={submitForm} />
       <Link to = "/profile" className = "button"> Return </Link>
+      <input type="button" value="finish run" onClick={submitInventory} />
     </form>
 
 
