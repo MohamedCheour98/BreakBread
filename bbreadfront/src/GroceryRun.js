@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom"
 
 function GroceryRun(props){
     
@@ -51,7 +52,7 @@ function GroceryRun(props){
       </div>
 
       <input type="button" value="add item" onClick={submitForm} />
-
+      <Link to = "/profile" className = "button"> Return </Link>
     </form>
 
 

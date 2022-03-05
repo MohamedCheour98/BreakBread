@@ -20,7 +20,7 @@ function LoginForm(props) {
   async function submitForm() {
     let loggedIn = await props.handleSubmit(person);
     console.log(loggedIn)
-    if (Object.keys(loggedIn[0]).length != 0) {
+    if (Object.keys(loggedIn).length != 0) {
       setShow(false);
       setUserData(loggedIn[0])
 
