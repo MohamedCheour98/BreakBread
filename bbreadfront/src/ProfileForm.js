@@ -3,13 +3,6 @@ import { Container } from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 function ProfileForm(props) {
-<<<<<<< HEAD
-  console.log("the user");
-  console.log(props.currentUser);
-  
- 
-=======
->>>>>>> master
   const [person, setPerson] = useState({
     name: "",
     password: ""

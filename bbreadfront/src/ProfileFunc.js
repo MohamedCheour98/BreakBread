@@ -64,7 +64,6 @@ function ProfileFunc() {
       return false;
     }
   }
-<<<<<<< HEAD
 
   async function addFriend(){
     //dont know know what to return from put just because there is only a status that is sent back
@@ -89,25 +88,11 @@ function ProfileFunc() {
     });
   }, [] );
   
-=======
-  
-  useEffect(() => {
-    fetchAll().then( result => {
-      if (result)
-          setCharacters(result);
-    });
-  }, [] );
-
->>>>>>> master
   return (
     <div className="container">
       <FriendTable user={location.state.user}/>
       <InventoryTable user={location.state.user}/>
-<<<<<<< HEAD
       <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} />
-=======
-      <ProfileForm />
->>>>>>> master
     </div>
   );  
 }
