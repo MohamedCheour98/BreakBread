@@ -12,6 +12,7 @@ function SignUpForm(props) {
   const [userData, setUserData] = useState({});
   
   async function submitForm() {
+    
     let signedIn = await props.handleSubmit(person);
     
     if (Object.keys(signedIn).length != 0) {

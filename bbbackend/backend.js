@@ -39,7 +39,7 @@ app.post("/users", async (req, res) => {
     user.username,
     user.password
   );
-
+  
   let savedUser = {};
 
   if (Object.keys(inDatabase).length === 0){
