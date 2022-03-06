@@ -23,10 +23,12 @@ function LoginFunc() {
       return false;
     }
   }
+  
   async function updateList(person) {
     let result = await makeGetCall(person);
     return result.data.users_list;
   }
+
   async function fetchAll() {
     try {
       const response = await axios.get("http://localhost:5000/users");
@@ -39,7 +41,6 @@ function LoginFunc() {
   }
   async function makeGetCall(person) {
     try {
-  
       const response = await axios.get(
         "http://localhost:5000/users?username=" +
           person.username +
@@ -47,7 +48,9 @@ function LoginFunc() {
           person.password
       );
       return response;
-    } catch (error) {
+    } 
+    
+    catch (error) {
       console.log(error);
       return false;
     }
