@@ -33,8 +33,8 @@ app.get("/users", async (req, res) => {
  * To implement: check if user already exists.
  */
 app.post("/users", async (req, res) => {
+  console.log('hey Mohamed');
   let user = req.body;
-
   const inDatabase = await userServices.findUserByNameAndPassword(
     user.username,
     user.password
@@ -42,7 +42,7 @@ app.post("/users", async (req, res) => {
 
   let savedUser = {};
 
-  if (Object.keys(inDatabase).length === 0) {
+  if (Object.keys(inDatabase).length === 0){
     savedUser = await userServices.addUser(user);
     res.status(201).send(savedUser);
   }
