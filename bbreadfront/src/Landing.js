@@ -6,6 +6,7 @@ import { BrowserRouter as Router,
 import LoginFunc from './LoginFunc'
 import SignUpFunc from './SignUpFunc'
 import ProfileFunc from './ProfileFunc'
+import GroceryFunc from './GroceryRun'
 import Button from 'react-bootstrap/Button';
 
 
@@ -17,7 +18,9 @@ import Button from 'react-bootstrap/Button';
             <a><Link to="/">Home</Link></a>
             <a><Link to="/login">Login</Link></a>
             <a><Link to="/signup">SignUp</Link></a>
+            <a><Link to ="/">Logout</Link></a>
             <h1>BreakBread</h1>
+
           </div>
           <Switch>
             <Route exact path="/login">
@@ -32,8 +35,12 @@ import Button from 'react-bootstrap/Button';
               <Profile />
               <ProfileFunc />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path = "/grocery">
+              <Grocery />
+              <GroceryFunc/>
             </Route>
           </Switch>
         </div>
@@ -47,7 +54,7 @@ import Button from 'react-bootstrap/Button';
         <h3>Shop, Share, Enjoy!</h3>
         <p>Join the <p2>BreakBread</p2> community to revolutionize
         your grocery shopping and sharing experience.</p>
-        <img id = "logo" src= "images/BreakBread@2x.png" width = "324" height = "267" alt = "BreakBread Logo"/>
+        <img id = "logo" src={require("./images/BreakBread@2x.png")} width = "162" height = "133.5" alt = "BreakBread Logo"/>
       </div>
     )
   }
@@ -62,4 +69,8 @@ import Button from 'react-bootstrap/Button';
 
   function Profile(){
     return <h2>Profile</h2>
+  }
+
+  function Grocery(){
+    return <h2>New Grocery Run</h2>
   }

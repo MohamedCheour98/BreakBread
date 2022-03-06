@@ -1,34 +1,45 @@
 import React, { useState } from "react";
-import { Container} from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 function ProfileForm(props) {
+<<<<<<< HEAD
   console.log("the user");
   console.log(props.currentUser);
   
  
+=======
+>>>>>>> master
   const [person, setPerson] = useState({
     name: "",
     password: ""
   });
+
 
   function submitForm() {
     props.handleSubmit(person);
     setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
   }
 
-  function handleChange(event) {
-    const { name, value } = event.target; /* added id*/
-    if (name === "password") setPerson({ username: person["username"], password: value });
-    else setPerson({ username: value, password: person["password"] });
-  }
-
   return (
+<<<<<<< HEAD
     <div><input type="button" value="Add Friends" onClick={props.addFriend} />
     <input type="button" value="Delete Friends" onClick={props.deleteFriend} /></div>
     
 
 
+=======
+    <container>
+      <div className = "grocery">
+      <Link to = "/grocery" className = "button"> New run </Link>    
+      </div>
+    </container>
+
+    
+>>>>>>> master
   );
+
 }
+
 
 export default ProfileForm;

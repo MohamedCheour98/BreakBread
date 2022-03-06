@@ -18,11 +18,12 @@ function LoginForm(props) {
   /*const message = this.state.displayErrorMessage ? null : <div> nice</div>; */
   // strange array prototype, making us use loggedIn[0], Joseph?
   async function submitForm() {
+    
     let loggedIn = await props.handleSubmit(person);
-    if (Object.keys(loggedIn[0]).length != 0) {
+    
+    if (Object.keys(loggedIn).length != 0) {
       setShow(false);
       setUserData(loggedIn[0])
-
       setRedirect(true);
 
     } else {

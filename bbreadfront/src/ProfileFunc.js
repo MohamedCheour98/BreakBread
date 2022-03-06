@@ -8,6 +8,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 
 function ProfileFunc() {
+
   let history = useHistory();
   let location = useLocation();
   let currentUser = location.state.user.username;
@@ -21,13 +22,12 @@ function ProfileFunc() {
     deleteBackend(deleted['_id']);
     setCharacters(updated);
   }
-
+  
   async function deleteBackend(_id) {
     try {
       const response = await axios.delete('http://localhost:5000/users/' + _id);
       return response.data.users_list;
-
-    }
+      }
     catch (error){
       //We're not handling errors. Just logging into the console.
       console.log(error); 
@@ -41,6 +41,7 @@ function ProfileFunc() {
        setCharacters([...characters, result.data] );*/
     });
   }
+  
   async function fetchAll(){
     try {
        const response = await axios.get('http://localhost:5000/users');
@@ -63,6 +64,7 @@ function ProfileFunc() {
       return false;
     }
   }
+<<<<<<< HEAD
 
   async function addFriend(){
     //dont know know what to return from put just because there is only a status that is sent back
@@ -87,11 +89,25 @@ function ProfileFunc() {
     });
   }, [] );
   
+=======
+  
+  useEffect(() => {
+    fetchAll().then( result => {
+      if (result)
+          setCharacters(result);
+    });
+  }, [] );
+
+>>>>>>> master
   return (
     <div className="container">
       <FriendTable user={location.state.user}/>
       <InventoryTable user={location.state.user}/>
+<<<<<<< HEAD
       <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} />
+=======
+      <ProfileForm />
+>>>>>>> master
     </div>
   );  
 }
