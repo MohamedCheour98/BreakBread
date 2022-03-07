@@ -90,10 +90,10 @@ async function update(userAddingFriend, friendToAdd) {
   if (oldVersionUser.length == 0 || oldVersionFriend.length == 0) return false;
   let oldVersionFriends = oldVersionUser[0].friends;
   let oldVersionFFriends = oldVersionFriend[0].friends;
-
+  console.log(oldVersionFFriends);
   if (
     oldVersionFFriends.friendList.includes(userAddingFriend) &&
-    oldVersionFriends.includes(friendToAdd)
+    oldVersionFriends.friendList.includes(friendToAdd)
   ) {
     return false;
   }

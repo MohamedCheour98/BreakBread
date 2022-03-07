@@ -8,25 +8,26 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 
 function ProfileFunc() {
+
   let history = useHistory();
   let location = useLocation();
   let currentUser = location.state.user.username;
-
   const [users, setCharacters] = useState([]);
-function removeOneCharacter (index) {
-  const deleted = users[index];
-  const updated = users.filter((user, i) => {
-      return i !== index
+  
+  function removeOneCharacter (index) {
+    const deleted = users[index];
+    const updated = users.filter((user, i) => {
+        return i !== index
     });
     deleteBackend(deleted['_id']);
     setCharacters(updated);
   }
+  
   async function deleteBackend(_id) {
     try {
       const response = await axios.delete('http://localhost:5000/users/' + _id);
       return response.data.users_list;
-
-    }
+      }
     catch (error){
       //We're not handling errors. Just logging into the console.
       console.log(error); 
@@ -77,11 +78,11 @@ async function fetchAll(){
         setCharacters(result);
    });
 }, [] );
+//        <InventoryTable user={location.state.user}/>
 
     return (
       <div className="container">
         <FriendTable user={location.state.user}/>
-        <InventoryTable user={location.state.user}/>
 
         <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} />
       </div>

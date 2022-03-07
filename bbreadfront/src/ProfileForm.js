@@ -3,35 +3,17 @@ import { Container} from "react-bootstrap";
 import FormFriend from './FormFriend'
 
 function ProfileForm(props) {
-  const [person, setPerson] = useState({
-    name: "",
-    password: ""
-  });
   const [askForFriend, setAskFriend] = useState(false);
-  function submitForm() {
-    props.handleSubmit(person);
-    setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
-  }
+  const[operation, setOperation] = useState("");
 
-  
-  const [friend, setFriend] = useState("");
-  function changeFriend(friend){
-    setAskFriend(false);
-  }
-  const [operation, setOperation] = useState("addFriend");
-  
 
   return (
+
     <div><input type="button" value="Add Friends" onClick={addFriend} />
     {askForFriend ? (
-        <div >
-              <FormFriend changeFriend={changeFriend} addFriend = {props.addFriend} deleteFriend = {props.deleteFriend} setAskFriend = {setAskFriend} operation = {operation} />
-        </div>
-      ) : null}
-    
+      <FormFriend addFriend = {props.addFriend} deleteFriend = {props.deleteFriend} operation = {operation} setAskFriend = {setAskFriend}  />
+    ): null}
     <input type="button" value="Delete Friends" onClick={deleteFriend} /></div>
-    
-
 
   );
   function addFriend(){
@@ -46,5 +28,6 @@ function ProfileForm(props) {
   }
   
 }
+
 
 export default ProfileForm;
