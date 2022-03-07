@@ -2,6 +2,7 @@
 const userServices = require("./models/user-services");
 const mongoose = require("mongoose");
 const ObjectId = require("mongoose").Types.ObjectId;
+const nodemon = require("nodemon");
 /*const { test } = require("prettier");*/
 
 test("adding user to database", async () => {
@@ -16,6 +17,17 @@ test("adding user to database", async () => {
 
   expect(savedUser.username).toBe("joe");
   expect(savedUser.password).toBe("joejoe");
+});
+
+test("adding bad user type to database", async () => {
+  const badPerson = {
+    yes: "yes",
+    no: "no",
+  };
+
+  let result = await userServices.addUser(badPerson);
+
+  expect(result).toBeFalsy();
 });
 
 test("test db query user joe", async () => {
