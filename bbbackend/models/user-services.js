@@ -6,7 +6,7 @@ const {
   compareByGeneratedPositionsDeflated,
 } = require("prettier/parser-postcss");
 dotenv.config();
-
+//mongoose.set("debug", true);
 mongoose
   .connect(
     "mongodb+srv://" +
@@ -60,6 +60,17 @@ async function addUser(user) {
   }
 }
 
+async function patchUser(item, userToPatch) {
+  try {
+    setInventory(item, userToPatch);
+    userToPatch[0].markModified("inventory");
+    const savedUser = await userToPatch[0].save();
+    return savedUser;
+  } catch (error) {
+    return false;
+  }
+}
+
 /**
  * Give a new user an empty list for each of there attributes: friends, groups, inventory, history.
  * History object has to be built out to include more functionality.
@@ -67,11 +78,17 @@ async function addUser(user) {
  */
 function setDefaults(userToAdd) {
   userToAdd.friends = { friendList: [], friendCount: 0 };
+  //userToAdd.inventory = { itemList: [], itemCount: 0 };
   userToAdd.inventory = { itemList: [], itemCount: 0 };
+
   userToAdd.profilepicture =
     "https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 }
 
+function setInventory(item, itemToPatch) {
+  //itemToPatch[0].inventory.itemList.push(item.item);
+  itemToPatch[0].inventory.itemList.push(item);
+}
 /**
  * Fetch user from the database given its username and password.
  * @param {*} username
@@ -82,9 +99,17 @@ async function findUserByNameAndPassword(username, password) {
   return await userModel.find({ username: username, password: password });
 }
 
+// pulls a user from the database based on their username, no functionality assosciated with this yet, but eventually we may need this lookup
+
+async function findUserByName(name) {
+  return await userModel.find({ username: name });
+}
+
 exports.getUsers = getUsers;
 exports.addUser = addUser;
 exports.findUserByNameAndPassword = findUserByNameAndPassword;
+exports.findUserByName = findUserByName;
+exports.patchUser = patchUser;
 
 /*FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
 
@@ -94,12 +119,6 @@ async function removeUserById(id) {
   let result;
   result = await userModel.findByIdAndDelete(id);
   return result;
-}
-
-// pulls a user from the database based on their username, no functionality assosciated with this yet, but eventually we may need this lookup
-
-async function findUserByName(name) {
-  return await userModel.find({ username: name });
 }
 
 // pulls a user from the database based on the _id, no functionality assosciated with this yet, but eventually we may need this lookup
@@ -117,6 +136,5 @@ async function findUserById(_id) {
 
 // export statements
 exports.findUserById = findUserById;
-exports.findUserByName = findUserByName;
 exports.removeUserById = removeUserById;
 */
