@@ -15,13 +15,13 @@ function ProfileForm(props) {
   }
 
   return (
-<<<<<<< HEAD
+
     <div><input type="button" value="Add Friends" onClick={props.addFriend} />
     <input type="button" value="Delete Friends" onClick={props.deleteFriend} /></div>
     
 
 
-=======
+
     <container>
       <div className = "grocery">
       <Link to = "/grocery" className = "button"> New run </Link>    
@@ -29,7 +29,7 @@ function ProfileForm(props) {
     </container>
 
     
->>>>>>> master
+
   );
 
 }
