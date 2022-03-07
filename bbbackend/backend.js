@@ -9,11 +9,10 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
-
 /**
  * Fetch all users when "/users" is added to the url.
- * Separation of concerns: Calling the model component "user-services" 
- * and not accessing the databse directly from here. 
+ * Separation of concerns: Calling the model component "user-services"
+ * and not accessing the databse directly from here.
  */
 app.get("/users", async (req, res) => {
   const username = req.query["username"];
@@ -22,7 +21,6 @@ app.get("/users", async (req, res) => {
   try {
     const result = await userServices.getUsers(username, password);
     res.send({ users_list: result });
-  
   } catch (error) {
     console.log(error);
     res.status(500).send("An error ocurred in the server.");
@@ -46,11 +44,21 @@ app.post("/users", async (req, res) => {
   if (Object.keys(inDatabase).length === 0) {
     savedUser = await userServices.addUser(user);
     res.status(201).send(savedUser);
-  }
-
-  else {
+  } else {
     res.status(500).end();
-  } 
+  }
+});
+
+app.patch("/users", async (req, res) => {
+  let item = req.body;
+  let patchedUser = {};
+  const userToPatch = await userServices.findUserByName(item.user);
+  if (Object.keys(userToPatch).length !== 0) {
+    patchedUser = await userServices.patchUser(item, userToPatch);
+    res.status(201).send(patchedUser);
+  } else {
+    res.status(500).end();
+  }
 });
 
 app.listen(process.env.PORT || port, () => {

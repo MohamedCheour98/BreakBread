@@ -421,19 +421,6 @@ h5 {
 
 }
 
-/*h1:not(:first-child),
-h2:not(:first-child),
-h3:not(:first-child),
-h4:not(:first-child),
-h5:not(:first-child) {
-  margin: 1.5rem 0;
-}
-
-h1:not(:first-child),
-h2:not(:first-child),
-h3:not(:first-child) {
-  margin-top: 2rem;
-}*/
 
 h1 {
   font-size: 1.75rem;
@@ -821,7 +808,9 @@ dd {
   text-transform: none;
   padding: 0.75rem 1.25rem;
   margin: auto;
-  /*vertical-align: middle;*/
+  margin-bottom: 10px;
+  width: 15%;
+  max-width: 30%;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
@@ -1012,9 +1001,12 @@ textarea.is-success:active {
  */
 table {
   border-collapse: collapse;
-  border-spacing: 0;
+  border-spacing: 3px;
+  margin: auto;
   width: 20%;
   max-width: 50%;
+  padding-top: 3px;
+  background:rgba(256, 256, 256, .75);
 }
 
 thead th {

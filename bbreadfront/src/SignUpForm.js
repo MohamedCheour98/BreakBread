@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router";
 function SignUpForm(props) {
+  
   const [person, setPerson] = useState({
     name: "",
     job: ""
   });
+  
   const [show, setShow] = React.useState(false);
   const [redirect, setRedirect] = React.useState(false);
   const [userData, setUserData] = useState({});
+  
   async function submitForm() {
     let signedIn = await props.handleSubmit(person);
-    console.log(signedIn)
+    
     if (Object.keys(signedIn).length != 0) {
       setShow(false);
       setUserData(signedIn)
