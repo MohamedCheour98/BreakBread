@@ -36,14 +36,38 @@ app.put("/users", async (req, res) => {
   const data = req.body;
   const userAddingFriend = data.user;
   const friendToAdd = data.friend;
-
-  let success = await userServices.update(userAddingFriend, friendToAdd);
-  if (success) {
-    res.status(201).end();
+  const operation = data.operation;
+  let success = false;
+  if (operation === "addFriend") {
+    success = await userServices.update(userAddingFriend, friendToAdd);
   } else {
-    res.status(300).end();
+    success = await userServices.update2(userAddingFriend, friendToAdd);
+  }
+
+  if (success) {
+    res.status(201).send(true);
+  } else {
+    res.status(201).send(false);
   }
 });
+/*
+app.put2("/users", async (req, res) => {
+  const data = req.body;
+  const userDeletingFriend = data.user;
+  const friendToDelete = data.friend;
+
+  let success = await userServices.updateDelete(
+    userDeletingFriend,
+    friendToDelete
+  );
+
+  if (success) {
+    res.status(201).send(true);
+  } else {
+    res.status(201).send(false);
+  }
+});
+*/
 
 app.post("/users", async (req, res) => {
   let user = req.body;

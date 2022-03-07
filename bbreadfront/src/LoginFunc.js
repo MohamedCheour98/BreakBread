@@ -52,6 +52,7 @@ function LoginFunc() {
       return false;
     }
   }
+ 
 
   useEffect(() => {
     fetchAll().then(result => {

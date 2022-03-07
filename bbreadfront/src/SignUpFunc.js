@@ -9,8 +9,7 @@ function SignUpFunc() {
   async function updateList(person) {
     let result  = await makePostCall(person);
       if (Object.keys(result.data).length !== 0 && result.status === 201) {
-        console.log('found func')
-        console.log(result.data)
+        
         return result.data;
       }
     return null
@@ -19,7 +18,7 @@ function SignUpFunc() {
 
   async function makePostCall(person) {
     try {
-      const response = await axios.post(" https://breakbread2.herokuapp.com/users", person);  
+      const response = await axios.post("http://localhost:5000/users", person);  
       return response;
     
     } catch (error) {  

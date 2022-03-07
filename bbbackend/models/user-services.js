@@ -86,9 +86,17 @@ async function findUserByNameAndPassword(username, password) {
 async function update(userAddingFriend, friendToAdd) {
   let oldVersionUser = await findUserByName(userAddingFriend);
   let oldVersionFriend = await findUserByName(friendToAdd);
+
   if (oldVersionUser.length == 0 || oldVersionFriend.length == 0) return false;
   let oldVersionFriends = oldVersionUser[0].friends;
   let oldVersionFFriends = oldVersionFriend[0].friends;
+
+  if (
+    oldVersionFFriends.friendList.includes(userAddingFriend) &&
+    oldVersionFriends.includes(friendToAdd)
+  ) {
+    return false;
+  }
 
   oldVersionFriends.friendList.push(friendToAdd);
   oldVersionFFriends.friendList.push(userAddingFriend);
@@ -104,6 +112,49 @@ async function update(userAddingFriend, friendToAdd) {
   if (found.modifiedCount == 0 || found2.modifiedCount == 0) return false;
   return true;
 }
+
+async function update2(user1, user2) {
+  let oldVersionUser = await findUserByName(user1);
+  let oldVersionFriend = await findUserByName(user2);
+
+  if (oldVersionUser.length == 0 || oldVersionFriend.length == 0) return false;
+
+  let oldVersionFriends = oldVersionUser[0].friends;
+  let oldVersionFFriends = oldVersionFriend[0].friends;
+
+  if (
+    !oldVersionFFriends.friendList.includes(user1) ||
+    !oldVersionFriends.friendList.includes(user2)
+  ) {
+    return false;
+  }
+
+  oldVersionFriends.friendList = arrayRemove(
+    oldVersionFriends.friendList,
+    user2
+  );
+  oldVersionFFriends.friendList = arrayRemove(
+    oldVersionFFriends.friendList,
+    user1
+  );
+
+  let found = await userModel.updateOne(
+    { username: user1 },
+    { $set: { friends: oldVersionFriends } }
+  );
+  let found2 = await userModel.updateOne(
+    { username: user2 },
+    { $set: { friends: oldVersionFFriends } }
+  );
+  if (found.modifiedCount == 0 || found2.modifiedCount == 0) return false;
+  return true;
+}
+function arrayRemove(arr, value) {
+  return arr.filter(function (ele) {
+    return ele != value;
+  });
+}
+
 async function findUserByName(name) {
   return await userModel.find({ username: name });
 }
@@ -112,6 +163,8 @@ exports.getUsers = getUsers;
 exports.addUser = addUser;
 exports.findUserByNameAndPassword = findUserByNameAndPassword;
 exports.update = update;
+exports.update2 = update2;
+
 exports.findUserByName = findUserByName;
 
 /*FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER

@@ -33,47 +33,43 @@ function removeOneCharacter (index) {
       return false;
     }
   }
-  function updateList(person) { 
-    makeGetCall(person).then( result => {
-    /*if (result && result.status === 201)
-       setCharacters([...characters, result.data] );*/
-    });
- }
-  async function fetchAll(){
-    try {
-       const response = await axios.get('http://localhost:5000/users');
-       return response.data.users_list;     
-    }
-    catch (error){
-       //We're not handling errors. Just logging into the console.
-       console.log(error); 
-       return false;         
-    }
- }
- async function makeGetCall(person){
-  try {
-     const response = await axios.get('http://localhost:5000/users', person);
-     return response;
-  }
-  catch (error) {
-     console.log(error);
-     return false;
-  }
-}
-async function addFriend(){
+
+async function addFriend(friend){
+  
   //dont know know what to return from put just because there is only a status that is sent back
   try {
-    const response = await axios.put('http://localhost:5000/users', {user: currentUser , friend: "come"});
+    const response = await axios.put('http://localhost:5000/users', {user: currentUser , friend: friend, operation: "addFriend"});
+    /* returns true or false if the friends were cross added */
     
-    return response;
+    return response.data;
  }
  catch (error) {
     console.log(error);
     return false;
  }
 }
-function deleteFriend(){
-  console.log("deletefriend");
+async function deleteFriend(friend){
+  try {
+    const response = await axios.put('http://localhost:5000/users', {user: currentUser , friend: friend, operation: "deleteFriend"});
+    /* returns true or false if the friends were cross added */
+    
+    return response.data;
+ }
+ catch (error) {
+    console.log(error);
+    return false;
+ }
+}
+async function fetchAll(){
+  try {
+     const response = await axios.get('http://localhost:5000/users');
+     return response.data.users_list;     
+  }
+  catch (error){
+     //We're not handling errors. Just logging into the console.
+     console.log(error); 
+     return false;         
+  }
 }
  useEffect(() => {
   fetchAll().then( result => {
@@ -81,10 +77,12 @@ function deleteFriend(){
         setCharacters(result);
    });
 }, [] );
+
     return (
       <div className="container">
         <FriendTable user={location.state.user}/>
         <InventoryTable user={location.state.user}/>
+
         <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} />
       </div>
     );  
