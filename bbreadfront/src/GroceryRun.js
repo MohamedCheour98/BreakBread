@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
 import axios from "axios";
+import { useLocation} from 'react-router-dom';
 
 
 let inventory = [
@@ -14,7 +15,10 @@ function GroceryRun(props){
         quantity: "",
         user: "",
     })
-
+    let location = useLocation();
+    console.log(location.state.user)
+    const [redirect, setRedirect] = React.useState(false);
+    const [userData, setUserData] = useState({});
     function handleChange(event) {
         const { name, value } = event.target; /* added inventory*/
         if (name === "price")
@@ -26,7 +30,9 @@ function GroceryRun(props){
         else(setPerson({ item: person["item"], price: person["price"], quantity: person["quantity"], user: value}))
 
       }
-
+    async function submitReturn() {
+      setRedirect(true);
+    }
     async function submitForm() {
       let newPerson = person
       inventory.push(newPerson)
@@ -86,11 +92,18 @@ function GroceryRun(props){
       </div>
 
       <input type="button" value="add item" onClick={submitForm} />
-      <Link to = "/profile" className = "button"> Return </Link>
+      <div className = "grocery">
+      <input type="button" value="return" onClick={submitReturn} />
+      {redirect  ? (<div>
+        <Redirect to={{pathname: "/profile", state: {user: userData}}}  />
+      </div> 
+      ): null}  
+      </div>
       <input type="button" value="finish run" onClick={submitInventory} />
     </form>
 
 
     );
+    // <Link to = "/profile" className = "button"> Return </Link>
 }
 export default GroceryRun;

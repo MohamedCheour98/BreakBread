@@ -7,38 +7,29 @@ function ProfileForm(props) {
     name: "",
     password: ""
   });
-  //const [redirect, setRedirect] = React.useState(false);
-  //const [userData, setUserData] = useState({});
+  const [redirect, setRedirect] = React.useState(false);
+  const [userData, setUserData] = useState({});
 
 
   function submitForm() {
-    props.handleSubmit(person);
-
-    //setRedirect(true);
+    console.log('true')
+    setRedirect(true);
     setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
   }
-  /*
+  
   return (
     <container>
       <div className = "grocery">
       <input type="button" value="New Run" onClick={submitForm} />
       {redirect  ? (<div>
-        <Redirect to={{pathname: "/profile", state: {user: userData}}}  />
+        <Redirect to={{pathname: "/grocery", state: {user: userData}}}  />
       </div> 
-      ): null} 
-
-  }
-
-  return (
-    <container>
-      <div className = "grocery">
-      <Link to = "/grocery" className = "button"> New run </Link>    
+      ): null}  
       </div>
     </container>
-
-    
   );
-  */
+      }
+  /*
   return (
     <container>
       <div className = "grocery">
@@ -47,6 +38,6 @@ function ProfileForm(props) {
     </container>
   );
 }
-
+*/
 
 export default ProfileForm;

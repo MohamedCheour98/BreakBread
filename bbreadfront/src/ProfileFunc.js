@@ -11,7 +11,7 @@ function ProfileFunc() {
 
   let history = useHistory();
   let location = useLocation();
-  
+  console.log(location.state.user)
   const [users, setCharacters] = useState([]);
   
   function removeOneCharacter (index) {
