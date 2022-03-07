@@ -9,8 +9,13 @@ test("adding user to database", async () => {
     username: "joe",
     password: "joejoe",
   };
+  const person2 = {
+    username: "hannyt",
+    password: "ht",
+  };
 
   const savedUser = await userServices.addUser(person);
+  const savedUser2 = await userServices.addUser(person2);
 
   console.log(savedUser);
 
@@ -48,6 +53,19 @@ test("testing get all users", async () => {
   expect(result[0].password).toBe("joejoe");
 });
 
-//testing deleting a user
+//test get all Users with no specified user to get (user-services, line 37)
 
-//test get all Users with no specified user to get
+//test an error catch in improper mongoose connection (user-services, line 24)
+
+//test patch user
+
+//test setInventory
+
+//test find user by name only
+test("testing finding a user by username only", async () => {
+  const result = await userServices.findUserByName("hannyt");
+  expect(result[0].username).toBe("hannyt");
+  expect(result[0].password).toBe("ht");
+});
+
+//test invalid password throws error
