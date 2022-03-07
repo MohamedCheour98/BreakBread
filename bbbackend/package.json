@@ -5,7 +5,7 @@
   "scripts": {
     "linttest": "prettier --check .",
     "test": "jest --forceExit",
-    "coverage": "jest --collectCoverage --forceExits",
+    "coverage": "jest --collectCoverage --forceExit",
     "dev": "nodemon backend.js",
     "start": "node backend.js"
   },
