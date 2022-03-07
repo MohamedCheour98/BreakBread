@@ -13,6 +13,7 @@ function ProfileForm(props) {
 
   function submitForm() {
     props.handleSubmit(person);
+
     //setRedirect(true);
     setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
   }
@@ -26,6 +27,13 @@ function ProfileForm(props) {
       </div> 
       ): null} 
 
+    setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
+  }
+
+  return (
+    <container>
+      <div className = "grocery">
+      <Link to = "/grocery" className = "button"> New run </Link>    
       </div>
     </container>
 
