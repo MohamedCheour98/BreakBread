@@ -1,10 +1,9 @@
-// import React, { useState } from "react";
 const userServices = require("./models/user-services");
 const mongoose = require("mongoose");
 const ObjectId = require("mongoose").Types.ObjectId;
-const nodemon = require("nodemon");
 /*const { test } = require("prettier");*/
 
+//testing adding a user to the DB with a valid user type
 test("adding user to database", async () => {
   const person = {
     username: "joe",
@@ -19,6 +18,7 @@ test("adding user to database", async () => {
   expect(savedUser.password).toBe("joejoe");
 });
 
+//test the adduser function to make sure it catches an attempt to add an invalid user
 test("adding bad user type to database", async () => {
   const badPerson = {
     yes: "yes",
@@ -30,6 +30,7 @@ test("adding bad user type to database", async () => {
   expect(result).toBeFalsy();
 });
 
+//testing finding user by name and password for a valid entry in the DB
 test("test db query user joe", async () => {
   let result = await userServices.findUserByNameAndPassword("joe", "joejoe");
   console.log(result);
@@ -40,8 +41,13 @@ test("test db query user joe", async () => {
   expect(result[0].password).toBe("joejoe");
 });
 
+//testing getUsers when a valid entry in the DB is passed
 test("testing get all users", async () => {
   let result = await userServices.getUsers("joe", "joejoe");
   expect(result[0].username).toBe("joe");
   expect(result[0].password).toBe("joejoe");
 });
+
+//testing deleting a user
+
+//test get all Users with no specified user to get
