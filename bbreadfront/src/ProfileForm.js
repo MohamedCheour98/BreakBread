@@ -27,7 +27,6 @@ function ProfileForm(props) {
       </div> 
       ): null} 
 
-    setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
   }
 
   return (
