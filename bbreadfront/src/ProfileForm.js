@@ -22,11 +22,6 @@ function ProfileForm(props) {
 
 
 
-    <container>
-      <div className = "grocery">
-      <Link to = "/grocery" className = "button"> New run </Link>    
-      </div>
-    </container>
 
     
 
