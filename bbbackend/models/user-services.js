@@ -6,7 +6,7 @@ const {
   compareByGeneratedPositionsDeflated,
 } = require("prettier/parser-postcss");
 dotenv.config();
-
+//mongoose.set("debug", true);
 mongoose
   .connect(
     "mongodb+srv://" +
@@ -62,13 +62,9 @@ async function addUser(user) {
 
 async function patchUser(item, userToPatch) {
   try {
-    //console.log("patchUser");
-    //console.log(item);
-    //console.log(userToPatch);
     setInventory(item, userToPatch);
-    console.log(userToPatch[0].inventory.itemList);
+    userToPatch[0].markModified("inventory");
     const savedUser = await userToPatch[0].save();
-
     return savedUser;
   } catch (error) {
     return false;
@@ -82,17 +78,13 @@ async function patchUser(item, userToPatch) {
  */
 function setDefaults(userToAdd) {
   userToAdd.friends = { friendList: [], friendCount: 0 };
-  userToAdd.inventory = { itemList: [], itemCount: 0 };
+  userToAdd.inventory = { itemList: {}, itemCount: 0 };
   userToAdd.profilepicture =
     "https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 }
 
 function setInventory(item, itemToPatch) {
-  //console.log("setInventory");
-  //console.log(item);
-  //console.log(itemToPatch[0].inventory.itemList);
-  itemToPatch[0].inventory.itemList.push(item.item);
-  //console.log(itemToPatch[0].inventory.itemList);
+  itemToPatch[0].inventory.itemList.push(item);
 }
 /**
  * Fetch user from the database given its username and password.

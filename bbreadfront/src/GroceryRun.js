@@ -33,7 +33,7 @@ function GroceryRun(props){
       async function makePatchCall(person) {
         // doesn't work for breakbread2
         try {
-          const response = await axios.patch(" https://breakbread2.herokuapp.com/users", person);  
+          const response = await axios.patch("http://localhost:5000/users", person);  
           return response;
         
         } catch (error) {  

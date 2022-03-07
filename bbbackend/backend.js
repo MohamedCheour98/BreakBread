@@ -55,7 +55,6 @@ app.patch("/users", async (req, res) => {
   const userToPatch = await userServices.findUserByName(item.user);
   if (Object.keys(userToPatch).length !== 0) {
     patchedUser = await userServices.patchUser(item, userToPatch);
-    console.log(patchedUser);
     res.status(201).send(patchedUser);
   } else {
     res.status(500).end();
