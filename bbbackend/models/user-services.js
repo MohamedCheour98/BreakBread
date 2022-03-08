@@ -7,6 +7,8 @@ const {
 } = require("prettier/parser-postcss");
 dotenv.config();
 
+//mongoose.set('debug', true);
+
 mongoose
   .connect(
     "mongodb+srv://" +
@@ -50,12 +52,15 @@ async function getUsers(username, password) {
  */
 async function addUser(user) {
   try {
-    const userToAdd = new userModel(user);
-    setDefaults(userToAdd);
+    const userToAdd = new userModel(user);    
+    setDefaults(userToAdd); 
     const savedUser = await userToAdd.save();
-
+    
     return savedUser;
-  } catch (error) {
+  } 
+  
+  catch (error) {
+    console.log(error);
     return false;
   }
 }

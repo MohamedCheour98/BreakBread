@@ -17,11 +17,11 @@ function SignUpFunc() {
   
   async function makePostCall(person){
     try {
-      console.log('hey');
-      const response = await axios.post("localhost:5000/users", person);  
+      const response = await axios.post("http://localhost:5000/users", person);  
       return response;
+    } 
     
-    } catch (error) { 
+    catch (error) { 
       console.log(error);
       return false;
     }

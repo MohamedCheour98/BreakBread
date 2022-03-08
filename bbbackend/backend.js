@@ -33,7 +33,7 @@ app.get("/users", async (req, res) => {
  * To implement: check if user already exists.
  */
 app.post("/users", async (req, res) => {
-  console.log('hey Mohamed');
+  
   let user = req.body;
   const inDatabase = await userServices.findUserByNameAndPassword(
     user.username,
