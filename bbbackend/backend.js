@@ -9,11 +9,10 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
-
 /**
  * Fetch all users when "/users" is added to the url.
- * Separation of concerns: Calling the model component "user-services" 
- * and not accessing the databse directly from here. 
+ * Separation of concerns: Calling the model component "user-services"
+ * and not accessing the databse directly from here.
  */
 app.get("/users", async (req, res) => {
   const username = req.query["username"];
@@ -45,11 +44,38 @@ app.post("/users", async (req, res) => {
   if (Object.keys(inDatabase).length === 0) {
     savedUser = await userServices.addUser(user);
     res.status(201).send(savedUser);
+  } else {
+    res.status(500).end();
+  }
+});
+app.put("/users", async (req, res) => {
+  const data = req.body;
+  const userAddingFriend = data.user;
+  const friendToAdd = data.friend;
+  const operation = data.operation;
+  let success = false;
+  if (operation === "addFriend") {
+    success = await userServices.update(userAddingFriend, friendToAdd);
+  } else {
+    success = await userServices.update2(userAddingFriend, friendToAdd);
   }
 
-  else {
+  if (success) {
+    res.status(201).send(true);
+  } else {
+    res.status(201).send(false);
+  }
+});
+app.patch("/users", async (req, res) => {
+  let item = req.body;
+  let patchedUser = {};
+  const userToPatch = await userServices.findUserByName(item.user);
+  if (Object.keys(userToPatch).length !== 0) {
+    patchedUser = await userServices.patchUser(item, userToPatch);
+    res.status(201).send(patchedUser);
+  } else {
     res.status(500).end();
-  } 
+  }
 });
 
 app.listen(process.env.PORT || port, () => {

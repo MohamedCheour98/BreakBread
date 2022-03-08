@@ -6,7 +6,7 @@ const {
   compareByGeneratedPositionsDeflated,
 } = require("prettier/parser-postcss");
 dotenv.config();
-
+//mongoose.set("debug", true);
 mongoose
   .connect(
     "mongodb+srv://" +
@@ -60,6 +60,87 @@ async function addUser(user) {
   }
 }
 
+async function update(userAddingFriend, friendToAdd) {
+  let oldVersionUser = await findUserByName(userAddingFriend);
+  let oldVersionFriend = await findUserByName(friendToAdd);
+
+  if (oldVersionUser.length == 0 || oldVersionFriend.length == 0) return false;
+  let oldVersionFriends = oldVersionUser[0].friends;
+  let oldVersionFFriends = oldVersionFriend[0].friends;
+  if (
+    oldVersionFFriends.friendList.includes(userAddingFriend) &&
+    oldVersionFriends.friendList.includes(friendToAdd)
+  ) {
+    return false;
+  }
+
+  oldVersionFriends.friendList.push(friendToAdd);
+  oldVersionFFriends.friendList.push(userAddingFriend);
+
+  let found = await userModel.updateOne(
+    { username: userAddingFriend },
+    { $set: { friends: oldVersionFriends } }
+  );
+  let found2 = await userModel.updateOne(
+    { username: friendToAdd },
+    { $set: { friends: oldVersionFFriends } }
+  );
+  if (found.modifiedCount == 0 || found2.modifiedCount == 0) return false;
+  return true;
+}
+
+async function update2(user1, user2) {
+  let oldVersionUser = await findUserByName(user1);
+  let oldVersionFriend = await findUserByName(user2);
+
+  if (oldVersionUser.length == 0 || oldVersionFriend.length == 0) return false;
+
+  let oldVersionFriends = oldVersionUser[0].friends;
+  let oldVersionFFriends = oldVersionFriend[0].friends;
+
+  if (
+    !oldVersionFFriends.friendList.includes(user1) ||
+    !oldVersionFriends.friendList.includes(user2)
+  ) {
+    return false;
+  }
+
+  oldVersionFriends.friendList = arrayRemove(
+    oldVersionFriends.friendList,
+    user2
+  );
+  oldVersionFFriends.friendList = arrayRemove(
+    oldVersionFFriends.friendList,
+    user1
+  );
+
+  let found = await userModel.updateOne(
+    { username: user1 },
+    { $set: { friends: oldVersionFriends } }
+  );
+  let found2 = await userModel.updateOne(
+    { username: user2 },
+    { $set: { friends: oldVersionFFriends } }
+  );
+  if (found.modifiedCount == 0 || found2.modifiedCount == 0) return false;
+  return true;
+}
+function arrayRemove(arr, value) {
+  return arr.filter(function (ele) {
+    return ele != value;
+  });
+}
+async function patchUser(item, userToPatch) {
+  try {
+    setInventory(item, userToPatch);
+    userToPatch[0].markModified("inventory");
+    const savedUser = await userToPatch[0].save();
+    return savedUser;
+  } catch (error) {
+    return false;
+  }
+}
+
 /**
  * Give a new user an empty list for each of there attributes: friends, groups, inventory, history.
  * History object has to be built out to include more functionality.
@@ -67,11 +148,17 @@ async function addUser(user) {
  */
 function setDefaults(userToAdd) {
   userToAdd.friends = { friendList: [], friendCount: 0 };
+  //userToAdd.inventory = { itemList: [], itemCount: 0 };
   userToAdd.inventory = { itemList: [], itemCount: 0 };
+
   userToAdd.profilepicture =
     "https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 }
 
+function setInventory(item, itemToPatch) {
+  //itemToPatch[0].inventory.itemList.push(item.item);
+  itemToPatch[0].inventory.itemList.push(item);
+}
 /**
  * Fetch user from the database given its username and password.
  * @param {*} username
@@ -82,9 +169,19 @@ async function findUserByNameAndPassword(username, password) {
   return await userModel.find({ username: username, password: password });
 }
 
+// pulls a user from the database based on their username, no functionality assosciated with this yet, but eventually we may need this lookup
+
+async function findUserByName(name) {
+  return await userModel.find({ username: name });
+}
+
 exports.getUsers = getUsers;
 exports.addUser = addUser;
 exports.findUserByNameAndPassword = findUserByNameAndPassword;
+exports.findUserByName = findUserByName;
+exports.patchUser = patchUser;
+exports.update = update;
+exports.update2 = update2;
 
 /*FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
 
@@ -94,12 +191,6 @@ async function removeUserById(id) {
   let result;
   result = await userModel.findByIdAndDelete(id);
   return result;
-}
-
-// pulls a user from the database based on their username, no functionality assosciated with this yet, but eventually we may need this lookup
-
-async function findUserByName(name) {
-  return await userModel.find({ username: name });
 }
 
 // pulls a user from the database based on the _id, no functionality assosciated with this yet, but eventually we may need this lookup
@@ -117,6 +208,5 @@ async function findUserById(_id) {
 
 // export statements
 exports.findUserById = findUserById;
-exports.findUserByName = findUserByName;
 exports.removeUserById = removeUserById;
 */
