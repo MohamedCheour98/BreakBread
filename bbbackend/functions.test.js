@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ObjectId = require("mongoose").Types.ObjectId;
 /*const { test } = require("prettier");*/
 
-//testing adding a user to the DB with a valid user type
+//testing adding two users to the DB with a valid user type
 test("adding user to database", async () => {
   const person = {
     username: "joe",
@@ -54,12 +54,30 @@ test("testing get all users", async () => {
 });
 
 //test get all Users with no specified user to get (user-services, line 37)
+test("testing get all users, no specific user", async () => {
+  let result = await userServices.getUsers();
+  expect(result.length > 1);
+});
 
 //test an error catch in improper mongoose connection (user-services, line 24)
+//Don't need to cover line 24 anymore
 
 //test patch user
+test("testing patching a user", async () => {
+  const result = await userServices.findUserByName("joe");
+});
 
 //test setInventory
+test("setting inventory of a user", async () => {
+  const usertoPatch = await userServices.findUserByName("joe");
+  const item = "banana";
+  const item2 = "eggs";
+  userServices.setInventory(item, usertoPatch);
+  userServices.setInventory(item2, usertoPatch);
+
+  expect(usertoPatch[0].inventory.itemList[0]).toBe("banana");
+  expect(usertoPatch[0].inventory.itemList[1]).toBe("eggs");
+});
 
 //test find user by name only
 test("testing finding a user by username only", async () => {
@@ -69,3 +87,10 @@ test("testing finding a user by username only", async () => {
 });
 
 //test invalid password throws error
+test("testing an invalid password attempt throws an error", async () => {
+  const person = {
+    username: "jess",
+    password: "1",
+  };
+  expect(() => userServices.addUser(person).toThrow(Error));
+});

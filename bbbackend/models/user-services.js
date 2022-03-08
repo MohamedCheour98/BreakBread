@@ -110,6 +110,7 @@ exports.addUser = addUser;
 exports.findUserByNameAndPassword = findUserByNameAndPassword;
 exports.findUserByName = findUserByName;
 exports.patchUser = patchUser;
+exports.setInventory = setInventory;
 
 /*FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
 
