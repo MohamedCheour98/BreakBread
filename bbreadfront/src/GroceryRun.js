@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import {Link} from "react-router-dom"
 import axios from "axios";
+import { useHistory, useLocation } from 'react-router-dom';
+import { Redirect } from "react-router";
 
 
 let inventory = [
 
 ];
 function GroceryRun(props){
-    
+  let location = useLocation();
+  let currentUser = location.state.user;
+
     const [person, setPerson] = useState({
         item: "",
         price: "",
         quantity: "",
         user: "",
     })
+    const [returnBack, setReturnBack] = useState(false)
 
     function handleChange(event) {
         const { name, value } = event.target; /* added inventory*/
@@ -86,11 +91,21 @@ function GroceryRun(props){
       </div>
 
       <input type="button" value="add item" onClick={submitForm} />
-      <Link to = "/profile" className = "button"> Return </Link>
-      <input type="button" value="finish run" onClick={submitInventory} />
+      <input type="button" value="Return" onClick={goBack}/>
+      {returnBack ? (
+        <div>
+        <Redirect to={{pathname: "/profile", state: {user: currentUser}}} /> 
+      
+      </div> 
+      ): null}
+      <input type="button" value="finish run" onClick={submitInventory}/>
+
     </form>
 
 
     );
+    function goBack(){
+      setReturnBack(true);
+    }
 }
 export default GroceryRun;

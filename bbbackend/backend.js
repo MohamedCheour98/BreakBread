@@ -48,7 +48,24 @@ app.post("/users", async (req, res) => {
     res.status(500).end();
   }
 });
+app.put("/users", async (req, res) => {
+  const data = req.body;
+  const userAddingFriend = data.user;
+  const friendToAdd = data.friend;
+  const operation = data.operation;
+  let success = false;
+  if (operation === "addFriend") {
+    success = await userServices.update(userAddingFriend, friendToAdd);
+  } else {
+    success = await userServices.update2(userAddingFriend, friendToAdd);
+  }
 
+  if (success) {
+    res.status(201).send(true);
+  } else {
+    res.status(201).send(false);
+  }
+});
 app.patch("/users", async (req, res) => {
   let item = req.body;
   let patchedUser = {};

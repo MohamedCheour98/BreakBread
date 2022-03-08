@@ -1,21 +1,45 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
-import {Link, Redirect} from "react-router-dom";
+import FormFriend from './FormFriend'
+import GroceryRun from "./GroceryRun";
+import { Redirect } from "react-router";
 
 function ProfileForm(props) {
-  const [person, setPerson] = useState({
-    name: "",
-    password: ""
-  });
-  //const [redirect, setRedirect] = React.useState(false);
-  //const [userData, setUserData] = useState({});
+  const [askForFriend, setAskFriend] = useState(false);
+  const[operation, setOperation] = useState("");
+  const [newGroceryRun, setNewGroceryRun] = useState(false);
+  return (
 
+    <div><input type="button" value="Add Friends" onClick={addFriend} />
+    {askForFriend ? (
+      <FormFriend addFriend = {props.addFriend} deleteFriend = {props.deleteFriend} operation = {operation} setAskFriend = {setAskFriend}  />
+    ): null}
+    <input type="button" value="Delete Friends" onClick={deleteFriend} />
+    
+    
+    <input type="button" value="New Run" onClick={newGRun} />
+    {newGroceryRun  ? (<div>
+      <Redirect to={{pathname: "/grocery", state: {user: props.user}}}  />
+    </div> 
+    ): null} 
+    
+    
+    
+    
+    </div>
+    
 
-  function submitForm() {
-    props.handleSubmit(person);
+  );
+  function newGRun(){
+    setNewGroceryRun(true);
+  }
+  function addFriend(){
+    setOperation("addFriend");
+    setAskFriend(true);
 
-    //setRedirect(true);
-    setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
+  }
+  function deleteFriend(){
+    setOperation("deleteFriend");
+    setAskFriend(true);
   }
   /*
   return (
@@ -38,7 +62,7 @@ function ProfileForm(props) {
 
     
   );
-  */
+  
   return (
     <container>
       <div className = "grocery">
@@ -46,6 +70,7 @@ function ProfileForm(props) {
       </div>
     </container>
   );
+  */
 }
 
 
