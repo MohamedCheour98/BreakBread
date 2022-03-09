@@ -897,7 +897,7 @@ a.full-button {
   margin-bottom: 0.5rem;
   font-size: 1rem;
   margin: auto;
-  width: 20%;
+  width: 50%;
   max-width: 50%;
   line-height: 1;
 }
@@ -1006,7 +1006,7 @@ table {
   width: 20%;
   max-width: 50%;
   padding-top: 3px;
-  background:rgba(256, 256, 256, .75);
+  background:rgba(256, 256, 256);
 }
 
 thead th {
@@ -1099,24 +1099,25 @@ html, body {
 .home {
   width: 50%; /* makes browser responsive to changes in size*/
   padding: 5%;
-  margin: 30px auto;
-  border-radius: 80%; /* rounded center div */
-  background: rgba(256, 256, 256, .75); /*this uses opacity of 80% for the background color*/
+  margin: 30px auto 30px;
+  border-radius: 20%; /* rounded center div */
+  background: rgba(256, 256, 256); /*this uses opacity of 80% for the background color*/
   text-align: center;
 /*border: 4px dashed white;*/
 }
 .form {
-  width: 50%; /* makes browser responsive to changes in size*/
+  width: 40%; /* makes browser responsive to changes in size*/
   padding: 5%;
   margin: 30px auto;
-  background: rgba(256, 256, 256, .75); /*this uses opacity of 80% for the background color*/
+  border-radius: 20%; /* rounded center div */
+  background: rgba(256, 256, 256); /*this uses opacity of 80% for the background color*/
   text-align: center;
 /*border: 4px dashed white;*/
 }
 
 .friends{
-  background: rgba(256, 256, 256, .75);
-  width: 30%;
+  background: rgba(256, 256, 256);
+  width: 50%;
   margin: auto;
 }
 
