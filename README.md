@@ -7,7 +7,7 @@ https://www.figma.com/file/0ncbdJk0rEqyZHln6A6Y5R/Erik-McCutchen's-team-library?
 Last Edited 02/28/2022
 
 Use-Case Diagram:
-https://app.diagrams.net/#G1e9jcAisj4jJb03Ss7P-V9nysNpddWrfx
+https://app.diagrams.net/#G1e9jcAisj4jJb03Ss7P-V9nysNpddWrfx available on Wiki page and the source file is in the repo.
 Last Edited 02/04/2022
 
 Class Diagram:
