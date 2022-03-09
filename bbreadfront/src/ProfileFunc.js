@@ -45,12 +45,14 @@ function ProfileFunc(props) {
        return false;         
     }
   }
+/*
    useEffect(() => {
     fetchAll().then( result => {
        if (result)
           setCharacters(result);
      });
   }, [] );
+  */
   //        <InventoryTable user={location.state.user}/>
       return (
         <div className="container">
