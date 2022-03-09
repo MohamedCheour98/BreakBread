@@ -1,4 +1,18 @@
 # BreakBread
+For college roommates who share grocery shopping amongst themselves, the BreakBread app is an inventory management tool that allows users to document their grocery purchases and divvy up payments. 
+Unlike any app before, BreakBread provides roommates with the best way to document, share, and enjoy grocery shopping.
+
+Figma UI prototype:
+https://www.figma.com/file/0ncbdJk0rEqyZHln6A6Y5R/Erik-McCutchen's-team-library?node-id=414%3A3
+Last Edited 02/28/2022
+
+Use-Case Diagram:
+https://app.diagrams.net/#G1e9jcAisj4jJb03Ss7P-V9nysNpddWrfx available on Wiki page and the source file is in the repo.
+Last Edited 02/04/2022
+
+Class Diagram:
+Available on Wiki page and the source file is in the repo. Can be opened using the free yED graph editing software.
+Last Edited 02/09/2022
 
 LINTER/CODE STYLER:
 (using the JavaScript default style guidlines: https://google.github.io/styleguide/jsguide.html)
