@@ -56,7 +56,6 @@ function GroceryRun(props){
       let newPerson = person
       inventory.push(newPerson)
       setPerson({ item: "", price: "", quantity: "", user: ""});
-      setTotalDisplay(true);
       
     }
 
