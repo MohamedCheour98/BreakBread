@@ -12,12 +12,16 @@ function FormFriend(props) {
 
     async function submitForm() {
         if(props.operation === "addFriend"){
-            props.addFriend(friend);
+            await props.addFriend(friend);
         }else{
-            props.deleteFriend(friend);
+        
+            await props.deleteFriend(friend);
         }
+        await props.updateCurrentUser();
         setFriend("");
         props.setAskFriend(false);
+        props.setReload(true);
+
 
     }
 

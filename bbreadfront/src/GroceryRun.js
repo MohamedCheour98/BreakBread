@@ -12,12 +12,16 @@ function GroceryRun(props){
   let location = useLocation();
   let currentUser = location.state.user;
 
+  const[user, setUser] = useState({});
+
     const [person, setPerson] = useState({
         item: "",
         price: "",
         quantity: "",
         user: "",
     })
+    const[total, setTotal] = useState(0);
+    const[showTotal, setShowTotal] = useState(false);
     const [returnBack, setReturnBack] = useState(false)
 
     function handleChange(event) {
@@ -31,17 +35,35 @@ function GroceryRun(props){
         else(setPerson({ item: person["item"], price: person["price"], quantity: person["quantity"], user: value}))
 
       }
+      async function makeGetCall(username, password) {
+        try {
+          const response = await axios.get(
+            "http://localhost:5000/users?username=" +
+              username +
+              "&password=" +
+              password
+          );
+          return response;
+        } 
+        
+        catch (error) {
+          console.log(error);
+          return false;
+        }
+      }
 
     async function submitForm() {
       let newPerson = person
       inventory.push(newPerson)
       setPerson({ item: "", price: "", quantity: "", user: ""});
-      }
+      setTotalDisplay(true);
+      
+    }
 
       async function makePatchCall(person) {
         // doesn't work for breakbread2
         try {
-          const response = await axios.patch("http://localhost:5000/users", person);  
+          const response = await axios.patch("http://localhost:5000/users", {item: person, mode: "add"});  
           return response;
         
         } catch (error) {  
@@ -51,10 +73,22 @@ function GroceryRun(props){
       }
     
     async function submitInventory() {
+      var total = 0;
       for (let i = 0; i < inventory.length; i++) {
-        console.log(inventory[i])
+        console.log(inventory[i].price);
+        total += (parseFloat(inventory[i].price)  * parseInt(inventory[i].quantity));
         await makePatchCall(inventory[i])
       }
+      await setTotal(total);
+      await setShowTotal(true);
+      total = 0;
+      inventory = [];
+      
+
+  
+      
+     //currentUser = finalAddedUser1;
+
     }
     return(
     <form>
@@ -94,17 +128,24 @@ function GroceryRun(props){
       <input type="button" value="Return" onClick={goBack}/>
       {returnBack ? (
         <div>
-        <Redirect to={{pathname: "/profile", state: {user: currentUser}}} /> 
+        <Redirect to={{pathname: "/profile", state: {user : user}}} /> 
       
       </div> 
       ): null}
       <input type="button" value="finish run" onClick={submitInventory}/>
 
+
+      {showTotal ? (<h1>${total}</h1>):  null}
+
     </form>
 
 
     );
-    function goBack(){
+  
+    async function goBack(){
+      let currentUser2 = await makeGetCall(currentUser.username, currentUser.password);
+      let finalAddedUser1 = currentUser2.data.users_list[0];
+      await setUser(finalAddedUser1);
       setReturnBack(true);
     }
 }
