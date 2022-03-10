@@ -1,6 +1,7 @@
 const userServices = require("./models/user-services");
 const mongoose = require("mongoose");
 const ObjectId = require("mongoose").Types.ObjectId;
+const { test } = require("prettier");
 
 /*const { test } = require("prettier");*/
 
@@ -63,7 +64,7 @@ test("testing get all users, no specific user", async () => {
 
 //test patch user: succes
 test("testing patching a user", async () => {
-  result = await userServices.findUserByName("hannyt");
+  user = await userServices.findUserByName("hannyt");
   const item = {
     item: "cookie",
     price: "1",
@@ -71,9 +72,10 @@ test("testing patching a user", async () => {
     user: "hannyt",
   };
 
-  result = await userServices.patchUser(item, result);
+  result = await userServices.patchUser(item, user);
   console.log(result);
-  expect(result.inventory.itemList[0].item).toBe("cookie");
+  console.log(user);
+  expect(user[0].inventory.itemList[0].item).toBe("cookie");
 });
 
 //test patch user: fail
@@ -120,6 +122,37 @@ test("testing an invalid password attempt throws an error", async () => {
   };
   expect(() => userServices.addUser(person).toThrow("Invalid Password"));
 });
+
+//test update returns false with invalid users
+test("test update returns false with invalid users", async () => {
+  result = await userServices.update("nouser", "nofriend");
+  expect(result).toBeFalsy();
+});
+
+//test update returns false with already friends
+test("test update returns false with invalid users", async () => {
+  result = await userServices.update("hannyt", "joe");
+  result = await userServices.update("hannyt", "joe");
+  expect(result).toBeFalsy();
+});
+
+//test update success functionality
+test("test update success functionality returns true", async () => {});
+
+//test update2 returns false with invalid users
+test("test update2 returns false with invalid users", async () => {
+  result = await userServices.update2("nouser", "nofriend");
+  expect(result).toBeFalsy();
+});
+
+//test update2 returns false with non-friends
+test("test update2 returns false with non-friends", async () => {
+  result = await userServices.update("hannyt", "joe");
+  expect(result).toBeFalsy();
+});
+
+//test update2 success functionality
+test("test update2 success functionality returns true", async () => {});
 
 //Test delete function and also cleanup
 test("delete users", async () => {

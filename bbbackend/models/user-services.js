@@ -89,6 +89,7 @@ async function update(userAddingFriend, friendToAdd) {
   return true;
 }
 
+//can we rename these functions (update and update2)? maybe to addFriend and deleteFriend?
 async function update2(user1, user2) {
   let oldVersionUser = await findUserByName(user1);
   let oldVersionFriend = await findUserByName(user2);
