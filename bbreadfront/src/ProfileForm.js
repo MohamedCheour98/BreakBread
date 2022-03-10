@@ -45,7 +45,9 @@ function ProfileForm(props) {
 
   );
   async function removeItem(index){
-    await props.deleteItem({index: index, mode: "delete", user: "Erik"});
+    console.log(userData.username);
+    
+    await props.deleteItem({index: index, mode: "delete", user: userData.username});
     await updateCurrentUser();
     await setReload(true);
   }
