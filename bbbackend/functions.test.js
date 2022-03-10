@@ -1,6 +1,7 @@
 const userServices = require("./models/user-services");
 const mongoose = require("mongoose");
 const ObjectId = require("mongoose").Types.ObjectId;
+
 /*const { test } = require("prettier");*/
 
 //testing adding two users to the DB with a valid user type
@@ -62,21 +63,48 @@ test("testing get all users, no specific user", async () => {
 //test an error catch in improper mongoose connection (user-services, line 24)
 //Don't need to cover line 24 anymore
 
-//test patch user
+//test patch user: succes
 test("testing patching a user", async () => {
-  const result = await userServices.findUserByName("joe");
+  result = await userServices.findUserByName("hannyt");
+  const item = {
+    item: "cookie",
+    price: "1",
+    quantity: "6",
+    user: "hannyt",
+  };
+
+  result = await userServices.patchUser(item, result);
+  console.log(result);
+  expect(result.inventory.itemList[0].item).toBe("cookie");
+});
+
+//test patch user: fail
+test("testing patching a user, bad input returns false on failure", async () => {
+  const result = await userServices.patchUser("cookie", "hannyt");
+  expect(result).toBeFalsy();
 });
 
 //test setInventory
 test("setting inventory of a user", async () => {
   const usertoPatch = await userServices.findUserByName("joe");
-  const item = "banana";
-  const item2 = "eggs";
+  const item = {
+    item: "banana",
+    price: "1",
+    quantity: "6",
+    user: "hannyt",
+  };
+  const item2 = {
+    item: "eggs",
+    price: "3",
+    quantity: "1",
+    user: "joe",
+  };
   userServices.setInventory(item, usertoPatch);
   userServices.setInventory(item2, usertoPatch);
 
-  expect(usertoPatch[0].inventory.itemList[0]).toBe("banana");
-  expect(usertoPatch[0].inventory.itemList[1]).toBe("eggs");
+  expect(usertoPatch[0].inventory.itemList[0].item).toBe("banana");
+  expect(usertoPatch[0].inventory.itemList[0].user).toBe("hannyt");
+  expect(usertoPatch[0].inventory.itemList[1].item).toBe("eggs");
 });
 
 //test find user by name only
@@ -92,5 +120,21 @@ test("testing an invalid password attempt throws an error", async () => {
     username: "jess",
     password: "1",
   };
-  expect(() => userServices.addUser(person).toThrow(Error));
+  expect(() => userServices.addUser(person).toThrow("Invalid Password"));
+});
+
+//Test delete function and also cleanup
+test("delete users", async () => {
+  result = await userServices.findUserByName("joe");
+  result2 = await userServices.findUserByName("hannyt");
+  result = await userServices.removeUserById(result._id);
+  result2 = await userServices.removeUserById(result2._id);
+  console.log(result);
+  console.log(result2);
+});
+
+//test improper delete call
+test("improper delete usage returns false", async () => {
+  const result = await userServices.removeUserById("joe");
+  expect(result).toBeFalsy();
 });
