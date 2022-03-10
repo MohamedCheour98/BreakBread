@@ -20,12 +20,12 @@ function ProfileForm(props) {
 
 
     <div>
-      <InventoryTable user={userData}   removeItem = {removeItem}/>
+      //<InventoryTable user={userData}   removeItem = {removeItem}/>
 
-      <FriendTable user={userData}/>
+      //<FriendTable user={userData}/>
 
       
-      <input type="button" value="Add Friends" onClick={addFriend} />
+      //<input type="button" value="Add Friends" onClick={addFriend} />
     {askForFriend ? (
       <FormFriend addFriend = {props.addFriend} deleteFriend = {props.deleteFriend} operation = {operation} setAskFriend = {setAskFriend} updateCurrentUser = {updateCurrentUser} setReload = {setReload}  />
     ): null}
