@@ -8,8 +8,9 @@ function ProfileForm(props) {
   const[operation, setOperation] = useState("");
   const [newGroceryRun, setNewGroceryRun] = useState(false);
   return (
-
-    <div><input type="button" value="Add Friends" onClick={addFriend} />
+    
+    <div>
+      //<input type="button" value="Add Friends" onClick={addFriend} />
     {askForFriend ? (
       <FormFriend addFriend = {props.addFriend} deleteFriend = {props.deleteFriend} operation = {operation} setAskFriend = {setAskFriend}  />
     ): null}
