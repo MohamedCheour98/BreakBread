@@ -120,10 +120,12 @@ function GroceryRun(props){
           value={person.user}
           onChange={handleChange}
         />
-        
+        <input type="button" value="add item" onClick={submitForm} />
+        <input type="button" value="finish run" onClick={submitInventory}/>
+
       </div>
 
-      <input type="button" value="add item" onClick={submitForm} />
+
       <input type="button" value="Return" onClick={goBack}/>
       {returnBack ? (
         <div>
@@ -131,7 +133,6 @@ function GroceryRun(props){
       
       </div> 
       ): null}
-      <input type="button" value="finish run" onClick={submitInventory}/>
 
 
       {showTotal ? (<h1>${total}</h1>):  null}
