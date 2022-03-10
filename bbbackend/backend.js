@@ -39,8 +39,6 @@ app.post("/users", async (req, res) => {
     user.password
   );
   const inDatabase2 = await userServices.findUserByName(user.username);
-  console.log(inDatabase);
-  console.log(inDatabase2);
 
   let savedUser = {};
 
@@ -51,7 +49,6 @@ app.post("/users", async (req, res) => {
     savedUser = await userServices.addUser(user);
     res.status(201).send(savedUser);
   } else {
-    console.log("fuckk");
     res.status(201).send(savedUser);
   }
 });
@@ -90,8 +87,9 @@ app.patch("/users", async (req, res) => {
     }
   } else if (mode === "delete") {
     let index = req.body.index;
+    let user = req.body.user;
     let patchedUser = {};
-    const userToPatch = await userServices.findUserByName(req.body.user);
+    const userToPatch = await userServices.findUserByName(user);
     if (Object.keys(userToPatch).length !== 0) {
       patchedUser = await userServices.patchedUserDelete(index, userToPatch);
       res.status(201).send(patchedUser);

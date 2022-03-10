@@ -29,9 +29,10 @@ function ProfileFunc(props) {
    }
  }
 
- async function makePatchCall(person) {
+ async function makePatchCall(data) {
+
    try {
-     const response = await axios.patch("http://localhost:5000/users", {user: "Erik", mode: "delete", index: 0});  
+     const response = await axios.patch("http://localhost:5000/users", {user: data.user, mode: data.mode, index: data.index});  
      return response;
    
    } catch (error) {  

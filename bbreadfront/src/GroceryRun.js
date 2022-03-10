@@ -20,6 +20,8 @@ function GroceryRun(props){
         quantity: "",
         user: "",
     })
+    const[total, setTotal] = useState(0);
+    const[showTotal, setShowTotal] = useState(false);
     const [returnBack, setReturnBack] = useState(false)
 
     function handleChange(event) {
@@ -54,6 +56,7 @@ function GroceryRun(props){
       let newPerson = person
       inventory.push(newPerson)
       setPerson({ item: "", price: "", quantity: "", user: ""});
+      setTotalDisplay(true);
       
     }
 
@@ -70,11 +73,15 @@ function GroceryRun(props){
       }
     
     async function submitInventory() {
-      
+      var total = 0;
       for (let i = 0; i < inventory.length; i++) {
-        console.log(inventory[i])
+        console.log(inventory[i].price);
+        total += (parseFloat(inventory[i].price)  * parseInt(inventory[i].quantity));
         await makePatchCall(inventory[i])
       }
+      await setTotal(total);
+      await setShowTotal(true);
+      total = 0;
       inventory = [];
       
 
@@ -126,6 +133,9 @@ function GroceryRun(props){
       </div> 
       ): null}
       <input type="button" value="finish run" onClick={submitInventory}/>
+
+
+      {showTotal ? (<h1>${total}</h1>):  null}
 
     </form>
 
