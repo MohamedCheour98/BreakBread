@@ -20,7 +20,7 @@ function ProfileForm(props) {
 
 
     <div>
-      <InventoryTable user={userData}/>
+      <InventoryTable user={userData}   removeItem = {removeItem}/>
 
       <FriendTable user={userData}/>
 
@@ -44,6 +44,9 @@ function ProfileForm(props) {
     
 
   );
+  function removeItem(){
+    console.log("Remove item");
+  }
 
   function Reload(){
     setReload(false) 
