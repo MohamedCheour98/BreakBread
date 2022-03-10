@@ -936,8 +936,8 @@ html, body {
   width: 50%; /* makes browser responsive to changes in size*/
   padding: 5%;
   margin: 30px auto 30px;
-  border-radius: 20%; /* rounded center div */
-  background: rgba(256, 256, 256); /*this uses opacity of 80% for the background color*/
+  border-radius: 80%; /* rounded center div */
+  background: rgba(256, 256, 256, .80); /*this uses opacity of 80% for the background color*/
   text-align: center;
 /*border: 4px dashed white;*/
 }
@@ -946,7 +946,7 @@ html, body {
   padding: 5%;
   margin: 30px auto;
   border-radius: 20%; /* rounded center div */
-  background: rgba(256, 256, 256); /*this uses opacity of 80% for the background color*/
+  background: rgba(256, 256, 256, .80); /*this uses opacity of 80% for the background color*/
   text-align: center;
 /*border: 4px dashed white;*/
 }
@@ -956,6 +956,7 @@ html, body {
   width: 50%;
   margin: auto;
 }
+
 
 /**
  * Layout
