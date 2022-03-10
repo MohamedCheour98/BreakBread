@@ -38,14 +38,21 @@ app.post("/users", async (req, res) => {
     user.username,
     user.password
   );
+  const inDatabase2 = await userServices.findUserByName(user.username);
+  console.log(inDatabase);
+  console.log(inDatabase2);
 
   let savedUser = {};
 
-  if (Object.keys(inDatabase).length === 0) {
+  if (
+    Object.keys(inDatabase).length === 0 &&
+    Object.keys(inDatabase2).length === 0
+  ) {
     savedUser = await userServices.addUser(user);
     res.status(201).send(savedUser);
   } else {
-    res.status(500).end();
+    console.log("fuckk");
+    res.status(201).send(savedUser);
   }
 });
 app.put("/users", async (req, res) => {

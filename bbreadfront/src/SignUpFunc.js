@@ -8,12 +8,8 @@ function SignUpFunc() {
   
   async function updateList(person) {
     let result  = await makePostCall(person);
-    
-    if (Object.keys(result.data).length !== 0 && result.status === 201) {
       return result.data;
-    }
-
-    return null;
+    
   }
   
   async function makePostCall(person) {

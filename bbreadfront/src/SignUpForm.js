@@ -13,8 +13,11 @@ function SignUpForm(props) {
   
   async function submitForm() {
     let signedIn = await props.handleSubmit(person);
+    ;
+    
     
     if (Object.keys(signedIn).length != 0) {
+    
       setShow(false);
       setUserData(signedIn)
       setRedirect(true);
