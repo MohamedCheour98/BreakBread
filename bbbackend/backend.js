@@ -50,6 +50,7 @@ app.post("/users", async (req, res) => {
 });
 app.put("/users", async (req, res) => {
   const data = req.body;
+
   const userAddingFriend = data.user;
   const friendToAdd = data.friend;
   const operation = data.operation;
@@ -67,14 +68,29 @@ app.put("/users", async (req, res) => {
   }
 });
 app.patch("/users", async (req, res) => {
-  let item = req.body;
-  let patchedUser = {};
-  const userToPatch = await userServices.findUserByName(item.user);
-  if (Object.keys(userToPatch).length !== 0) {
-    patchedUser = await userServices.patchUser(item, userToPatch);
-    res.status(201).send(patchedUser);
-  } else {
-    res.status(500).end();
+  let mode = req.body.mode;
+  if (mode === "add") {
+    let item = req.body.item;
+
+    let patchedUser = {};
+    const userToPatch = await userServices.findUserByName(item.user);
+
+    if (Object.keys(userToPatch).length !== 0) {
+      patchedUser = await userServices.patchUser(item, userToPatch);
+      res.status(201).send(patchedUser);
+    } else {
+      res.status(500).end();
+    }
+  } else if (mode === "delete") {
+    let index = req.body.index;
+    let patchedUser = {};
+    const userToPatch = await userServices.findUserByName(req.body.user);
+    if (Object.keys(userToPatch).length !== 0) {
+      patchedUser = await userServices.patchedUserDelete(index, userToPatch);
+      res.status(201).send(patchedUser);
+    } else {
+      res.status(500).end();
+    }
   }
 });
 

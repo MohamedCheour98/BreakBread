@@ -60,7 +60,7 @@ function GroceryRun(props){
       async function makePatchCall(person) {
         // doesn't work for breakbread2
         try {
-          const response = await axios.patch("http://localhost:5000/users", person);  
+          const response = await axios.patch("http://localhost:5000/users", {item: person, mode: "add"});  
           return response;
         
         } catch (error) {  
@@ -70,10 +70,14 @@ function GroceryRun(props){
       }
     
     async function submitInventory() {
+      
       for (let i = 0; i < inventory.length; i++) {
         console.log(inventory[i])
         await makePatchCall(inventory[i])
       }
+      inventory = [];
+      
+
   
       
      //currentUser = finalAddedUser1;

@@ -29,6 +29,17 @@ function ProfileFunc(props) {
    }
  }
 
+ async function makePatchCall(person) {
+   try {
+     const response = await axios.patch("http://localhost:5000/users", {user: "Erik", mode: "delete", index: 0});  
+     return response;
+   
+   } catch (error) {  
+     console.log(error);
+     return false;
+   }
+ }
+
   async function addFriend(friend){
   
     try {
@@ -68,7 +79,7 @@ function ProfileFunc(props) {
   //        <InventoryTable user={location.state.user}/>
       return (
         <div className="container">
-          <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} updatedUser = {makeGetCall}/>
+          <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} updatedUser = {makeGetCall}  deleteItem = {makePatchCall}/>
         </div>
       );  
   }
