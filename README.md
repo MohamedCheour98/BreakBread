@@ -14,6 +14,9 @@ Class Diagram:
 Available on Wiki page and the source file is in the repo. Can be opened using the free yED graph editing software.
 Last Edited 02/09/2022
 
+GitHub Actions, CI Builds:
+https://github.com/MohamedCheour98/BreakBread/actions
+
 LINTER/CODE STYLER:
 (using the JavaScript default style guidlines: https://google.github.io/styleguide/jsguide.html)
 -We used the Prettier ESLint combination plugin on VS Code which is available by looking up "Prettier ESLint" on the VS Code plugin page.

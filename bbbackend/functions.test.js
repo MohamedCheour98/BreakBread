@@ -13,8 +13,6 @@ test("adding user to database", async () => {
 
   const savedUser = await userServices.addUser(person);
 
-  console.log(savedUser);
-
   expect(savedUser.username).toBe("joe");
   expect(savedUser.password).toBe("joejoe");
 });

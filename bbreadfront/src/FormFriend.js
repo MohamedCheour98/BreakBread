@@ -12,12 +12,16 @@ function FormFriend(props) {
 
     async function submitForm() {
         if(props.operation === "addFriend"){
-            props.addFriend(friend);
+            await props.addFriend(friend);
         }else{
-            props.deleteFriend(friend);
+        
+            await props.deleteFriend(friend);
         }
+        await props.updateCurrentUser();
         setFriend("");
         props.setAskFriend(false);
+        props.setReload(true);
+
 
     }
 
@@ -25,7 +29,7 @@ function FormFriend(props) {
         <form className="user-form"> 
             <label htmlFor="friend">Friend</label> 
             <input type="text" name="friend" id="friend" value={friend} onChange={handleChange} /> 
-            <input type="button" value="Submit" onClick={submitForm} />
+            //<input type="button" value="Submit" onClick={submitForm} />
         </form>        
     );
 }
