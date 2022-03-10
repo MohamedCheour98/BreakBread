@@ -60,12 +60,110 @@ async function addUser(user) {
   }
 }
 
+async function update(userAddingFriend, friendToAdd) {
+  let oldVersionUser = await findUserByName(userAddingFriend);
+  let oldVersionFriend = await findUserByName(friendToAdd);
+
+  if (oldVersionUser.length == 0 || oldVersionFriend.length == 0) return false;
+  let oldVersionFriends = oldVersionUser[0].friends;
+  let oldVersionFFriends = oldVersionFriend[0].friends;
+  if (
+    oldVersionFFriends.friendList.includes(userAddingFriend) &&
+    oldVersionFriends.friendList.includes(friendToAdd)
+  ) {
+    return false;
+  }
+
+  oldVersionFriends.friendList.push(friendToAdd);
+  oldVersionFFriends.friendList.push(userAddingFriend);
+
+  let found = await userModel.updateOne(
+    { username: userAddingFriend },
+    { $set: { friends: oldVersionFriends } }
+  );
+  let found2 = await userModel.updateOne(
+    { username: friendToAdd },
+    { $set: { friends: oldVersionFFriends } }
+  );
+  if (found.modifiedCount == 0 || found2.modifiedCount == 0) return false;
+  return true;
+}
+
+async function update2(user1, user2) {
+  let oldVersionUser = await findUserByName(user1);
+  let oldVersionFriend = await findUserByName(user2);
+
+  if (oldVersionUser.length == 0 || oldVersionFriend.length == 0) return false;
+
+  let oldVersionFriends = oldVersionUser[0].friends;
+  let oldVersionFFriends = oldVersionFriend[0].friends;
+
+  if (
+    !oldVersionFFriends.friendList.includes(user1) ||
+    !oldVersionFriends.friendList.includes(user2)
+  ) {
+    return false;
+  }
+
+  oldVersionFriends.friendList = arrayRemove(
+    oldVersionFriends.friendList,
+    user2
+  );
+  oldVersionFFriends.friendList = arrayRemove(
+    oldVersionFFriends.friendList,
+    user1
+  );
+
+  let found = await userModel.updateOne(
+    { username: user1 },
+    { $set: { friends: oldVersionFriends } }
+  );
+  let found2 = await userModel.updateOne(
+    { username: user2 },
+    { $set: { friends: oldVersionFFriends } }
+  );
+  if (found.modifiedCount == 0 || found2.modifiedCount == 0) return false;
+  return true;
+}
+function arrayRemove(arr, value) {
+  return arr.filter(function (ele) {
+    return ele != value;
+  });
+}
 async function patchUser(item, userToPatch) {
   try {
+    let inventory = userToPatch[0].inventory;
+    let itemlist = inventory.itemList;
+    itemlist.push(item);
+    inventory.itemList = itemlist;
+
+    let found = await userModel.updateOne(
+      { username: userToPatch[0].username },
+      { $set: { inventory: inventory } }
+    );
+    return found;
+
+    /*
     setInventory(item, userToPatch);
-    userToPatch[0].markModified("inventory");
+    userToPatch[0].markModified("inventory"); //does this even do anything.
     const savedUser = await userToPatch[0].save();
     return savedUser;
+    */
+  } catch (error) {
+    return false;
+  }
+}
+//dslkfnsdfnkjdsf
+async function patchedUserDelete(index, userToPatch) {
+  try {
+    let inventory = userToPatch[0].inventory;
+    inventory.itemList.splice(index, 1);
+    let found = await userModel.updateOne(
+      { username: userToPatch[0].username },
+      { $set: { inventory: inventory } }
+    );
+
+    return found;
   } catch (error) {
     return false;
   }
@@ -111,6 +209,10 @@ exports.findUserByNameAndPassword = findUserByNameAndPassword;
 exports.findUserByName = findUserByName;
 exports.patchUser = patchUser;
 exports.setInventory = setInventory;
+exports.patchedUserDelete = patchedUserDelete;
+
+exports.update = update;
+exports.update2 = update2;
 
 //FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
 

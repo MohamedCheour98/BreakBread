@@ -38,26 +38,64 @@ app.post("/users", async (req, res) => {
     user.username,
     user.password
   );
+  const inDatabase2 = await userServices.findUserByName(user.username);
 
   let savedUser = {};
 
-  if (Object.keys(inDatabase).length === 0) {
+  if (
+    Object.keys(inDatabase).length === 0 &&
+    Object.keys(inDatabase2).length === 0
+  ) {
     savedUser = await userServices.addUser(user);
     res.status(201).send(savedUser);
   } else {
-    res.status(500).end();
+    res.status(201).send(savedUser);
   }
 });
+app.put("/users", async (req, res) => {
+  const data = req.body;
 
-app.patch("/users", async (req, res) => {
-  let item = req.body;
-  let patchedUser = {};
-  const userToPatch = await userServices.findUserByName(item.user);
-  if (Object.keys(userToPatch).length !== 0) {
-    patchedUser = await userServices.patchUser(item, userToPatch);
-    res.status(201).send(patchedUser);
+  const userAddingFriend = data.user;
+  const friendToAdd = data.friend;
+  const operation = data.operation;
+  let success = false;
+  if (operation === "addFriend") {
+    success = await userServices.update(userAddingFriend, friendToAdd);
   } else {
-    res.status(500).end();
+    success = await userServices.update2(userAddingFriend, friendToAdd);
+  }
+
+  if (success) {
+    res.status(201).send(true);
+  } else {
+    res.status(201).send(false);
+  }
+});
+app.patch("/users", async (req, res) => {
+  let mode = req.body.mode;
+  if (mode === "add") {
+    let item = req.body.item;
+
+    let patchedUser = {};
+    const userToPatch = await userServices.findUserByName(item.user);
+
+    if (Object.keys(userToPatch).length !== 0) {
+      patchedUser = await userServices.patchUser(item, userToPatch);
+      res.status(201).send(patchedUser);
+    } else {
+      res.status(500).end();
+    }
+  } else if (mode === "delete") {
+    let index = req.body.index;
+    let user = req.body.user;
+    let patchedUser = {};
+    const userToPatch = await userServices.findUserByName(user);
+    if (Object.keys(userToPatch).length !== 0) {
+      patchedUser = await userServices.patchedUserDelete(index, userToPatch);
+      res.status(201).send(patchedUser);
+    } else {
+      res.status(500).end();
+    }
   }
 });
 

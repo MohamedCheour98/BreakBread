@@ -16,9 +16,11 @@ function TableBody(props) {
 const rows = props.user.inventory.itemList.map((row, index) => {
     return (
       <tr key={index}>
+        <td>{index}</td>
         <td>{row.item}</td>
         <td>{row.price}</td> 
-        <td>{row.quantity}</td>        
+        <td>{row.quantity}</td>
+        <td><button onClick={() => props.removeItem(index)}>delete</button></td>        
       </tr>
     );
    }
@@ -35,7 +37,7 @@ function InventoryTable(props) {
       
       <table>
         <TableHeader />
-        <TableBody user={props.user} />
+        <TableBody user={props.user} removeItem = {props.removeItem} />
       </table>
     );
 } 

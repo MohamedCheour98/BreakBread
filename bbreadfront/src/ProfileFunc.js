@@ -1,48 +1,70 @@
 
 import React, {useState, useEffect} from 'react'
 import ProfileForm from './ProfileForm'
-import axios from 'axios'
-import FriendTable from './FriendTable'
-import InventoryTable from './InventoryTable'
+import FriendTable from "./FriendTable"
+import InventoryTable from './InventoryTable';
 import { useHistory, useLocation } from 'react-router-dom';
-
-
-function ProfileFunc() {
-
-  let history = useHistory();
+import axios from "axios";
+function ProfileFunc(props) {
+  
   let location = useLocation();
+  let currentUser = location.state.user;
+
+
+
+  async function makeGetCall(username, password) {
+   try {
+     const response = await axios.get(
+       "http://localhost:5000/users?username=" +
+         username +
+         "&password=" +
+         password
+     );
+     return response;
+   } 
+   
+   catch (error) {
+     console.log(error);
+     return false;
+   }
+ }
+
+ async function makePatchCall(data) {
+
+   try {
+     const response = await axios.patch("http://localhost:5000/users", {user: data.user, mode: data.mode, index: data.index});  
+     return response;
+   
+   } catch (error) {  
+     console.log(error);
+     return false;
+   }
+ }
+
+  async function addFriend(friend){
   
-  const [users, setCharacters] = useState([]);
-  
-  function removeOneCharacter (index) {
-    const deleted = users[index];
-    const updated = users.filter((user, i) => {
-      return i !== index
-    });
-    deleteBackend(deleted['_id']);
-    setCharacters(updated);
-  }
-  
-  async function deleteBackend(_id) {
     try {
-      const response = await axios.delete('http://localhost:5000/users/' + _id);
-      return response.data.users_list;
-      }
-    catch (error){
-      //We're not handling errors. Just logging into the console.
-      console.log(error); 
+      const response = await axios.put("http://localhost:5000/users", {user: currentUser.username , friend: friend, operation: "addFriend"});
+      
+      return response.data;
+   }
+   catch (error) {
+      console.log(error);
       return false;
-    }
+   }
   }
-
-
-  function updateList(person) { 
-    makeGetCall(person).then( result => {
-    /*if (result && result.status === 201)
-       setCharacters([...characters, result.data] );*/
-    });
+  async function deleteFriend(friend){
+   
+    try {
+      const response = await axios.put("http://localhost:5000/users", {user: currentUser.username , friend: friend, operation: "deleteFriend"});
+      
+      return response.data;
+   }
+   catch (error) {
+      console.log(error);
+      return false;
+   }
   }
-
   async function fetchAll(){
     try {
        const response = await axios.get('http://localhost:5000/users');
@@ -54,32 +76,12 @@ function ProfileFunc() {
        return false;         
     }
   }
-
-  async function makeGetCall(person){
-    try {
-      const response = await axios.get('http://localhost:5000/users', person);
-      return response;
-    }
-    catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
   
-  useEffect(() => {
-    fetchAll().then( result => {
-      if (result)
-          setCharacters(result);
-    });
-  }, [] );
-
-  return (
-    <div className="container">
-      <FriendTable user={location.state.user}/>
-      <InventoryTable user={location.state.user}/>
-      <ProfileForm />
-    </div>
-  );  
-}
-
+  //        <InventoryTable user={location.state.user}/>
+      return (
+        <div className="container">
+          <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} updatedUser = {makeGetCall}  deleteItem = {makePatchCall}/>
+        </div>
+      );  
+  }
 export default ProfileFunc;

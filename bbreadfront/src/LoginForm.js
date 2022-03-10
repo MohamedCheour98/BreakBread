@@ -62,7 +62,7 @@ function LoginForm(props) {
 
       {show ? (
         <div id="ip">
-          <h5 style={{ color: "red" }}>Invalid Login</h5>
+          <h5 style={{ color: "red" }}>Invalid Password</h5>
         </div>
       ) : null}
 
