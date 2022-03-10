@@ -48,14 +48,15 @@ function SignUpForm(props) {
           value={person.password}
           onChange={handleChange}
         />
+        <input type="button" value="SignUp" onClick={submitForm} />
+        {show ? (
+          <div id="ip">
+            <h2 style={{ color: "red" }}>Invalid Login</h2>
+          </div>
+        ) : null}
       </div>
 
-      <input type="button" value="SignUp" onClick={submitForm} />
-      {show ? (
-        <div id="ip">
-          <h2 style={{ color: "red" }}>Invalid Login</h2>
-        </div>
-      ) : null}
+
 
     {redirect ? (<div>
         <Redirect to={{pathname: "/profile", state: {user: userData}}} /> 
