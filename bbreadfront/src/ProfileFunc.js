@@ -10,6 +10,25 @@ function ProfileFunc(props) {
   let location = useLocation();
   let currentUser = location.state.user;
 
+
+
+  async function makeGetCall(username, password) {
+   try {
+     const response = await axios.get(
+       "http://localhost:5000/users?username=" +
+         username +
+         "&password=" +
+         password
+     );
+     return response;
+   } 
+   
+   catch (error) {
+     console.log(error);
+     return false;
+   }
+ }
+
   async function addFriend(friend){
   
     try {
@@ -45,18 +64,11 @@ function ProfileFunc(props) {
        return false;         
     }
   }
-   useEffect(() => {
-    fetchAll().then( result => {
-       if (result)
-          setCharacters(result);
-     });
-  }, [] );
+  
   //        <InventoryTable user={location.state.user}/>
       return (
         <div className="container">
-          <FriendTable user={location.state.user}/>
-          <InventoryTable user={location.state.user}/>
-          <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} user = {currentUser}/>
+          <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} updatedUser = {makeGetCall}/>
         </div>
       );  
   }

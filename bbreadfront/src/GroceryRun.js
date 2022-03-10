@@ -12,6 +12,8 @@ function GroceryRun(props){
   let location = useLocation();
   let currentUser = location.state.user;
 
+  const[user, setUser] = useState({});
+
     const [person, setPerson] = useState({
         item: "",
         price: "",
@@ -31,12 +33,29 @@ function GroceryRun(props){
         else(setPerson({ item: person["item"], price: person["price"], quantity: person["quantity"], user: value}))
 
       }
+      async function makeGetCall(username, password) {
+        try {
+          const response = await axios.get(
+            "http://localhost:5000/users?username=" +
+              username +
+              "&password=" +
+              password
+          );
+          return response;
+        } 
+        
+        catch (error) {
+          console.log(error);
+          return false;
+        }
+      }
 
     async function submitForm() {
       let newPerson = person
       inventory.push(newPerson)
       setPerson({ item: "", price: "", quantity: "", user: ""});
-      }
+      
+    }
 
       async function makePatchCall(person) {
         // doesn't work for breakbread2
@@ -55,6 +74,10 @@ function GroceryRun(props){
         console.log(inventory[i])
         await makePatchCall(inventory[i])
       }
+  
+      
+     //currentUser = finalAddedUser1;
+
     }
     return(
     <form>
@@ -94,7 +117,7 @@ function GroceryRun(props){
       <input type="button" value="Return" onClick={goBack}/>
       {returnBack ? (
         <div>
-        <Redirect to={{pathname: "/profile", state: {user: currentUser}}} /> 
+        <Redirect to={{pathname: "/profile", state: {user : user}}} /> 
       
       </div> 
       ): null}
@@ -104,7 +127,11 @@ function GroceryRun(props){
 
 
     );
-    function goBack(){
+  
+    async function goBack(){
+      let currentUser2 = await makeGetCall(currentUser.username, currentUser.password);
+      let finalAddedUser1 = currentUser2.data.users_list[0];
+      await setUser(finalAddedUser1);
       setReturnBack(true);
     }
 }
