@@ -141,7 +141,10 @@ test("test update returns false with invalid users", async () => {
 });
 
 //test update success functionality
-test("test update success functionality returns true", async () => {});
+test("test update success functionality returns true", async () => {
+  result = await userServices.update("joe", "ruby");
+  expect(result).toBeTruthy();
+});
 
 //test update2 returns false with invalid users
 test("test update2 returns false with invalid users", async () => {
@@ -156,7 +159,10 @@ test("test update2 returns false with non-friends", async () => {
 });
 
 //test update2 success functionality
-test("test update2 success functionality returns true", async () => {});
+test("test update2 success functionality returns true", async () => {
+  result = await userServices.update2("hannyt", "joe");
+  expect(result).toBeTruthy();
+});
 
 //Test delete function and also cleanup
 test("delete users", async () => {
