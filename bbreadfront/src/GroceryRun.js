@@ -23,6 +23,7 @@ function GroceryRun(props){
     const[total, setTotal] = useState(0);
     const[showTotal, setShowTotal] = useState(false);
     const [returnBack, setReturnBack] = useState(false)
+    
 
     function handleChange(event) {
         const { name, value } = event.target; /* added inventory*/
@@ -59,6 +60,20 @@ function GroceryRun(props){
       
     }
 
+    //newly added
+    async function PayMe(payment){
+      console.log(payment);
+      try {
+
+        const response = await axios.patch("http://localhost:5000/users", {payment : payment, mode: "payme", currentUser : currentUser.username});  
+        return response;
+      
+      } catch (error) {  
+        console.log(error);
+        return false;
+      }
+    }
+
       async function makePatchCall(person) {
         // doesn't work for breakbread2
         try {
@@ -73,21 +88,21 @@ function GroceryRun(props){
     
     async function submitInventory() {
       var total = 0;
+      
       for (let i = 0; i < inventory.length; i++) {
         console.log(inventory[i].price);
         total += (parseFloat(inventory[i].price)  * parseInt(inventory[i].quantity));
         await makePatchCall(inventory[i])
       }
+
       await setTotal(total);
       await setShowTotal(true);
+      await PayMe({user: "bruh", money: "23"});
+      
+
+
       total = 0;
       inventory = [];
-      
-
-  
-      
-     //currentUser = finalAddedUser1;
-
     }
     return(
     <form>

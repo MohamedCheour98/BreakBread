@@ -59,7 +59,7 @@ async function addUser(user) {
     return false;
   }
 }
-
+//adding friend
 async function update(userAddingFriend, friendToAdd) {
   let oldVersionUser = await findUserByName(userAddingFriend);
   let oldVersionFriend = await findUserByName(friendToAdd);
@@ -88,7 +88,7 @@ async function update(userAddingFriend, friendToAdd) {
   if (found.modifiedCount == 0 || found2.modifiedCount == 0) return false;
   return true;
 }
-
+//remove friend
 async function update2(user1, user2) {
   let oldVersionUser = await findUserByName(user1);
   let oldVersionFriend = await findUserByName(user2);
@@ -142,18 +142,10 @@ async function patchUser(item, userToPatch) {
       { $set: { inventory: inventory } }
     );
     return found;
-
-    /*
-    setInventory(item, userToPatch);
-    userToPatch[0].markModified("inventory"); //does this even do anything.
-    const savedUser = await userToPatch[0].save();
-    return savedUser;
-    */
   } catch (error) {
     return false;
   }
 }
-//dslkfnsdfnkjdsf
 async function patchedUserDelete(index, userToPatch) {
   try {
     let inventory = userToPatch[0].inventory;
@@ -176,8 +168,7 @@ async function patchedUserDelete(index, userToPatch) {
  */
 function setDefaults(userToAdd) {
   userToAdd.friends = { friendList: [], friendCount: 0 };
-  //userToAdd.inventory = { itemList: [], itemCount: 0 };
-  userToAdd.inventory = { itemList: [], itemCount: 0 };
+  userToAdd.inventory = { itemList: [], itemOwedCount: [], itemOwingCount: [] };
 
   userToAdd.profilepicture =
     "https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
@@ -197,11 +188,43 @@ async function findUserByNameAndPassword(username, password) {
   return await userModel.find({ username: username, password: password });
 }
 
+async function addPayment(currentUser, payment) {
+  console.log(payment);
+  let currentUserData = await findUserByName(currentUser);
+  let personOweing = await findUserByName(payment.user);
+  let money = payment.money;
+
+  if (currentUserData.length == 0 || personOweing.length == 0) return false;
+  let itemOwedCountCUI = currentUserData[0].inventory;
+  let itemOwedCountOwerI = personOweing[0].inventory;
+
+  let itemlistUser = itemOwedCountCUI.itemOwedCount;
+  let itemlistOwer = itemOwedCountOwerI.itemOwingCount;
+
+  itemlistUser.push(payment);
+  itemlistOwer.push({ user: currentUser, money: money });
+  itemOwedCountCUI.itemOwedCount = itemlistUser;
+  itemOwedCountOwerI.itemOwingCount = itemlistOwer;
+  let found = await userModel.updateOne(
+    { username: currentUser },
+    { $set: { inventory: itemOwedCountCUI } }
+  );
+  let found2 = await userModel.updateOne(
+    { username: payment.user },
+    { $set: { inventory: itemOwedCountOwerI } }
+  );
+
+  if (found.modifiedCount == 0 || found2.modifiedCount == 0) return false;
+  return true;
+}
+
 // pulls a user from the database based on their username, no functionality assosciated with this yet, but eventually we may need this lookup
 
 async function findUserByName(name) {
   return await userModel.find({ username: name });
 }
+
+exports.addPayment = addPayment;
 
 exports.getUsers = getUsers;
 exports.addUser = addUser;
@@ -212,31 +235,3 @@ exports.patchedUserDelete = patchedUserDelete;
 
 exports.update = update;
 exports.update2 = update2;
-
-/*FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
-
-// deletes a user from the database based on their id, no functionality assosciated with this yet, but eventually we should be able to delete accounts
-
-async function removeUserById(id) {
-  let result;
-  result = await userModel.findByIdAndDelete(id);
-  return result;
-}
-
-// pulls a user from the database based on the _id, no functionality assosciated with this yet, but eventually we may need this lookup
-
-
-async function findUserById(_id) {
-  try {
-    return await userModel.findById(_id);
-  } catch (error) {
-    console.log(error);
-    return undefined;
-  }
-}
-
-
-// export statements
-exports.findUserById = findUserById;
-exports.removeUserById = removeUserById;
-*/

@@ -70,6 +70,7 @@ app.put("/users", async (req, res) => {
   } else {
     res.status(201).send(false);
   }
+  s;
 });
 app.patch("/users", async (req, res) => {
   let mode = req.body.mode;
@@ -96,8 +97,14 @@ app.patch("/users", async (req, res) => {
     } else {
       res.status(500).end();
     }
+  } else if (mode == "payme") {
+    let payment = req.body.payment;
+    let currentUser = req.body.currentUser;
+    let result = await userServices.addPayment(currentUser, payment);
   }
 });
+
+app.delete("/users", async (req, res) => {});
 
 app.listen(process.env.PORT || port, () => {
   console.log(`REST API is listening.:${port}`);

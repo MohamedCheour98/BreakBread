@@ -15,10 +15,10 @@ function LoginForm(props) {
   const [redirect, setRedirect] = React.useState(false);
   const [userData, setUserData] = useState({});
 
-  /*const message = this.state.displayErrorMessage ? null : <div> nice</div>; */
-  // strange array prototype, making us use loggedIn[0], Joseph?
   async function submitForm() {
-    
+    // if the user is already in the database and is found. Logged in will be true and we will set the current
+    //user data to be the user that logged in. If no user was found then show will become true and display a 
+    //message that there was an invalid loggin
     let loggedIn = await props.handleSubmit(person);
     
     if (Object.keys(loggedIn).length != 0) {
@@ -65,11 +65,9 @@ function LoginForm(props) {
         ) : null}
       </div>
 
-
-{redirect  ? (<div>
-        <Redirect to={{pathname: "/profile", state: {user: userData}}}  />
-      </div> 
-      ): null} 
+      {redirect  ? (<div>
+             <Redirect to={{pathname: "/profile", state: {user: userData}}}  />
+             </div>  ): null} 
     </form>
   );
 }
