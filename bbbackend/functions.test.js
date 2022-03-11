@@ -164,6 +164,16 @@ test("test update2 success functionality returns true", async () => {
   expect(result).toBeTruthy();
 });
 
+//test patchedUserDelete success functionality
+test("test deleting an item successfully", async () => {
+  userToPatch = await userServices.findUserByName("hannyt");
+  item = userToPatch[0].inventory.itemList[0];
+  await userServices.patchedUserDelete(item, userToPatch);
+  expect(userToPatch[0].inventory.itemList[0]).not.toBe(item);
+});
+
+//test patchedUserDelete failure functionality
+
 //Test delete function and also cleanup
 test("delete users", async () => {
   result = await userServices.findUserByName("joe");
