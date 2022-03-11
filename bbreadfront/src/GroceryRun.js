@@ -245,7 +245,7 @@ function GroceryRun(props){
     async function goBack(){
       let currentUser2 = await makeGetCall(currentUser.username, currentUser.password);
       let finalAddedUser1 = currentUser2.data.users_list[0];
-      await setUser(finalAddedUser1);
+      setUser(finalAddedUser1);
       setReturnBack(true);
     }
 }
