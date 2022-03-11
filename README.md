@@ -14,6 +14,9 @@ Class Diagram:
 Available on Wiki page and the source file is in the repo. Can be opened using the free yED graph editing software.
 Last Edited 02/09/2022
 
+GitHub Actions, CI Builds:
+https://github.com/MohamedCheour98/BreakBread/actions
+
 LINTER/CODE STYLER:
 (using the JavaScript default style guidlines: https://google.github.io/styleguide/jsguide.html)
 -We used the Prettier ESLint combination plugin on VS Code which is available by looking up "Prettier ESLint" on the VS Code plugin page.
@@ -22,5 +25,11 @@ LINTER/CODE STYLER:
 -Three dependencies need to be downloaded: eslint@6.8.0, prettier@1.9.1, & prettier-eslint@10.1.0, to download these, run npm install and the name of the dependecy in the directory you want to be affected by the style checker
 -Then the style checker should be set up, to format a file, run SHIFT+ALT+F(windows) or SHIFT+OPTION+F(mac)
 -There is also an option to set up auto format on save in Settings on VS Code
+
+TESTING:
+Uncovered Lines:
+Line 23 in user.js is covered by a test, however, Jest doesn't know how to deal with this particular case, as it is testing for an error throw while the database is running the code, so the code gets stuck in mongoose. Approved by BJK.
+
+Line 24 in userServices.js does not need to be covered, as it is a database connection fail, rather than a function fail. Approved by BJK.
 
 ![backend.js](https://github.com/MohamedCheour98/BreakBread/actions/workflows/backend.js.yml/badge.svg)

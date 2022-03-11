@@ -132,10 +132,38 @@ function arrayRemove(arr, value) {
 }
 async function patchUser(item, userToPatch) {
   try {
+    let inventory = userToPatch[0].inventory;
+    let itemlist = inventory.itemList;
+    itemlist.push(item);
+    inventory.itemList = itemlist;
+
+    let found = await userModel.updateOne(
+      { username: userToPatch[0].username },
+      { $set: { inventory: inventory } }
+    );
+    return found;
+
+    /*
     setInventory(item, userToPatch);
-    userToPatch[0].markModified("inventory");
+    userToPatch[0].markModified("inventory"); //does this even do anything.
     const savedUser = await userToPatch[0].save();
     return savedUser;
+    */
+  } catch (error) {
+    return false;
+  }
+}
+//dslkfnsdfnkjdsf
+async function patchedUserDelete(index, userToPatch) {
+  try {
+    let inventory = userToPatch[0].inventory;
+    inventory.itemList.splice(index, 1);
+    let found = await userModel.updateOne(
+      { username: userToPatch[0].username },
+      { $set: { inventory: inventory } }
+    );
+
+    return found;
   } catch (error) {
     return false;
   }
@@ -180,6 +208,8 @@ exports.addUser = addUser;
 exports.findUserByNameAndPassword = findUserByNameAndPassword;
 exports.findUserByName = findUserByName;
 exports.patchUser = patchUser;
+exports.patchedUserDelete = patchedUserDelete;
+
 exports.update = update;
 exports.update2 = update2;
 

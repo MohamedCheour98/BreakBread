@@ -13,8 +13,11 @@ function SignUpForm(props) {
   
   async function submitForm() {
     let signedIn = await props.handleSubmit(person);
+    ;
+    
     
     if (Object.keys(signedIn).length != 0) {
+    
       setShow(false);
       setUserData(signedIn)
       setRedirect(true);
@@ -48,14 +51,13 @@ function SignUpForm(props) {
           value={person.password}
           onChange={handleChange}
         />
+        <input type="button" value="SignUp" onClick={submitForm} />
+        {show ? (
+          <div id="ip">
+            <h5 style={{ color: "red" }}>Username not available</h5>
+          </div>
+        ) : null}
       </div>
-
-      <input type="button" value="SignUp" onClick={submitForm} />
-      {show ? (
-        <div id="ip">
-          <h2 style={{ color: "red" }}>Invalid Login</h2>
-        </div>
-      ) : null}
 
     {redirect ? (<div>
         <Redirect to={{pathname: "/profile", state: {user: userData}}} /> 
