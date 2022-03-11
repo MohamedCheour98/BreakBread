@@ -42,9 +42,6 @@ test("adding bad user type to database", async () => {
 //testing finding user by name and password for a valid entry in the DB
 test("test db query user joe", async () => {
   let result = await userServices.findUserByNameAndPassword("joe", "joejoe");
-  console.log(result);
-  console.log(result[0]);
-  console.log(result[0].username);
 
   expect(result[0].username).toBe("joe");
   expect(result[0].password).toBe("joejoe");
@@ -77,8 +74,6 @@ test("testing patching a user", async () => {
   };
 
   result = await userServices.patchUser(item, user);
-  console.log(result);
-  console.log(user);
   expect(user[0].inventory.itemList[0].item).toBe("cookie");
 });
 
@@ -184,7 +179,6 @@ test("test deleting an item successfully", async () => {
 
   item3 = userToPatch[0].inventory.itemList[0];
   await userServices.patchedUserDelete(item3, userToPatch);
-  console.log(userToPatch[0].inventory.itemList[0]);
   expect(userToPatch[0].inventory.itemList[0]).not.toBe(item3);
 });
 
@@ -205,8 +199,6 @@ test("delete users", async () => {
   result2 = await userServices.findUserByName("hannyt");
   result = await userServices.removeUserById(result._id);
   result2 = await userServices.removeUserById(result2._id);
-  console.log(result);
-  console.log(result2);
 });
 
 //test improper delete call
