@@ -11,7 +11,7 @@ app.use(express.json());
 
 /**
  * Fetch all users when "/users" is added to the url.
- * Separation of concerns: Calling the model component "user-services".
+ * Separation of concerns: Calling the model component "user-services"
  * and not accessing the databse directly from here.
  */
 app.get("/users", async (req, res) => {
