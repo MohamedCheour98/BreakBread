@@ -1,5 +1,5 @@
 import React from 'react'
-
+//this is the inventory table
 function TableHeader() {
     return (
         <thead>
