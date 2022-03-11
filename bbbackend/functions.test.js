@@ -99,7 +99,7 @@ test("setting inventory of a user", async () => {
     quantity: "1",
     user: "joe",
   };
-  userServices.setInventory(item, usertoPatch);
+  userServices.setInventory(item, usertoPatch2);
   userServices.setInventory(item2, usertoPatch);
 
   expect(usertoPatch[0].inventory.itemList[0].item).toBe("eggs");
