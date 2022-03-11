@@ -111,7 +111,7 @@ function GroceryRun(props){
           <thead>
             <tr>
               <th>User</th>
-              <th>Price</th>
+              <th>Total Price</th>
             </tr>
           </thead>
   );
