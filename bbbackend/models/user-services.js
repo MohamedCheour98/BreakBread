@@ -89,6 +89,7 @@ async function update(userAddingFriend, friendToAdd) {
   return true;
 }
 
+//can we rename these functions (update and update2)? maybe to addFriend and deleteFriend?
 async function update2(user1, user2) {
   let oldVersionUser = await findUserByName(user1);
   let oldVersionFriend = await findUserByName(user2);
@@ -198,23 +199,26 @@ exports.addUser = addUser;
 exports.findUserByNameAndPassword = findUserByNameAndPassword;
 exports.findUserByName = findUserByName;
 exports.patchUser = patchUser;
+exports.setInventory = setInventory;
 exports.patchedUserDelete = patchedUserDelete;
 
 exports.update = update;
 exports.update2 = update2;
 
-/*FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
+//FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
 
 // deletes a user from the database based on their id, no functionality assosciated with this yet, but eventually we should be able to delete accounts
 
 async function removeUserById(id) {
-  let result;
-  result = await userModel.findByIdAndDelete(id);
-  return result;
+  try {
+    return await userModel.findByIdAndDelete(id);
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }
-
+/*
 // pulls a user from the database based on the _id, no functionality assosciated with this yet, but eventually we may need this lookup
-
 
 async function findUserById(_id) {
   try {
@@ -225,8 +229,6 @@ async function findUserById(_id) {
   }
 }
 
-
 // export statements
-exports.findUserById = findUserById;
+exports.findUserById = findUserById;*/
 exports.removeUserById = removeUserById;
-*/
