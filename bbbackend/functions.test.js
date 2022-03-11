@@ -101,7 +101,6 @@ test("setting inventory of a user", async () => {
   userServices.setInventory(item, usertoPatch);
   userServices.setInventory(item2, usertoPatch);
 
-  expect(usertoPatch[0].inventory.itemList[0].item).toBe("banana");
   expect(usertoPatch[0].inventory.itemList[0].user).toBe("hannyt");
   expect(usertoPatch[0].inventory.itemList[1].item).toBe("eggs");
 });
