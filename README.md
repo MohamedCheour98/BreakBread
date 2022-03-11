@@ -20,13 +20,13 @@ https://github.com/MohamedCheour98/BreakBread/actions
 Download Instructions:
 git clone https://github.com/MohamedCheour98/BreakBread.git
 navigate to bbbbackend,
-npm i
+npm i,
 navigate to bbfrontend,
-npm i
+npm i,
 in bbbackend,
-npm run dev (starts up backend)
+npm run dev (starts up backend),
 in bbfrontend,
-npm start (starts up frontend)
+npm start (starts up frontend),
 A new user trying to use our code won't be able to access the database we are using so they'll need to use their own cluster of MongoDB.
 
 LINTER/CODE STYLER:
