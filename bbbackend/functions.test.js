@@ -114,7 +114,7 @@ test("testing finding a user by username only", async () => {
   expect(result[0].password).toBe("ht");
 });
 
-//test invalid password throws error
+//test invalid password throws error in test
 test("testing an invalid password attempt throws an error", async () => {
   const person = {
     username: "jess",
