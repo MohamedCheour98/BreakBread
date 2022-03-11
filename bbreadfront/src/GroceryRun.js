@@ -223,23 +223,24 @@ function GroceryRun(props){
 
       </div>
 
-      <input type="button" value="add item" onClick={submitForm} />
-      <input type="button" value="Return" onClick={goBack}/>
       {returnBack ? (
         <div>
         <Redirect to={{pathname: "/profile", state: {user : user}}} /> 
       
       </div> 
       ): null}
-      <h1>Groceries to Add</h1>
+      <div className = "header">
+      <h2>Groceries to Add</h2>
       <TrackingTable />
-      <input type="button" value="finish run" onClick={submitInventory}/>
       {show ? (
         <div id="ip">
           <FinalTable />
         </div>
       ) : null}
+      </div>
+      //
       <input type="button" value="Return" onClick={goBack}/>
+      //
     </form>
 
 

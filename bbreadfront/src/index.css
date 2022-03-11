@@ -644,7 +644,7 @@ dd {
   margin: auto;
   margin-bottom: 10px;
   width: 30%;
-  max-width: 30%;
+  max-width: 30%; 
   text-align: center;
   cursor: pointer;
   text-decoration: none;
@@ -841,7 +841,7 @@ table {
   max-width: 50%;
   padding-top: 10px;
   padding-bottom: 10px;
-  background:rgba(256, 256, 256);
+  background:rgba(256, 256, 256, .9);
 }
 
 thead th {
@@ -861,26 +861,6 @@ th,
 td {
   text-align: left;
   padding: 0.5rem;
-}
-
-caption {
-  padding: 1rem 0;
-  caption-side: bottom;
-  color: #ababab;
-}
-
-.striped-table tbody tr:nth-child(odd) {
-  background-color: #f8f8f8;
-}
-
-.contain-table {
-  overflow-x: auto;
-}
-
-@media (min-width: 600px) {
-  .contain-table {
-    width: 100%;
-  }
 }
 
 /*
@@ -954,6 +934,12 @@ html, body {
 .friends{
   background: rgba(256, 256, 256);
   width: 50%;
+  margin: auto;
+}
+
+.header{
+  background: rgba(256, 256, 256);
+  width: 40%;
   margin: auto;
 }
 

@@ -60,7 +60,9 @@ import Button from 'react-bootstrap/Button';
   }
   
   function Login() {
-    return <h2>Login</h2>;
+    return (
+    <h2>Login</h2>
+    )
   }
   
   function SignUp() {
