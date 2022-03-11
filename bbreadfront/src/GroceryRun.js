@@ -6,8 +6,14 @@ import { Redirect } from "react-router";
 
 
 let inventory = [
+  
 
 ];
+let finalTable = [
+
+
+];
+
 function GroceryRun(props){
   let location = useLocation();
   let currentUser = location.state.user;
@@ -18,6 +24,7 @@ function GroceryRun(props){
         quantity: "",
         user: "",
     })
+    const [show, setShow] = React.useState(false);
     const [returnBack, setReturnBack] = useState(false)
 
     function handleChange(event) {
@@ -52,10 +59,108 @@ function GroceryRun(props){
     
     async function submitInventory() {
       for (let i = 0; i < inventory.length; i++) {
-        console.log(inventory[i])
         await makePatchCall(inventory[i])
       }
+      let userFlag = 0;
+      let userCount = 0
+      for (let i = 0; i < inventory.length; i++) {
+        for (let j = 0; j < finalTable.length; j++) {
+          if (inventory[i].user == finalTable[j].user) {
+            userFlag = 1;
+            userCount = j;
+          }
+        }
+        if (userFlag == 1) {
+          finalTable[userCount].price = finalTable[userCount].price + parseFloat(inventory[i].price);
+        } else {
+          finalTable.push({user: inventory[i].user, price: parseFloat(inventory[i].price)});
+        }
+        userFlag = 0;
+      }
+      setShow(true);
     }
+
+    function FinalTableHeader() {
+      return (
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+  );
+  }
+  
+  function FinalTableBody(props) {
+  const rows = finalTable.map((row, index) => {
+      return (
+        <tr key={index}>
+          <td>{row.user}</td>       
+          <td>{row.price}</td>  
+        </tr>
+      );
+     }
+    );
+    return (
+        <tbody>
+          {rows}
+         </tbody>
+     );	
+  }
+  
+  function FinalTable(props) {
+      return (
+        
+        <table>
+          <FinalTableHeader />
+          <FinalTableBody />
+        </table>
+      );
+  } 
+
+    function TrackingTableHeader() {
+      return (
+          <thead>
+            <tr>
+              <th>Inventory</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>User</th>
+            </tr>
+          </thead>
+  );
+  }
+  
+  function TrackingTableBody(props) {
+  const rows = inventory.map((row, index) => {
+      return (
+        <tr key={index}>
+          <td>{row.item}</td>
+          <td>{row.price}</td> 
+          <td>{row.quantity}</td>
+          <td>{row.user}</td>        
+        </tr>
+      );
+     }
+    );
+    return (
+        <tbody>
+          {rows}
+         </tbody>
+     );	
+  }
+  
+  function TrackingTable(props) {
+      return (
+        
+        <table>
+          <TrackingTableHeader />
+          <TrackingTableBody />
+        </table>
+      );
+  } 
+
+
     return(
     <form>
       <div className="form">
@@ -91,15 +196,21 @@ function GroceryRun(props){
       </div>
 
       <input type="button" value="add item" onClick={submitForm} />
-      <input type="button" value="Return" onClick={goBack}/>
       {returnBack ? (
         <div>
         <Redirect to={{pathname: "/profile", state: {user: currentUser}}} /> 
       
       </div> 
       ): null}
+      <h1>Groceries to Add</h1>
+      <TrackingTable />
       <input type="button" value="finish run" onClick={submitInventory}/>
-
+      {show ? (
+        <div id="ip">
+          <FinalTable />
+        </div>
+      ) : null}
+      <input type="button" value="Return" onClick={goBack}/>
     </form>
 
 
@@ -109,3 +220,10 @@ function GroceryRun(props){
     }
 }
 export default GroceryRun;
+/*
+      {show ? (
+        <div id="ip">
+          <FinalTable />
+        </div>
+      ) : null}
+      */
