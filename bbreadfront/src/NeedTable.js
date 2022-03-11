@@ -4,22 +4,21 @@ function TableHeader() {
     return (
         <thead>
           <tr>
-            <th>Inventory</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th>From</th>
+            <th>Owed</th>
           </tr>
         </thead>
 );
 }
 
 function TableBody(props) {
-const rows = props.user.inventory.itemList.map((row, index) => {
+const rows = props.user.inventory.itemOwedCount.map((row, index) => {
     return (
       <tr key={index}>
-        <td>{row.item}</td>
-        <td>{row.price}</td> 
-        <td>{row.quantity}</td>
-        <td><button onClick={() => props.removeItem(index)}>delete</button></td>        
+        <td>{row.user}</td>
+        <td>${row.price}</td> 
+        <td><button onClick={() => props.removePayment(index, "owed")}>Resolved</button></td>        
+
       </tr>
     );
    }
@@ -32,11 +31,12 @@ const rows = props.user.inventory.itemList.map((row, index) => {
 }
 
 function InventoryTable(props) {
+  console.log(props);
     return (
       
       <table>
         <TableHeader />
-        <TableBody user={props.user} removeItem = {props.removeItem} />
+        <TableBody user={props.user} removePayment = {props.removePayment}  />
       </table>
     );
 } 

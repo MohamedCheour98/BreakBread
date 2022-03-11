@@ -62,7 +62,6 @@ function GroceryRun(props){
 
     //newly added
     async function PayMe(payment){
-      console.log(payment);
       try {
 
         const response = await axios.patch("http://localhost:5000/users", {payment : payment, mode: "payme", currentUser : currentUser.username});  
@@ -74,10 +73,10 @@ function GroceryRun(props){
       }
     }
 
-      async function makePatchCall(person) {
+      async function makePatchCall(person, currentUser) {
         // doesn't work for breakbread2
         try {
-          const response = await axios.patch("http://localhost:5000/users", {item: person, mode: "add"});  
+          const response = await axios.patch("http://localhost:5000/users", {item: person, mode: "add", currentUser: currentUser});  
           return response;
         
         } catch (error) {  
@@ -92,12 +91,13 @@ function GroceryRun(props){
       for (let i = 0; i < inventory.length; i++) {
         console.log(inventory[i].price);
         total += (parseFloat(inventory[i].price)  * parseInt(inventory[i].quantity));
-        await makePatchCall(inventory[i])
+        await makePatchCall(inventory[i], currentUser.username);
       }
 
       await setTotal(total);
       await setShowTotal(true);
-      await PayMe({user: "bruh", money: "23"});
+      
+      await PayMe({user: "bruh", price: "25"});
       
 
 

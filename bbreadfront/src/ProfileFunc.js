@@ -32,7 +32,7 @@ function ProfileFunc(props) {
  async function makePatchCall(data) {
 
    try {
-     const response = await axios.patch("http://localhost:5000/users", {user: data.user, mode: data.mode, index: data.index});  
+     const response = await axios.patch("http://localhost:5000/users", {user: data.user, mode: data.mode, index: data.index, thingToPatch: data.thingToPatch});  
      return response;
    
    } catch (error) {  
@@ -40,6 +40,10 @@ function ProfileFunc(props) {
      return false;
    }
  }
+
+
+
+
 
   async function addFriend(friend){
   
@@ -80,7 +84,7 @@ function ProfileFunc(props) {
   //        <InventoryTable user={location.state.user}/>
       return (
         <div className="container">
-          <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} updatedUser = {makeGetCall}  deleteItem = {makePatchCall}/>
+          <ProfileForm addFriend= {addFriend} deleteFriend={deleteFriend} updatedUser = {makeGetCall}  deleteItem = {makePatchCall} />
         </div>
       );  
   }

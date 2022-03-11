@@ -5,6 +5,9 @@ import { Redirect } from "react-router";
 import FriendTable from "./FriendTable"
 import InventoryTable from './InventoryTable';
 import { useHistory, useLocation } from 'react-router-dom';
+import OwedTable from './OwedTable';
+import NeedTable from './NeedTable';
+
 
 
 function ProfileForm(props) {
@@ -20,12 +23,14 @@ function ProfileForm(props) {
 
 
     <div>
-      //<InventoryTable user={userData}   removeItem = {removeItem}/>
+      <InventoryTable id = "IT" user={userData}   removeItem = {removeItem}/>
 
-      //<FriendTable user={userData}/>
+      <FriendTable user={userData}/>
+      <OwedTable user ={userData} removePayment = {removePayment} />
+      <NeedTable user = {userData} removePayment = {removePayment} />
 
       
-      //<input type="button" value="Add Friends" onClick={addFriend} />
+    <input type="button" value="Add Friends" onClick={addFriend} />
     {askForFriend ? (
       <FormFriend addFriend = {props.addFriend} deleteFriend = {props.deleteFriend} operation = {operation} setAskFriend = {setAskFriend} updateCurrentUser = {updateCurrentUser} setReload = {setReload}  />
     ): null}
@@ -44,10 +49,15 @@ function ProfileForm(props) {
     
 
   );
+  async function removePayment(index, thingToPatch){
+    await props.deleteItem({index: index, mode: "delete", user: userData.username, thingToPatch: thingToPatch});
+    await updateCurrentUser();
+    await setReload(true);
+
+  }
   async function removeItem(index){
-    console.log(userData.username);
     
-    await props.deleteItem({index: index, mode: "delete", user: userData.username});
+    await props.deleteItem({index: index, mode: "delete", user: userData.username, thingToPatch: "inventory"});
     await updateCurrentUser();
     await setReload(true);
   }
