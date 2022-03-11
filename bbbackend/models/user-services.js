@@ -142,18 +142,10 @@ async function patchUser(item, userToPatch) {
       { $set: { inventory: inventory } }
     );
     return found;
-
-    /*
-    setInventory(item, userToPatch);
-    userToPatch[0].markModified("inventory"); //does this even do anything.
-    const savedUser = await userToPatch[0].save();
-    return savedUser;
-    */
   } catch (error) {
     return false;
   }
 }
-//dslkfnsdfnkjdsf
 async function patchedUserDelete(index, userToPatch) {
   try {
     let inventory = userToPatch[0].inventory;
@@ -176,7 +168,6 @@ async function patchedUserDelete(index, userToPatch) {
  */
 function setDefaults(userToAdd) {
   userToAdd.friends = { friendList: [], friendCount: 0 };
-  //userToAdd.inventory = { itemList: [], itemCount: 0 };
   userToAdd.inventory = { itemList: [], itemCount: 0 };
 
   userToAdd.profilepicture =
@@ -184,7 +175,6 @@ function setDefaults(userToAdd) {
 }
 
 function setInventory(item, itemToPatch) {
-  //itemToPatch[0].inventory.itemList.push(item.item);
   itemToPatch[0].inventory.itemList.push(item);
 }
 /**

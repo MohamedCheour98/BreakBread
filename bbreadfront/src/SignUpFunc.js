@@ -14,6 +14,7 @@ function SignUpFunc() {
   
   async function makePostCall(person) {
     try {
+      // https://breakbread2.herokuapp.com/users for herokuapp instead of local
       const response = await axios.post("http://localhost:5000/users/", person);  
       return response;
     

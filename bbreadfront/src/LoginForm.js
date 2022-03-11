@@ -15,8 +15,6 @@ function LoginForm(props) {
   const [redirect, setRedirect] = React.useState(false);
   const [userData, setUserData] = useState({});
 
-  /*const message = this.state.displayErrorMessage ? null : <div> nice</div>; */
-  // strange array prototype, making us use loggedIn[0], Joseph?
   async function submitForm() {
     
     let loggedIn = await props.handleSubmit(person);
@@ -29,11 +27,11 @@ function LoginForm(props) {
     } else {
       setShow(true);
     }
-    setPerson({ username: "", password: "" }); /*  id: ''  this was added */
+    setPerson({ username: "", password: "" });
   }
 
   function handleChange(event) {
-    const { name, value } = event.target; /* added id*/
+    const { name, value } = event.target;
     if (name === "password")
       setPerson({ username: person["username"], password: value });
     else setPerson({ username: value, password: person["password"] });

@@ -15,6 +15,7 @@ function LoginFunc() {
   }
   async function deleteBackend(_id) {
     try {
+      // https://breakbread2.herokuapp.com/users for herokuapp instead of local
       const response = await axios.delete("http://localhost:5000/users/" + _id);
       return response.data.users_list;
     } catch (error) {
@@ -31,6 +32,7 @@ function LoginFunc() {
 
   async function fetchAll() {
     try {
+      // https://breakbread2.herokuapp.com/users for herokuapp instead of local
       const response = await axios.get("http://localhost:5000/users");
       return response.data.users_list;
     } catch (error) {
@@ -41,6 +43,7 @@ function LoginFunc() {
   }
   async function makeGetCall(person) {
     try {
+      // https://breakbread2.herokuapp.com/users?username=un&password=p for herokuapp instead of local
       const response = await axios.get(
         "http://localhost:5000/users?username=" +
           person.username +

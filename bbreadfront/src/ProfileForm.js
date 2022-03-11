@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import FormFriend from './FormFriend'
-import GroceryRun from "./GroceryRun";
 import { Redirect } from "react-router";
 import FriendTable from "./FriendTable"
 import InventoryTable from './InventoryTable';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 function ProfileForm(props) {
@@ -73,14 +72,6 @@ function ProfileForm(props) {
 
   }
    async function updateCurrentUser(){
-     /*
-    props.updatedUser("Erik", "mcc").then(result => {
-      
-      setUserData(result.data.users_list[0]);
-      console.log(userData);
-      
-    }};*/
-
 
     let update = await props.updatedUser(currentUser.username, currentUser.password);
     

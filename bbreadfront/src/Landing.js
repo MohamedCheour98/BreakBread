@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import { BrowserRouter as Router, 
   Switch,
   Route,
@@ -7,8 +7,6 @@ import LoginFunc from './LoginFunc'
 import SignUpFunc from './SignUpFunc'
 import ProfileFunc from './ProfileFunc'
 import GroceryFunc from './GroceryRun'
-import Button from 'react-bootstrap/Button';
-
 
   export default function Landing() {
     return (

@@ -24,11 +24,11 @@ function SignUpForm(props) {
     } else {
       setShow(true);
     }
-    setPerson({ username: "", password: "" }); /*  id: ''  this was added*/
+    setPerson({ username: "", password: "" });
   }
 
   function handleChange(event) {
-    const { name, value } = event.target; /* added id*/
+    const { name, value } = event.target;
     if (name === "password")
       setPerson({ username: person["username"], password: value });
     else setPerson({ username: value, password: person["password"] });

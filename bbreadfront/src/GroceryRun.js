@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom"
 import axios from "axios";
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Redirect } from "react-router";
 
 
@@ -27,8 +26,6 @@ function GroceryRun(props){
         user: "",
     })
     const [show, setShow] = React.useState(false);
-    const[total, setTotal] = useState(0);
-    const[showTotal, setShowTotal] = useState(false);
     const [returnBack, setReturnBack] = useState(false)
 
     function handleChange(event) {
@@ -44,6 +41,7 @@ function GroceryRun(props){
       }
       async function makeGetCall(username, password) {
         try {
+          // https://breakbread2.herokuapp.com/users?username=un&password=p for herokuapp instead of local
           const response = await axios.get(
             "http://localhost:5000/users?username=" +
               username +
@@ -67,8 +65,8 @@ function GroceryRun(props){
     }
 
       async function makePatchCall(person) {
-        // doesn't work for breakbread2
-        try {
+      // https://breakbread2.herokuapp.com/users for herokuapp instead of local
+      try {
           const response = await axios.patch("http://localhost:5000/users", {item: person, mode: "add"});  
           return response;
         
@@ -79,7 +77,6 @@ function GroceryRun(props){
       }
     
     async function submitInventory() {
-      var total = 0;
       for (let i = 0; i < inventory.length; i++) {
         await makePatchCall(inventory[i])
       }
@@ -87,23 +84,22 @@ function GroceryRun(props){
       let userCount = 0
       for (let i = 0; i < inventory.length; i++) {
         for (let j = 0; j < finalTable.length; j++) {
-          if (inventory[i].user == finalTable[j].user) {
+          if (inventory[i].user === finalTable[j].user) {
             userFlag = 1;
             userCount = j;
           }
         }
-        if (userFlag == 1) {
+        if (userFlag === 1) {
           finalTable[userCount].price = finalTable[userCount].price + parseFloat(inventory[i].price);
         } else {
           finalTable.push({user: inventory[i].user, price: parseFloat(inventory[i].price)});
         }
         userFlag = 0;
       }
+      console.log(finalTable);
       setShow(true);
       inventory = [];
-    
-     //currentUser = finalAddedUser1;
-
+      finalTable = [];
     }
 
     function FinalTableHeader() {
@@ -254,10 +250,3 @@ function GroceryRun(props){
     }
 }
 export default GroceryRun;
-/*
-      {show ? (
-        <div id="ip">
-          <FinalTable />
-        </div>
-      ) : null}
-      */
