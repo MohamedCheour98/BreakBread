@@ -17,6 +17,18 @@ Last Edited 02/09/2022
 GitHub Actions, CI Builds:
 https://github.com/MohamedCheour98/BreakBread/actions
 
+Download Instructions:
+git clone https://github.com/MohamedCheour98/BreakBread.git
+navigate to bbbbackend,
+npm i
+navigate to bbfrontend,
+npm i
+in bbbackend,
+npm run dev (starts up backend)
+in bbfrontend,
+npm start (starts up frontend)
+A new user trying to use our code won't be able to access the database we are using so they'll need to use their own cluster of MongoDB.
+
 LINTER/CODE STYLER:
 (using the JavaScript default style guidlines: https://google.github.io/styleguide/jsguide.html)
 -We used the Prettier ESLint combination plugin on VS Code which is available by looking up "Prettier ESLint" on the VS Code plugin page.
