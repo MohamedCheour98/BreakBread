@@ -100,18 +100,8 @@ function GroceryRun(props){
         userFlag = 0;
       }
       setShow(true);
-        console.log(inventory[i].price);
-        total += (parseFloat(inventory[i].price)  * parseInt(inventory[i].quantity));
-        await makePatchCall(inventory[i])
-      }
-      await setTotal(total);
-      await setShowTotal(true);
-      total = 0;
       inventory = [];
-      
-
-  
-      
+    
      //currentUser = finalAddedUser1;
 
     }
@@ -250,7 +240,6 @@ function GroceryRun(props){
         </div>
       ) : null}
       <input type="button" value="Return" onClick={goBack}/>
-      {showTotal ? (<h1>${total}</h1>):  null}
     </form>
 
 
