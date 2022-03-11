@@ -86,6 +86,7 @@ test("testing patching a user, bad input returns false on failure", async () => 
 //test setInventory
 test("setting inventory of a user", async () => {
   const usertoPatch = await userServices.findUserByName("joe");
+  const usertoPatch2 = await userServices.findUserByName("hannyt");
   const item = {
     item: "banana",
     price: "1",
@@ -101,8 +102,9 @@ test("setting inventory of a user", async () => {
   userServices.setInventory(item, usertoPatch);
   userServices.setInventory(item2, usertoPatch);
 
-  expect(usertoPatch[0].inventory.itemList[0].user).toBe("hannyt");
-  expect(usertoPatch[0].inventory.itemList[1].item).toBe("eggs");
+  expect(usertoPatch[0].inventory.itemList[0].item).toBe("eggs");
+  expect(usertoPatch2[0].inventory.itemList[0].user).toBe("hannyt");
+  expect(usertoPatch2[0].inventory.itemList[0].item).toBe("banana");
 });
 
 //test find user by name only
