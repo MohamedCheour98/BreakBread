@@ -166,13 +166,38 @@ test("test update2 success functionality returns true", async () => {
 
 //test patchedUserDelete success functionality
 test("test deleting an item successfully", async () => {
-  userToPatch = await userServices.findUserByName("hannyt");
-  item = userToPatch[0].inventory.itemList[0];
-  await userServices.patchedUserDelete(item, userToPatch);
-  expect(userToPatch[0].inventory.itemList[0]).not.toBe(item);
+  userToPatch = await userServices.findUserByName("joe");
+  const item = {
+    item: "banana",
+    price: "1",
+    quantity: "6",
+    user: "hannyt",
+  };
+  const item2 = {
+    item: "eggs",
+    price: "3",
+    quantity: "1",
+    user: "joe",
+  };
+  await userServices.patchUser(item, userToPatch);
+  await userServices.patchUser(item2, userToPatch);
+
+  item3 = userToPatch[0].inventory.itemList[0];
+  await userServices.patchedUserDelete(item3, userToPatch);
+  console.log(userToPatch[0].inventory.itemList[0]);
+  expect(userToPatch[0].inventory.itemList[0]).not.toBe(item3);
 });
 
 //test patchedUserDelete failure functionality
+test("test deleting an item failure", async () => {
+  userToPatch = {
+    name: "hannah",
+  };
+
+  index = 1;
+  result = await userServices.patchedUserDelete(index, userToPatch);
+  expect(result).toBeFalsy();
+});
 
 //Test delete function and also cleanup
 test("delete users", async () => {
