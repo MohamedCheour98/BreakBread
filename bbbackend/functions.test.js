@@ -83,7 +83,7 @@ test("testing patching a user, bad input returns false on failure", async () => 
   expect(result).toBeFalsy();
 });
 
-//test setInventory
+//test setInventory for user
 test("setting inventory of a user", async () => {
   const usertoPatch = await userServices.findUserByName("joe");
   const usertoPatch2 = await userServices.findUserByName("hannyt");
