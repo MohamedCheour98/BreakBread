@@ -26,10 +26,10 @@ function FormFriend(props) {
     }
 
     return (
-        <form className="user-form"> 
+        <form className = "form2"> 
             <label htmlFor="friend">Friend</label> 
             <input type="text" name="friend" id="friend" value={friend} onChange={handleChange} /> 
-            //<input type="button" value="Submit" onClick={submitForm} />
+            <input type="button" value="Submit" onClick={submitForm} />
         </form>        
     );
 }

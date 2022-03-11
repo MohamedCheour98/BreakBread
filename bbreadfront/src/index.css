@@ -629,7 +629,7 @@ dd {
  */
 
  
-.button, a.button, button, [type=submit], [type=reset], [type=button] {
+.button, [type=submit], [type=reset], [type=button] {
   -webkit-appearance: none;
   display: block;
   border: 1px solid #56CCF2;
@@ -645,6 +645,27 @@ dd {
   margin-bottom: 10px;
   width: 30%;
   max-width: 30%; 
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1;
+}
+.button1{
+  -webkit-appearance: none;
+  display: block;
+  border: 1px solid #56CCF2;
+  border-radius: 4px;
+  background: #56CCF2;
+  color: #ffffff;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  text-transform: none;
+  padding: 0.75rem 1.25rem;
+  margin: auto;
+  margin-bottom: 10px;
+  width: 80%;
+  max-width: 80%; 
   text-align: center;
   cursor: pointer;
   text-decoration: none;
@@ -931,6 +952,14 @@ html, body {
 /*border: 4px dashed white;*/
 }
 
+.form2{
+  width: 50%; /* makes browser responsive to changes in size*/
+  margin: 30px auto;
+  padding: 10px;
+  background: rgba(256, 256, 256, .80); /*this uses opacity of 80% for the background color*/
+  text-align: center;  
+}
+
 .friends{
   background: rgba(256, 256, 256);
   width: 50%;
@@ -938,7 +967,7 @@ html, body {
 }
 
 .header{
-  background: rgba(256, 256, 256);
+  background: rgba(256, 256, 256,.8);
   width: 40%;
   margin: auto;
 }
