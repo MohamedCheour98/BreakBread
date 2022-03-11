@@ -103,8 +103,8 @@ test("setting inventory of a user", async () => {
   userServices.setInventory(item2, usertoPatch);
 
   expect(usertoPatch[0].inventory.itemList[0].item).toBe("eggs");
-  expect(usertoPatch2[0].inventory.itemList[0].user).toBe("hannyt");
-  expect(usertoPatch2[0].inventory.itemList[0].item).toBe("banana");
+  expect(usertoPatch2[0].inventory.itemList[1].user).toBe("hannyt");
+  expect(usertoPatch2[0].inventory.itemList[1].item).toBe("banana");
 });
 
 //test find user by name only
