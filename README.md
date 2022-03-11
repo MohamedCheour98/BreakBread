@@ -26,4 +26,10 @@ LINTER/CODE STYLER:
 -Then the style checker should be set up, to format a file, run SHIFT+ALT+F(windows) or SHIFT+OPTION+F(mac)
 -There is also an option to set up auto format on save in Settings on VS Code
 
+TESTING:
+Uncovered Lines:
+Line 23 in user.js is covered by a test, however, Jest doesn't know how to deal with this particular case, as it is testing for an error throw while the database is running the code, so the code gets stuck in mongoose. Approved by BJK.
+
+Line 24 in userServices.js does not need to be covered, as it is a database connection fail, rather than a function fail. Approved by BJK.
+
 ![backend.js](https://github.com/MohamedCheour98/BreakBread/actions/workflows/backend.js.yml/badge.svg)
