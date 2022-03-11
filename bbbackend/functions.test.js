@@ -1,7 +1,6 @@
 const userServices = require("./models/user-services");
 const mongoose = require("mongoose");
 const ObjectId = require("mongoose").Types.ObjectId;
-const { test } = require("prettier");
 
 /*const { test } = require("prettier");*/
 
@@ -15,9 +14,14 @@ test("adding user to database", async () => {
     username: "hannyt",
     password: "ht",
   };
+  const person3 = {
+    username: "ruby",
+    password: "rb",
+  };
 
   const savedUser = await userServices.addUser(person);
-  const savedUser2 = await userServices.addUser(person2);
+  await userServices.addUser(person2);
+  await userServices.addUser(person3);
 
   expect(savedUser.username).toBe("joe");
   expect(savedUser.password).toBe("joejoe");
@@ -147,7 +151,7 @@ test("test update2 returns false with invalid users", async () => {
 
 //test update2 returns false with non-friends
 test("test update2 returns false with non-friends", async () => {
-  result = await userServices.update("hannyt", "joe");
+  result = await userServices.update2("hannyt", "ruby");
   expect(result).toBeFalsy();
 });
 
