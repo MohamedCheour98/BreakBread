@@ -8,6 +8,7 @@ const port = 5000;
 
 app.use(cors());
 app.use(express.json());
+// test comment for actions
 
 /**
  * Fetch all users when "/users" is added to the url.
