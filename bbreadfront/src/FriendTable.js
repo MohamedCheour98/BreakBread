@@ -26,6 +26,8 @@ const rows = props.user.friends.friendList.map((row, index) => {
    );	
 }
 
+// this table renders the friends on the profile page
+
 function FriendTable(props) {
     return (
       

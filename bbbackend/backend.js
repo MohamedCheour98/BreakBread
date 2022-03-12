@@ -52,6 +52,9 @@ app.post("/users", async (req, res) => {
     res.status(201).send(savedUser);
   }
 });
+
+// put call to add a friend on the backend from the profile page
+
 app.put("/users", async (req, res) => {
   const data = req.body;
 
@@ -71,6 +74,9 @@ app.put("/users", async (req, res) => {
     res.status(201).send(false);
   }
 });
+
+// patch call to add an item to a user's inventory on the back end
+
 app.patch("/users", async (req, res) => {
   let mode = req.body.mode;
   if (mode === "add") {

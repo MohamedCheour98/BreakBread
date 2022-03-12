@@ -5,7 +5,6 @@ import FriendTable from "./FriendTable"
 import InventoryTable from './InventoryTable';
 import { useLocation } from 'react-router-dom';
 
-
 function ProfileForm(props) {
   let location = useLocation();
   let currentUser = location.state.user;

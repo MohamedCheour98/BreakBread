@@ -31,6 +31,8 @@ const rows = props.user.inventory.itemList.map((row, index) => {
    );	
 }
 
+// this table renders the inventory on the profile page
+
 function InventoryTable(props) {
     return (
       

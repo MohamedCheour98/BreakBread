@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import SignUpForm from "./SignUpForm";
 import axios from "axios";
 
+// SignUpFunc follows the structure of MyApp from the class programming assignments and 
+// SignUpForm follows the structure of Form
+
 const SignUp = require("./SignUpForm");
 
 function SignUpFunc() {

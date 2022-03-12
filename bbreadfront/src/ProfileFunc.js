@@ -3,6 +3,10 @@ import React from 'react'
 import ProfileForm from './ProfileForm'
 import { useLocation } from 'react-router-dom';
 import axios from "axios";
+
+// ProfileFunc follows the structure of MyApp from the class programming assignments and 
+// ProfileForm follows the structure of Form
+
 function ProfileFunc(props) {
   
   let location = useLocation();

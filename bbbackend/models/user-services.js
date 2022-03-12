@@ -61,7 +61,9 @@ async function addUser(user) {
   }
 }
 
-async function update(userAddingFriend, friendToAdd) {
+// function to add friends from the profile page in the backend
+
+async function addFriend(userAddingFriend, friendToAdd) {
   let oldVersionUser = await findUserByName(userAddingFriend);
   let oldVersionFriend = await findUserByName(friendToAdd);
 
@@ -78,11 +80,11 @@ async function update(userAddingFriend, friendToAdd) {
   oldVersionFriends.friendList.push(friendToAdd);
   oldVersionFFriends.friendList.push(userAddingFriend);
 
-  let found = await userModel.updateOne(
+  let found = await userModel.addFriendOne(
     { username: userAddingFriend },
     { $set: { friends: oldVersionFriends } }
   );
-  let found2 = await userModel.updateOne(
+  let found2 = await userModel.addFriendOne(
     { username: friendToAdd },
     { $set: { friends: oldVersionFFriends } }
   );
@@ -90,8 +92,9 @@ async function update(userAddingFriend, friendToAdd) {
   return true;
 }
 
-//can we rename these functions (update and update2)? maybe to addFriend and deleteFriend?
-async function update2(user1, user2) {
+// function to delete friends from the profile page in the backend
+
+async function deleteFriend(user1, user2) {
   let oldVersionUser = await findUserByName(user1);
   let oldVersionFriend = await findUserByName(user2);
 
@@ -116,11 +119,11 @@ async function update2(user1, user2) {
     user1
   );
 
-  let found = await userModel.updateOne(
+  let found = await userModel.addFriendOne(
     { username: user1 },
     { $set: { friends: oldVersionFriends } }
   );
-  let found2 = await userModel.updateOne(
+  let found2 = await userModel.addFriendOne(
     { username: user2 },
     { $set: { friends: oldVersionFFriends } }
   );
@@ -132,6 +135,9 @@ function arrayRemove(arr, value) {
     return ele != value;
   });
 }
+
+// function to patch a users inventory by adding a item on grocery run page
+
 async function patchUser(item, userToPatch) {
   try {
     let inventory = userToPatch[0].inventory;
@@ -139,7 +145,7 @@ async function patchUser(item, userToPatch) {
     itemlist.push(item);
     inventory.itemList = itemlist;
 
-    let found = await userModel.updateOne(
+    let found = await userModel.addFriendOne(
       { username: userToPatch[0].username },
       { $set: { inventory: inventory } }
     );
@@ -148,11 +154,14 @@ async function patchUser(item, userToPatch) {
     return false;
   }
 }
+
+// function to remove an item from a users inventory from the profile page
+
 async function patchedUserDelete(index, userToPatch) {
   try {
     let inventory = userToPatch[0].inventory;
     inventory.itemList.splice(index, 1);
-    let found = await userModel.updateOne(
+    let found = await userModel.addFriendOne(
       { username: userToPatch[0].username },
       { $set: { inventory: inventory } }
     );
@@ -203,8 +212,8 @@ exports.patchUser = patchUser;
 exports.setInventory = setInventory;
 exports.patchedUserDelete = patchedUserDelete;
 
-exports.update = update;
-exports.update2 = update2;
+exports.addFriend = addFriend;
+exports.deleteFriend = deleteFriend;
 
 //FUNCTIONS NOT USED IN ACTIVE CODE(leftover), USEFUL FOR LATER
 

@@ -3,6 +3,9 @@ import LoginForm from "./LoginForm";
 import axios from "axios";
 const loginform = require("./LoginForm");
 
+// LoginFunc follows the structure of MyApp from the class programming assignments and 
+// LoginForm follows the structure of Form
+
 function LoginFunc() {
   const [characters, setCharacters] = useState([]);
   function removeOneCharacter(index) {

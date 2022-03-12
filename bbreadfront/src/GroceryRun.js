@@ -75,6 +75,10 @@ function GroceryRun(props){
           return false;
         }
       }
+
+    // function that updates after the finish run button is hit on the grocery run page
+    // this function parses the inventory list and sends all the objects to the backend 
+    // then shows the total price by user on the grocery run page
     
     async function submitInventory() {
       for (let i = 0; i < inventory.length; i++) {
@@ -129,6 +133,8 @@ function GroceryRun(props){
          </tbody>
      );	
   }
+
+  // this table shows the total price by user of the entire grocery run
   
   function FinalTable(props) {
       return (
@@ -152,6 +158,7 @@ function GroceryRun(props){
           </thead>
   );
   }
+
   
   function TrackingTableBody(props) {
   const rows = inventory.map((row, index) => {
@@ -171,6 +178,8 @@ function GroceryRun(props){
          </tbody>
      );	
   }
+  
+  // this table shows all the items added to the grocery run
   
   function TrackingTable(props) {
       return (
