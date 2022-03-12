@@ -80,11 +80,11 @@ async function addFriend(userAddingFriend, friendToAdd) {
   oldVersionFriends.friendList.push(friendToAdd);
   oldVersionFFriends.friendList.push(userAddingFriend);
 
-  let found = await userModel.addFriendOne(
+  let found = await userModel.updateOne(
     { username: userAddingFriend },
     { $set: { friends: oldVersionFriends } }
   );
-  let found2 = await userModel.addFriendOne(
+  let found2 = await userModel.updateOne(
     { username: friendToAdd },
     { $set: { friends: oldVersionFFriends } }
   );
@@ -119,11 +119,11 @@ async function deleteFriend(user1, user2) {
     user1
   );
 
-  let found = await userModel.addFriendOne(
+  let found = await userModel.updateOne(
     { username: user1 },
     { $set: { friends: oldVersionFriends } }
   );
-  let found2 = await userModel.addFriendOne(
+  let found2 = await userModel.updateOne(
     { username: user2 },
     { $set: { friends: oldVersionFFriends } }
   );
@@ -145,7 +145,7 @@ async function patchUser(item, userToPatch) {
     itemlist.push(item);
     inventory.itemList = itemlist;
 
-    let found = await userModel.addFriendOne(
+    let found = await userModel.updateOne(
       { username: userToPatch[0].username },
       { $set: { inventory: inventory } }
     );
@@ -161,7 +161,7 @@ async function patchedUserDelete(index, userToPatch) {
   try {
     let inventory = userToPatch[0].inventory;
     inventory.itemList.splice(index, 1);
-    let found = await userModel.addFriendOne(
+    let found = await userModel.updateOne(
       { username: userToPatch[0].username },
       { $set: { inventory: inventory } }
     );
