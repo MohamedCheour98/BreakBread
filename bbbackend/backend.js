@@ -64,9 +64,9 @@ app.put("/users", async (req, res) => {
   const operation = data.operation;
   let success = false;
   if (operation === "addFriend") {
-    success = await userServices.update(userAddingFriend, friendToAdd);
+    success = await userServices.addFriend(userAddingFriend, friendToAdd);
   } else {
-    success = await userServices.update2(userAddingFriend, friendToAdd);
+    success = await userServices.deleteFriend(userAddingFriend, friendToAdd);
   }
 
   if (success) {

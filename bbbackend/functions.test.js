@@ -123,40 +123,40 @@ test("testing an invalid password attempt throws an error", async () => {
   expect(() => userServices.addUser(person).toThrow("Invalid Password"));
 });
 
-//test update returns false with invalid users
-test("test update returns false with invalid users", async () => {
-  result = await userServices.update("nouser", "nofriend");
+//test addFriend returns false with invalid users
+test("test addFriend returns false with invalid users", async () => {
+  result = await userServices.addFriend("nouser", "nofriend");
   expect(result).toBeFalsy();
 });
 
-//test update returns false with already friends
-test("test update returns false with invalid users", async () => {
-  result = await userServices.update("hannyt", "joe");
-  result = await userServices.update("hannyt", "joe");
+//test addFriend returns false with already friends
+test("test addFriend returns false with invalid users", async () => {
+  result = await userServices.addFriend("hannyt", "joe");
+  result = await userServices.addFriend("hannyt", "joe");
   expect(result).toBeFalsy();
 });
 
-//test update success functionality
-test("test update success functionality returns true", async () => {
-  result = await userServices.update("joe", "ruby");
+//test addFriend success functionality
+test("test addFriend success functionality returns true", async () => {
+  result = await userServices.addFriend("joe", "ruby");
   expect(result).toBeTruthy();
 });
 
-//test update2 returns false with invalid users
-test("test update2 returns false with invalid users", async () => {
-  result = await userServices.update2("nouser", "nofriend");
+//test deleteFriend returns false with invalid users
+test("test deleteFriend returns false with invalid users", async () => {
+  result = await userServices.deleteFriend("nouser", "nofriend");
   expect(result).toBeFalsy();
 });
 
-//test update2 returns false with non-friends
-test("test update2 returns false with non-friends", async () => {
-  result = await userServices.update2("hannyt", "ruby");
+//test deleteFriend returns false with non-friends
+test("test deleteFriend returns false with non-friends", async () => {
+  result = await userServices.deleteFriend("hannyt", "ruby");
   expect(result).toBeFalsy();
 });
 
-//test update2 success functionality
-test("test update2 success functionality returns true", async () => {
-  result = await userServices.update2("hannyt", "joe");
+//test deleteFriend success functionality
+test("test deleteFriend success functionality returns true", async () => {
+  result = await userServices.deleteFriend("hannyt", "joe");
   expect(result).toBeTruthy();
 });
 
