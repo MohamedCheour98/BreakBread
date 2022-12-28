@@ -1,5 +1,5 @@
 # BreakBread
-For college roommates who share grocery shopping amongst themselves, the BreakBread app is an inventory management tool that allows users to document their grocery purchases and divvy up payments. 
+For college roommates who share grocery shopping amongst themselves, the BreakBread WebApp is an inventory management tool that allows users to document their grocery purchases and divvy up payments. 
 Unlike any app before, BreakBread provides roommates with the best way to document, share, and enjoy grocery shopping.
 
 Figma UI prototype:
